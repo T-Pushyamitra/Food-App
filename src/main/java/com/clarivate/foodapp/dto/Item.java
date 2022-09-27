@@ -9,28 +9,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="item")
+@Table(name = "item")
 public class Item {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private int productId;
 	private String name;
 	private String type;
 	private int quantity;
 	private int price;
-	
+
 	@ManyToOne
 	@JoinColumn
 	FoodOrder foodOrder;
-
-	public int getProductId() {
-		return productId;
-	}
-
-	public void setProductId(int productId) {
-		this.productId = productId;
-	}
 
 	public String getName() {
 		return name;
