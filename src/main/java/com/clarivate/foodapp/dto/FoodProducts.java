@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="foodProduct")
+@Table(name = "foodProduct")
 public class FoodProducts {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,11 +19,28 @@ public class FoodProducts {
 	private String about;
 	private boolean availability;
 	private int price;
-	
-	
+
 	@ManyToOne
 	@JoinColumn
 	Menu menu;
+
+	/**
+	 * @param id
+	 * @param name
+	 * @param type
+	 * @param about
+	 * @param availability
+	 * @param price
+	 * @param menu
+	 */
+	public FoodProducts(int id, String name, String type, String about, boolean availability, int price, Menu menu) {
+		this.name = name;
+		this.type = type;
+		this.about = about;
+		this.availability = availability;
+		this.price = price;
+		this.menu = menu;
+	}
 
 	public String getName() {
 		return name;

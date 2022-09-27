@@ -1,5 +1,7 @@
 package com.clarivate.foodapp.dto;
 
+import java.sql.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,8 +18,8 @@ public class FoodOrder {
 	private int id;
 	private boolean status;
 	private float totalPrice;
-	private int orderCreatedTime;
-	private int orderDeliveryTime;
+	private Date orderCreatedTime;
+	private Date orderDeliveryTime;
 	private String customerName;
 	private long contactNumber;
 
@@ -41,19 +43,31 @@ public class FoodOrder {
 		this.totalPrice = totalPrice;
 	}
 
-	public int getOrderCreatedTime() {
+	public Date getOrderCreatedTime() {
 		return orderCreatedTime;
 	}
 
-	public void setOrderCreatedTime(int orderCreatedTime) {
+	public FoodOrder(int id, boolean status, float totalPrice, Date orderCreatedTime, Date orderDeliveryTime,
+			String customerName, long contactNumber, User user) {
+
+		this.status = status;
+		this.totalPrice = totalPrice;
+		this.orderCreatedTime = orderCreatedTime;
+		this.orderDeliveryTime = orderDeliveryTime;
+		this.customerName = customerName;
+		this.contactNumber = contactNumber;
+		this.user = user;
+	}
+
+	public void setOrderCreatedTime(Date orderCreatedTime) {
 		this.orderCreatedTime = orderCreatedTime;
 	}
 
-	public int getOrderDeliveryTime() {
+	public Date getOrderDeliveryTime() {
 		return orderDeliveryTime;
 	}
 
-	public void setOrderDeliveryTime(int orderDeliveryTime) {
+	public void setOrderDeliveryTime(Date orderDeliveryTime) {
 		this.orderDeliveryTime = orderDeliveryTime;
 	}
 
@@ -71,6 +85,14 @@ public class FoodOrder {
 
 	public void setContactNumber(long contactNumber) {
 		this.contactNumber = contactNumber;
+	}
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 }
