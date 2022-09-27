@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 //import org.springframework.http.HttpStatus;
 
+import com.clarivate.foodapp.dto.FoodOrder;
 import com.clarivate.foodapp.dto.Item;
 import com.clarivate.foodapp.dto.User;
+import com.clarivate.foodapp.services.FoodOrderService;
 import com.clarivate.foodapp.services.ItemService;
 import com.clarivate.foodapp.services.UserServiceImpl;
 
@@ -25,6 +27,9 @@ public class AppController {
 
 	@Autowired
 	ItemService itemService;
+	
+	@Autowired
+	FoodOrderService foodOrderService;
 
 	@GetMapping("/users")
 	public List<User> getAllUser() {
@@ -53,6 +58,18 @@ public class AppController {
 	@PostMapping("/addItem")
 	public Item saveItem(@RequestBody Item item) {
 		return itemService.saveItem(item);
+	}
+	
+	/** Food Order */
+	
+	@PostMapping("/addFoodOrder")
+	public FoodOrder saveFoodOrder(@RequestBody FoodOrder foodOrder) {
+		return foodOrderService.saveFoodOrder(foodOrder);
+	}
+	
+	@GetMapping("/foodOrders")
+	public List<FoodOrder> getAllFoodOrder(){
+		return foodOrderService.getAllFoodOrder();
 	}
 
 }
