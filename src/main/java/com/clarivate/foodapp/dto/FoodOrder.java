@@ -1,6 +1,6 @@
 package com.clarivate.foodapp.dto;
 
-import java.sql.Date;
+
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
