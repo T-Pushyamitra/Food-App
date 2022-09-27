@@ -32,4 +32,19 @@ public class ItemDao {
 		return item.get();
 	}
 	
+	public String deleteItem(int id) {
+		Optional<Item> optional = itemRepository.findById(id);
+		
+		if(optional.isPresent()) {
+			itemRepository.delete(optional.get());
+			return "Item data "+ id +" has been deleted successfully";
+		} else {
+			return "Item data with ID:"+ id +" doesn't exist";
+		}
+	}
+	
+	public Item updateItem (Item item) {
+		return itemRepository.save(item);
+	}
+	
 }

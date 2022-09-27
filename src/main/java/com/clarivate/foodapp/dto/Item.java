@@ -17,11 +17,7 @@ public class Item {
 	private String name;
 	private String type;
 	private int quantity;
-	private int price;
-
-	@ManyToOne
-	@JoinColumn
-	FoodOrder foodOrder;
+	private float price;
 
 	public String getName() {
 		return name;
@@ -47,12 +43,16 @@ public class Item {
 		this.quantity = quantity;
 	}
 
-	public int getPrice() {
+	public float getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(float price) {
 		this.price = price;
+	}
+
+	public int getId() {
+		return this.id;
 	}
 
 }

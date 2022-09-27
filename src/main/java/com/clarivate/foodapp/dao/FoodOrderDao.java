@@ -23,17 +23,34 @@ public class FoodOrderDao {
 		return foodOrderRepository.save(foodOrder);
 	}
 
-	public List<FoodOrder> getFoodOrder() {
+	public List<FoodOrder> getAllFoodOrder() {
 		return foodOrderRepository.findAll();
 	}
 
-	public void deleteFoodOrder(int id) {
-		foodOrderRepository.deleteById(id);
-	}
-
-	public FoodOrder getUserById(int id) {
+	public FoodOrder getFoodOrderById(int id) {
 		Optional<FoodOrder> foodOrder = foodOrderRepository.findById(id);
-		return foodOrder.get();
+		
+		if(foodOrder.isPresent()) {			
+			return foodOrder.get();
+		}
+		else {
+			return null;
+		}
+	}
+	
+	public String deleteFoodOrder(int id) {
+		Optional<FoodOrder> foodOrder = foodOrderRepository.findById(id);
+		
+		if(foodOrder.isPresent()) {
+			foodOrderRepository.delete(foodOrder.get());
+			return "Food order data "+ id +" has been deleted successfully";
+		} else {
+			return "Food order with ID:"+ id +" doesn't exist";
+		}
+	}
+	
+	public FoodOrder updateFoodOrder(FoodOrder foodOrder) {
+		return foodOrderRepository.save(foodOrder);
 	}
 
 }

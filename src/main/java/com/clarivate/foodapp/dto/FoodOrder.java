@@ -9,6 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import java.time.LocalDateTime;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name="foodOrder")
@@ -18,8 +24,14 @@ public class FoodOrder {
 	private int id;
 	private boolean status;
 	private float totalPrice;
-	private Date orderCreatedTime;
-	private Date orderDeliveryTime;
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm", iso = ISO.DATE_TIME)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime orderCreatedTime;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm", iso = ISO.DATE_TIME)
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+	private LocalDateTime orderDeliveryTime;
+	
 	private String customerName;
 	private long contactNumber;
 
@@ -43,31 +55,19 @@ public class FoodOrder {
 		this.totalPrice = totalPrice;
 	}
 
-	public Date getOrderCreatedTime() {
+	public LocalDateTime getOrderCreatedTime() {
 		return orderCreatedTime;
 	}
 
-	public FoodOrder(int id, boolean status, float totalPrice, Date orderCreatedTime, Date orderDeliveryTime,
-			String customerName, long contactNumber, User user) {
-
-		this.status = status;
-		this.totalPrice = totalPrice;
-		this.orderCreatedTime = orderCreatedTime;
-		this.orderDeliveryTime = orderDeliveryTime;
-		this.customerName = customerName;
-		this.contactNumber = contactNumber;
-		this.user = user;
-	}
-
-	public void setOrderCreatedTime(Date orderCreatedTime) {
+	public void setOrderCreatedTime(LocalDateTime orderCreatedTime) {
 		this.orderCreatedTime = orderCreatedTime;
 	}
 
-	public Date getOrderDeliveryTime() {
+	public LocalDateTime getOrderDeliveryTime() {
 		return orderDeliveryTime;
 	}
 
-	public void setOrderDeliveryTime(Date orderDeliveryTime) {
+	public void setOrderDeliveryTime(LocalDateTime orderDeliveryTime) {
 		this.orderDeliveryTime = orderDeliveryTime;
 	}
 
@@ -86,13 +86,10 @@ public class FoodOrder {
 	public void setContactNumber(long contactNumber) {
 		this.contactNumber = contactNumber;
 	}
+
+	public int getId() {
+		return id;
+	}
+
 	
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 }

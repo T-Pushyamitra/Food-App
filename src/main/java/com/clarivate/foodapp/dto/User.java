@@ -8,27 +8,47 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 @Entity
-@Table(name="users")
 public class User {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+
 	private String name;
 	private String email;
 	private String password;
 	private String role;
-
+	
 	@OneToOne
 	Menu menu;
-
-	@OneToMany(mappedBy = "user")
+	
+	@OneToMany(mappedBy="user")
 	List<Branch> branch;
 	
 	@OneToMany(mappedBy="user")
 	List<FoodOrder> foodOrders;
+
+	public User(int id, String name, String email, String password, String role) {
+
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.role = role;
+	}
+
+	public User() {
+
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public String getName() {
 		return name;
@@ -61,5 +81,15 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
+	
+	
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
+				+ "]";
+	}
+	
+	
 
 }

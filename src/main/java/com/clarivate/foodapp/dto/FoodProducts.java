@@ -18,7 +18,7 @@ public class FoodProducts {
 	private String type;
 	private String about;
 	private boolean availability;
-	private int price;
+	private float price;
 
 	@ManyToOne
 	@JoinColumn
@@ -74,11 +74,11 @@ public class FoodProducts {
 		this.availability = availability;
 	}
 
-	public int getPrice() {
+	public float getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(float price) {
 		this.price = price;
 	}
 

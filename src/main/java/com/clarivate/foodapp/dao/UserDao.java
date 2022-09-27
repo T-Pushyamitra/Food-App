@@ -25,13 +25,28 @@ public class UserDao {
 		return userRepository.findAll();
 	}
 
-	public void deleteUsers(int id) {
-		userRepository.deleteById(id);
-	}
 
 	public User getUserById(int id) {
 		Optional<User> user = userRepository.findById(id);
-		return user.get();
+		if(user.isPresent()) {
+			return user.get();
+		}
+		return null;
+	}
+	
+	public User updateUser(User user) {
+	
+		return userRepository.save(user);
+	}
+
+	public String deleteUser(int id) {
+		Optional<User> user = userRepository.findById(id);
+		if(user.isPresent()) {
+			userRepository.delete(user.get());
+			return "User has been deleted";
+		}
+		
+		return "User Id dosen't exists";
 	}
 
 }
