@@ -8,18 +8,25 @@ import org.springframework.stereotype.Component;
 import com.clarivate.foodapp.dto.FoodProducts;
 import com.clarivate.foodapp.repository.FoodProductRepository;
 
+
+
+
+
 @Component
 public class FoodProductDao {
-
 	@Autowired
-	FoodProductRepository foodProductRepository;
-
-	public void addProduct(FoodProducts foodProduct) {
+	FoodProductRepository  foodProductRepository;
+	
+	public void add(FoodProducts foodProduct) {
+	
 		foodProductRepository.save(foodProduct);
 	}
-
-	public List<FoodProducts> getAllProducts() {
+	
+	public List<FoodProducts > getProducts(){
 		return foodProductRepository.findAll();
 	}
-
+	
+	public void deleteByProductId(int id) {
+		foodProductRepository.deleteById(id);
+	}
 }

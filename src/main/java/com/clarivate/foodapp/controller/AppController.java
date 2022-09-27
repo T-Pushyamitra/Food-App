@@ -39,7 +39,7 @@ public class AppController {
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable("id") int id) {
 		userService.delete(id);
-		return "Deleted id" + id;
+		return "Deleted id " + id;
 	}
 
 	
