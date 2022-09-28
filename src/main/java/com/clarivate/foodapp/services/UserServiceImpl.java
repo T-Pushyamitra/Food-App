@@ -30,7 +30,7 @@ public class UserServiceImpl {
 		return responseStructure;
 	}
 	
-	public ResponseStructure<List<User>> getAllUser(){
+	public ResponseStructure<List<User>> getAllUsers(){
 		ResponseStructure<List<User>> responseStructure = new ResponseStructure<List<User>>();
 		
 		List<User> userList = userDao.getAllUsers();
