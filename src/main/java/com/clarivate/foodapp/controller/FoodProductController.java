@@ -21,9 +21,9 @@ public class FoodProductController {
 	@Autowired
 	FoodProductService foodProductService;
 
-	@PostMapping("/foodProduct")
-	public ResponseStructure<FoodProducts> saveFoodProducts(@RequestBody FoodProducts foodProduct) {
-		return foodProductService.saveFoodProducts(foodProduct);
+	@PostMapping("/foodProduct/{id}")
+	public ResponseStructure<FoodProducts> saveFoodProducts(@RequestBody FoodProducts foodProduct,@PathVariable int id) {
+		return foodProductService.saveFoodProducts(foodProduct,id);
 	}
 	@GetMapping("/foodProduct")
 	public ResponseStructure<List<FoodProducts>> getAllFoodProduct() {
