@@ -1,7 +1,13 @@
 package com.clarivate.foodapp.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import com.clarivate.foodapp.dao.ResponseStructure;
@@ -16,5 +22,24 @@ public class FoodProductController {
 	@PostMapping("/foodProduct")
 	public ResponseStructure<FoodProducts> saveFoodProducts(@RequestBody FoodProducts foodProduct) {
 		return foodProductService.saveFoodProducts(foodProduct);
+	}
+	@GetMapping("/foodProduct")
+	public ResponseStructure<List<FoodProducts>> getAllFoodProduct() {
+		return foodProductService.getAllFoodProducts();
+	}
+	@GetMapping("/foodProduct/{id}")
+	public ResponseStructure<FoodProducts> getFoodProductById(@PathVariable int id) {
+		return foodProductService.getFoodProductsById(id);
+	}
+
+	@DeleteMapping("/foodProduct/{id}")
+	public ResponseStructure<String> deleteFoodProduct(@PathVariable int id) {
+		return foodProductService.deleteFoodProducts(id);
+
+	}
+
+	@PutMapping("/foodProduct")
+	public ResponseStructure<FoodProducts> updateFoodProducts(@RequestBody FoodProducts foodProduct) {
+		return foodProductService.updateFoodProducts(foodProduct);
 	}
 }
