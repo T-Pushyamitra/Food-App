@@ -42,8 +42,8 @@ public class MenuController {
 		return menuService.deleteMenu(id);
 	}
 
-	@PutMapping("/menu")
-	public ResponseStructure<Menu> updateMenu(@RequestBody Menu menu) {
-		return menuService.updateMenu(menu);
+	@PutMapping("/menu/{id}")
+	public ResponseStructure<Menu> updateMenu(@RequestBody Menu menu,@PathVariable int id) {
+		return menuService.updateMenu(menu,id);
 	}
 }

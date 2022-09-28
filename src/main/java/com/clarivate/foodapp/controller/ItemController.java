@@ -41,8 +41,8 @@ public class ItemController {
 		return itemService.deleteItem(id);
 	}
 
-	@PutMapping("/items")
-	public ResponseStructure<Item> updateItem(@RequestBody Item item) {
-		return itemService.updateItem(item);
+	@PutMapping("/items/{id}")
+	public ResponseStructure<Item> updateItem(@RequestBody Item item,@PathVariable int id) {
+		return itemService.updateItem(item,id);
 	}
 }
