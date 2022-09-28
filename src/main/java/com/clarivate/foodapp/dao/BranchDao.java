@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.clarivate.foodapp.dto.Branch;
+import com.clarivate.foodapp.dto.FoodOrder;
 import com.clarivate.foodapp.repository.BranchRepository;
 
 @Component
@@ -25,11 +26,21 @@ public class BranchDao {
 		return branchRepository.findAll();
 	}
 
-	public void deleteBranch(int id) {
-		branchRepository.deleteById(id);
+	public String deleteBranch(int id) {
+	Optional<Branch> branch = branchRepository.findById(id);
+		
+		if(branch.isPresent()) {
+			branchRepository.delete(branch.get());
+			return "Branch data "+ id +" has been deleted successfully";
+		} else {
+			return "Branch with ID:"+ id +" doesn't exist";
+		}
+	}
+	public Branch updateBranch(Branch branch) {
+		return branchRepository.save(branch);
 	}
 
-	public Branch getBranchrById(int id) {
+	public Branch getBranchById(int id) {
 		Optional<Branch> branch = branchRepository.findById(id);
 		return branch.get();
 	}

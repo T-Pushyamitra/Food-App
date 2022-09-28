@@ -18,7 +18,7 @@ public class Branch {
 	private String email;
 
 	@ManyToOne
-	User user;
+	private User user;
 
 	/**
 	 * @param id
@@ -56,6 +56,10 @@ public class Branch {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	public User getUser() {
