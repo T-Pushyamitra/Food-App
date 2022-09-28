@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.clarivate.foodapp.dao.ResponseStructure;
 import com.clarivate.foodapp.dto.FoodProducts;
 import com.clarivate.foodapp.services.FoodProductService;
 
+@RestController
 public class FoodProductController {
 
 	@Autowired
