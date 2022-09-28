@@ -57,6 +57,10 @@ public class FoodProducts {
 		this.menu = menu;
 	}
 
+
+	public FoodProducts() {
+	}
+
 	public String getName() {
 		return name;
 	}

@@ -42,7 +42,7 @@ public class FoodProductService {
 			responseStructure.setData(null);
 		} else {
 			responseStructure.setStatusCode(HttpStatus.FOUND.value());
-			responseStructure.setMsg("Food order Details");
+			responseStructure.setMsg("Food product Details");
 			responseStructure.setData(foodProductList);
 		}
 		return responseStructure;
@@ -60,7 +60,7 @@ public class FoodProductService {
 			responseStructure.setData(foodProduct);
 		} else {
 			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
-			responseStructure.setMsg("Food order details Not Found");
+			responseStructure.setMsg("Food product details Not Found");
 			responseStructure.setData(null);
 		}
 		return responseStructure;

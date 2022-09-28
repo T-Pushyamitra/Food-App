@@ -49,5 +49,63 @@ public class MenuService {
 		return response;
 	}
 	
+	public ResponseStructure<Menu> getMenuById(int id) {
+
+		ResponseStructure<Menu> responseStructure = new ResponseStructure<Menu>();
+
+		Menu menu = menuDao.getMenuById(id);
+
+		if (menu != null) {
+			responseStructure.setStatusCode(HttpStatus.FOUND.value());
+			responseStructure.setMsg("Menu Details Obtained");
+			responseStructure.setData(menu);
+		} else {
+			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
+			responseStructure.setMsg("Menu Details Not Found");
+			responseStructure.setData(null);
+		}
+		return responseStructure;
+	
+	}
+	
+	public ResponseStructure<String> deleteMenu(int id) {
+
+		ResponseStructure<String> responseStructure = new ResponseStructure<String>();
+
+		Menu user = menuDao.getMenuById(id);
+
+		if (user != null) {
+			responseStructure.setStatusCode(HttpStatus.FOUND.value());
+			responseStructure.setMsg("Menu Details Deleted Successfully");
+			responseStructure.setData(menuDao.deleteMenu(id));
+		} else {
+			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
+			responseStructure.setMsg("Menu Details Not Found");
+			responseStructure.setData(null);
+		}
+		return responseStructure;
+
+	}
+
+	public ResponseStructure<Menu> updateMenu(Menu user) {
+		
+		ResponseStructure<Menu> responseStructure = new ResponseStructure<Menu>();
+		
+		Menu u1 = menuDao.getMenuById(user.getId());
+		
+		if (u1 == null) {
+			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
+			responseStructure.setMsg("Menu data missing");
+			responseStructure.setData(null);
+
+		} else {
+			responseStructure.setStatusCode(HttpStatus.FOUND.value());
+			responseStructure.setMsg("Menu is present");
+			responseStructure.setData(menuDao.updateMenu(user));
+
+		}
+		return responseStructure;
+
+	}
 
 }

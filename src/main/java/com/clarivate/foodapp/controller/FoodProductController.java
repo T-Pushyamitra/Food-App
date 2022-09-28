@@ -29,6 +29,7 @@ public class FoodProductController {
 	public ResponseStructure<List<FoodProducts>> getAllFoodProduct() {
 		return foodProductService.getAllFoodProducts();
 	}
+	
 	@GetMapping("/foodProduct/{id}")
 	public ResponseStructure<FoodProducts> getFoodProductById(@PathVariable int id) {
 		return foodProductService.getFoodProductsById(id);
