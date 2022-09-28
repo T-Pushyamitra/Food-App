@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.clarivate.foodapp.dto.Menu;
-import com.clarivate.foodapp.dto.User;
 import com.clarivate.foodapp.repository.MenuRepository;
 
 @Component
