@@ -22,7 +22,7 @@ public class FoodOrderController {
 	@Autowired
 	FoodOrderService foodOrderService;
 
-	@PostMapping("/foodOrder")
+	@PostMapping("/foodOrder/{id}")
 	public ResponseStructure<FoodOrder> saveFoodOrder(@RequestBody FoodOrder foodOrder) {
 		return foodOrderService.saveFoodOrder(foodOrder);
 	}

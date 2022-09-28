@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.clarivate.foodapp.dao.MenuDao;
 import com.clarivate.foodapp.dao.ResponseStructure;
+import com.clarivate.foodapp.dao.UserDao;
 import com.clarivate.foodapp.dto.Menu;
+import com.clarivate.foodapp.dto.User;
 
 @Service
 public class MenuService {
@@ -17,7 +19,10 @@ public class MenuService {
 	@Autowired
 	MenuDao menuDao;
 	
+	@Autowired
+	UserDao userDao;
 	
+/**	
 	public ResponseStructure<Menu> saveMenu(Menu menu){
 		
 		ResponseStructure<Menu> response = new ResponseStructure<Menu>();
@@ -30,6 +35,30 @@ public class MenuService {
 		}
 		return response;
 	}
+	*/
+	
+	public ResponseStructure<Menu> saveMenu(Menu menu, int id){
+		
+		ResponseStructure<Menu> response = new ResponseStructure<Menu>();
+		
+		User user = userDao.getUserById(id);
+		
+		if(user == null) {
+			response.setStatusCode(HttpStatus.NOT_FOUND.value());
+			response.setMsg("Menu not found");
+			response.setData(null);
+		} else {
+			response.setStatusCode(HttpStatus.FOUND.value());
+			response.setMsg("Menu Details");
+			menu.setUser(user);
+			response.setData(menuDao.addMenu(menu));
+			
+		}
+		return response;
+		
+	}
+	
+	
 	
 	public ResponseStructure<List<Menu>> getAllMenus(){
 		
@@ -107,5 +136,6 @@ public class MenuService {
 		return responseStructure;
 
 	}
+	
 
 }

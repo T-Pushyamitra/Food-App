@@ -22,9 +22,9 @@ public class MenuController {
 	@Autowired
 	MenuService menuService;
 
-	@PostMapping("/menu")
-	public ResponseStructure<Menu> saveMenu(@RequestBody Menu menu) {
-		return menuService.saveMenu(menu);
+	@PostMapping("/menu/{id}")
+	public ResponseStructure<Menu> saveMenu(@RequestBody Menu menu, @PathVariable int id) {
+		return menuService.saveMenu(menu,id);
 	}
 
 	@GetMapping("/menu")

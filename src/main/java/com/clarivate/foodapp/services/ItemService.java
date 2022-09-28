@@ -6,8 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.clarivate.foodapp.dao.FoodOrderDao;
 import com.clarivate.foodapp.dao.ItemDao;
 import com.clarivate.foodapp.dao.ResponseStructure;
+import com.clarivate.foodapp.dto.FoodOrder;
 import com.clarivate.foodapp.dto.Item;
 
 @Service
@@ -16,6 +18,10 @@ public class ItemService {
 	@Autowired
 	ItemDao itemDao;
 	
+	@Autowired
+	FoodOrderDao foodOrderDao;
+
+	/**
 	public ResponseStructure<Item> saveItem(Item item){
 		ResponseStructure<Item> response = new ResponseStructure<Item>();
 		
@@ -24,6 +30,27 @@ public class ItemService {
 			response.setStatusCode(HttpStatus.CREATED.value());
 			response.setMsg("Item added successfully");
 			response.setData(item2);
+		}
+		return response;
+	}
+	*/
+	
+	public ResponseStructure<Item> saveItem(Item item, int id){
+	
+		ResponseStructure<Item> response = new ResponseStructure<Item>();
+		
+		FoodOrder foodOrder = foodOrderDao.getFoodOrderById(id);
+		
+		if(foodOrder == null) {
+			response.setStatusCode(HttpStatus.NOT_FOUND.value());
+			response.setMsg("Menu not found");
+			response.setData(null);
+		} else {
+			response.setStatusCode(HttpStatus.FOUND.value());
+			response.setMsg("Item Details");
+			item.setFoodOrder(foodOrder);
+			response.setData(itemDao.addItem(item));
+			
 		}
 		return response;
 	}

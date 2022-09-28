@@ -21,9 +21,9 @@ public class ItemController {
 	@Autowired
 	ItemService itemService;
 
-	@PostMapping("/items")
-	public ResponseStructure<Item> saveItem(@RequestBody Item item) {
-		return itemService.saveItem(item);
+	@PostMapping("/items/{id}")
+	public ResponseStructure<Item> saveItem(@RequestBody Item item, @PathVariable int id) {
+		return itemService.saveItem(item,id);
 	}
 
 	@GetMapping("/items")
