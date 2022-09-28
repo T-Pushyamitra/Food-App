@@ -20,15 +20,31 @@ public class User {
 	private String email;
 	private String password;
 	private String role;
-	
-	@OneToOne
-	Menu menu;
-	
-	@OneToMany(mappedBy="user")
-	List<Branch> branch;
-	
-	@OneToMany(mappedBy="user")
-	List<FoodOrder> foodOrders;
+
+	@OneToOne(mappedBy = "user")
+	private Menu menu;
+
+//	@OneToMany(mappedBy="user")
+//	private List<Branch> branch;
+
+	@OneToMany(mappedBy = "user")
+	private List<FoodOrder> foodOrders;
+
+	public Menu getMenu() {
+		return menu;
+	}
+
+	public void setMenu(Menu menu) {
+		this.menu = menu;
+	}
+
+	public List<FoodOrder> getFoodOrders() {
+		return foodOrders;
+	}
+
+	public void setFoodOrders(List<FoodOrder> foodOrders) {
+		this.foodOrders = foodOrders;
+	}
 
 	public User(int id, String name, String email, String password, String role) {
 
@@ -81,15 +97,11 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	
-	
 
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
 				+ "]";
 	}
-	
-	
 
 }
