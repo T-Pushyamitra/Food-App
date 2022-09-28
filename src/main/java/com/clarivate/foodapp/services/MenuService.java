@@ -4,17 +4,22 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.clarivate.foodapp.dao.MenuDao;
 import com.clarivate.foodapp.dao.ResponseStructure;
 import com.clarivate.foodapp.dto.Menu;
 
+@Service
 public class MenuService {
 
 	@Autowired
 	MenuDao menuDao;
 	
+	
 	public ResponseStructure<Menu> saveMenu(Menu menu){
+		
 		ResponseStructure<Menu> response = new ResponseStructure<Menu>();
 		
 		Menu Menu2 = menuDao.addMenu(menu);
