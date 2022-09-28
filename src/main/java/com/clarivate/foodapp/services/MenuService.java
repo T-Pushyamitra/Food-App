@@ -28,6 +28,7 @@ public class MenuService {
 		ResponseStructure<Menu> response = new ResponseStructure<Menu>();
 		
 		Menu Menu2 = menuDao.addMenu(menu);
+		
 		if(Menu2 != null) {
 			response.setStatusCode(HttpStatus.CREATED.value());
 			response.setMsg("Menu added successfully");

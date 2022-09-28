@@ -22,9 +22,9 @@ public class BranchController {
 	@Autowired
 	BranchService branchService;
 
-	@PostMapping("/branch")
-	public ResponseStructure<Branch> saveFoodOrder(@RequestBody Branch branch) {
-		return branchService.saveBranch(branch);
+	@PostMapping("/branch/{id}")
+	public ResponseStructure<Branch> saveFoodOrder(@RequestBody Branch branch, @PathVariable int id) {
+		return branchService.saveBranch(branch,id);
 	}
 
 	@GetMapping("/branch")

@@ -8,8 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.clarivate.foodapp.dao.ResponseStructure;
+import com.clarivate.foodapp.dao.UserDao;
 import com.clarivate.foodapp.dao.BranchDao;
 import com.clarivate.foodapp.dto.Branch;
+import com.clarivate.foodapp.dto.User;
 
 @Service
 public class BranchService {
@@ -17,6 +19,10 @@ public class BranchService {
 	@Autowired
 	BranchDao branchDao;
 	
+	@Autowired
+	UserDao userDao;
+	
+/**
 	public ResponseStructure<Branch> saveBranch(Branch branch){
 		ResponseStructure<Branch> responseStructure = new ResponseStructure<Branch>();
 		
@@ -28,6 +34,25 @@ public class BranchService {
 			responseStructure.setData(branchDao.addBranch(tempBranch));
 		}
 		return responseStructure;
+	}
+*/
+	
+	public ResponseStructure<Branch> saveBranch(Branch branch,int id){
+		ResponseStructure<Branch> response = new ResponseStructure<Branch>();
+		
+		User user = userDao.getUserById(id);
+		if(user ==null) {
+			response.setStatusCode(HttpStatus.NOT_FOUND.value());
+			response.setMsg("Branch not found");
+			response.setData(null);
+		}
+		else {
+			response.setStatusCode(HttpStatus.CREATED.value());
+			response.setMsg("Data added into db successfully");
+			branch.setUser(user);
+			response.setData(branchDao.addBranch(branchDao.addBranch(branch)));
+		}
+		return response;
 	}
 	
 	public ResponseStructure<List<Branch>> getAllBranch(){
