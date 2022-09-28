@@ -23,8 +23,8 @@ public class FoodOrderController {
 	FoodOrderService foodOrderService;
 
 	@PostMapping("/foodOrder/{id}")
-	public ResponseStructure<FoodOrder> saveFoodOrder(@RequestBody FoodOrder foodOrder) {
-		return foodOrderService.saveFoodOrder(foodOrder);
+	public ResponseStructure<FoodOrder> saveFoodOrder(@RequestBody FoodOrder foodOrder,@PathVariable int id) {
+		return foodOrderService.saveFoodOrder(foodOrder, id);
 	}
 
 	@GetMapping("/foodOrder")

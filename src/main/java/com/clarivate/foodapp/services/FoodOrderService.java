@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.clarivate.foodapp.dao.FoodOrderDao;
 import com.clarivate.foodapp.dao.ResponseStructure;
+import com.clarivate.foodapp.dao.UserDao;
 import com.clarivate.foodapp.dto.FoodOrder;
+import com.clarivate.foodapp.dto.Menu;
+import com.clarivate.foodapp.dto.User;
 
 @Service
 public class FoodOrderService {
@@ -16,21 +19,45 @@ public class FoodOrderService {
 	@Autowired
 	FoodOrderDao foodOrderDao;
 
-	// Create new food order
-	public ResponseStructure<FoodOrder> saveFoodOrder(FoodOrder foodOrder) {
-		ResponseStructure<FoodOrder> responseStructure = new ResponseStructure<FoodOrder>();
-		
-		FoodOrder foodOrder1 = foodOrderDao.addFoodOrder(foodOrder);
-
-		if (foodOrder1 != null) {
-			responseStructure.setStatusCode(HttpStatus.CREATED.value());
-			responseStructure.setMsg("Data added into db successfully");
-			responseStructure.setData(foodOrderDao.addFoodOrder(foodOrder1));
-		}
-		return responseStructure;
-	}
+	@Autowired
+	UserDao userDao;
+// Create new food order
+//	public ResponseStructure<FoodOrder> saveFoodOrder(FoodOrder foodOrder) {
+//		ResponseStructure<FoodOrder> responseStructure = new ResponseStructure<FoodOrder>();
+//		
+//		FoodOrder foodOrder1 = foodOrderDao.addFoodOrder(foodOrder);
+//
+//		if (foodOrder1 != null) {
+//			responseStructure.setStatusCode(HttpStatus.CREATED.value());
+//			responseStructure.setMsg("Data added into db successfully");
+//			responseStructure.setData(foodOrderDao.addFoodOrder(foodOrder1));
+//		}
+//		return responseStructure;
+//	}
 
 	
+		public ResponseStructure<FoodOrder> saveFoodOrder(FoodOrder foodOrder, int id){
+		
+		ResponseStructure<FoodOrder> response = new ResponseStructure<FoodOrder>();
+		
+		User user = userDao.getUserById(id);
+		
+		if(user == null) {
+			response.setStatusCode(HttpStatus.NOT_FOUND.value());
+			response.setMsg("Menu not found");
+			response.setData(null);
+		} else {
+			response.setStatusCode(HttpStatus.FOUND.value());
+			response.setMsg("Menu Details");
+			foodOrder.setUser(user);
+			response.setData(foodOrderDao.addFoodOrder(foodOrder));
+			
+		}
+		return response;
+		
+	}
+	
+		
 	// Get All food orders
 	
 	public ResponseStructure<List<FoodOrder>> getAllFoodOrdersData() {
