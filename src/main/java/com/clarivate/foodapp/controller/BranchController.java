@@ -43,8 +43,8 @@ public class BranchController {
 
 	}
 
-	@PutMapping("/branch")
-	public ResponseStructure<Branch> updateBranch(@RequestBody Branch branch) {
-		return branchService.updateBranch(branch);
+	@PutMapping("/branch/{id}")
+	public ResponseStructure<Branch> updateBranch(@RequestBody Branch branch, @PathVariable int id) {
+		return branchService.updateBranch(branch,id);
 	}
 }

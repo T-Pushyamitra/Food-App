@@ -110,11 +110,11 @@ public class BranchService {
 
 	}
 
-	public ResponseStructure<Branch> updateBranch(Branch branch) {
+	public ResponseStructure<Branch> updateBranch(Branch branch,int id) {
 		
 		ResponseStructure<Branch> responseStructure = new ResponseStructure<Branch>();
 		
-		Branch u1 = branchDao.getBranchById(branch.getId());
+		Branch u1 = branchDao.getBranchById(id);
 		
 		if (u1 == null) {
 			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());

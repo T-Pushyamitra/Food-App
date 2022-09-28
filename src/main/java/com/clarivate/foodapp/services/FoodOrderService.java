@@ -123,11 +123,11 @@ public class FoodOrderService {
 	
 	// Update food order by id
 	
-	public ResponseStructure<FoodOrder> updateFoodOrder(FoodOrder foodOrder) {
+	public ResponseStructure<FoodOrder> updateFoodOrder(FoodOrder foodOrder, int id) {
 		
 		ResponseStructure<FoodOrder> responseStructure = new ResponseStructure<FoodOrder>();
 		
-		FoodOrder foodOrder1 = foodOrderDao.getFoodOrderById(foodOrder.getId());
+		FoodOrder foodOrder1 = foodOrderDao.getFoodOrderById(id);
 		
 		if (foodOrder1 == null) {
 			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
