@@ -21,8 +21,20 @@ public class FoodProducts {
 	private float price;
 
 	@ManyToOne
-	@JoinColumn
-	Menu menu;
+	@JoinColumn(name="menu_id")
+	private Menu menu;
+
+	public Menu getMenu() {
+		return menu;
+	}
+
+	public void setMenu(Menu menu) {
+		this.menu = menu;
+	}
+
+	public int getId() {
+		return id;
+	}
 
 	/**
 	 * @param id

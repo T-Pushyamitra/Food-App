@@ -36,8 +36,16 @@ public class FoodOrder {
 	private long contactNumber;
 
 	@ManyToOne
-	@JoinColumn
-	User user;
+	@JoinColumn(name = "user_id")
+	private User user;
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 
 	public boolean isStatus() {
 		return status;
