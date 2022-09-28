@@ -2,14 +2,18 @@ package com.clarivate.foodapp.dto;
 
 
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -35,9 +39,21 @@ public class FoodOrder {
 	private String customerName;
 	private long contactNumber;
 
+	
+	@OneToMany(cascade = CascadeType.ALL,mappedBy="foodOrder",fetch=FetchType.LAZY)
+	private List<Item> item;
+	
 	@ManyToOne
 	@JoinColumn(name = "user_id")
 	private User user;
+
+	public List<Item> getItem() {
+		return item;
+	}
+
+	public void setItem(List<Item> item) {
+		this.item = item;
+	}
 
 	public User getUser() {
 		return user;

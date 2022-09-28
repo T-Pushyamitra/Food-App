@@ -19,7 +19,7 @@ public class FoodOrderService {
 	// Create new food order
 	public ResponseStructure<FoodOrder> saveFoodOrder(FoodOrder foodOrder) {
 		ResponseStructure<FoodOrder> responseStructure = new ResponseStructure<FoodOrder>();
-
+		
 		FoodOrder foodOrder1 = foodOrderDao.addFoodOrder(foodOrder);
 
 		if (foodOrder1 != null) {

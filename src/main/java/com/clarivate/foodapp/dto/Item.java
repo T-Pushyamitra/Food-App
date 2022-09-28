@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -16,6 +18,19 @@ public class Item {
 	private String type;
 	private int quantity;
 	private float price;
+
+//	
+	@ManyToOne
+	@JoinColumn()
+	private FoodOrder foodOrder;
+	
+	public FoodOrder getFoodOrder() {
+		return foodOrder;
+	}
+//
+	public void setFoodOrder(FoodOrder foodOrder) {
+		this.foodOrder = foodOrder;
+	}
 
 	public String getName() {
 		return name;

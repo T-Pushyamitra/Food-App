@@ -2,7 +2,9 @@ package com.clarivate.foodapp.dto;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +21,7 @@ public class Menu {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@OneToMany(targetEntity = FoodProducts.class, mappedBy = "menu")
+	@OneToMany(cascade=CascadeType.ALL,mappedBy = "menu",fetch=FetchType.LAZY)
 	private List<FoodProducts> foodProducts;
 
 	@OneToOne

@@ -26,7 +26,7 @@ public class ItemController {
 		return itemService.saveItem(item);
 	}
 
-	@GetMapping("/getItems")
+	@GetMapping("/items")
 	public ResponseStructure<List<Item>> getAllItems() {
 		return itemService.getAllItems();
 	}
