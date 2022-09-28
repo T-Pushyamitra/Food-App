@@ -25,7 +25,7 @@ public class UserController {
 
 	@GetMapping("/users")
 	public ResponseStructure<List<User>> getAllUser() {
-		return userService.getAllUser();
+		return userService.getAllUsers();
 	}
 
 	@PostMapping("/users")
