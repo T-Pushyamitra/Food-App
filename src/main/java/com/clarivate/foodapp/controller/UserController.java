@@ -44,9 +44,9 @@ public class UserController {
 
 	}
 
-	@PutMapping("/users")
-	public ResponseStructure<User> updateUser(@RequestBody User user) {
-		return userService.updateUser(user);
+	@PutMapping("/users/{id}")
+	public ResponseStructure<User> updateUser(@RequestBody User user,@PathVariable int id) {
+		return userService.updateUser(user,id);
 	}
 
 }

@@ -85,11 +85,11 @@ public class UserServiceImpl {
 
 	}
 
-	public ResponseStructure<User> updateUser(User user) {
+	public ResponseStructure<User> updateUser(User user,int id) {
 		
 		ResponseStructure<User> responseStructure = new ResponseStructure<User>();
 		
-		User u1 = userDao.getUserById(user.getId());
+		User u1 = userDao.getUserById(id);
 		
 		if (u1 == null) {
 			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
