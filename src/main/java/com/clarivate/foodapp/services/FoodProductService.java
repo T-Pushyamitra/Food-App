@@ -7,8 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.clarivate.foodapp.dao.FoodProductDao;
+import com.clarivate.foodapp.dao.MenuDao;
 import com.clarivate.foodapp.dao.ResponseStructure;
 import com.clarivate.foodapp.dto.FoodProducts;
+import com.clarivate.foodapp.dto.Menu;
 
 
 @Service
@@ -16,8 +18,10 @@ public class FoodProductService {
 
 	@Autowired
 	FoodProductDao foodProductDao;
+	@Autowired
+	MenuDao menuDao;
 	
-	public ResponseStructure<FoodProducts> saveFoodProducts(FoodProducts foodProduct) {
+	/*public ResponseStructure<FoodProducts> saveFoodProducts(FoodProducts foodProduct) {
 		ResponseStructure<FoodProducts> responseStructure = new ResponseStructure<FoodProducts>();
 
 		FoodProducts foodProduct1 = foodProductDao.addFoodProduct(foodProduct);
@@ -28,7 +32,35 @@ public class FoodProductService {
 			responseStructure.setData(foodProductDao.addFoodProduct(foodProduct1));
 		}
 		return responseStructure;
+	}*/
+	
+	public ResponseStructure<FoodProducts> saveFoodProducts(FoodProducts foodProduct, int id) {
+	ResponseStructure<FoodProducts> response= new ResponseStructure<FoodProducts>();
+	 
+	Menu menu =menuDao.getMenuById(id);
+	
+	if(menu==null) {
+		response.setStatusCode(HttpStatus.NOT_FOUND.value());
+        response.setMsg("Menu not found");
+        response.setData(null);
+		
 	}
+	else {
+		response.setStatusCode(HttpStatus.FOUND.value());
+        response.setMsg("Food Order Details");
+        foodProduct.setMenu(menu);
+        response.setData(foodProductDao.addFoodProduct(foodProduct));
+
+
+		
+	}
+	return response;
+	
+	}
+	
+
+	
+	
 
 	public ResponseStructure<List<FoodProducts>> getAllFoodProducts() {
 
