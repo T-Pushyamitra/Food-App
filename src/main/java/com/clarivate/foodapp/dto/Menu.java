@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "menu")
 public class Menu {
@@ -28,6 +30,7 @@ public class Menu {
 	@JoinColumn(name = "user_id")
 	private User user;
 
+	@JsonManagedReference
 	public List<FoodProducts> getFoodProducts() {
 		return foodProducts;
 	}

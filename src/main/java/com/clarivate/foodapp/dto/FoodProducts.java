@@ -8,6 +8,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "foodProduct")
 public class FoodProducts {
@@ -24,6 +26,7 @@ public class FoodProducts {
 	@JoinColumn(name="menu_id")
 	private Menu menu;
 
+	@JsonBackReference
 	public Menu getMenu() {
 		return menu;
 	}

@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class User {
 
@@ -23,7 +25,7 @@ public class User {
 	private String password;
 	private String role;
 
-	@OneToOne(cascade=CascadeType.ALL,mappedBy = "user",fetch =FetchType.LAZY)
+	@OneToOne(mappedBy = "user")
 	private Menu menu;
 
 //	@OneToMany(mappedBy="user")
@@ -40,6 +42,7 @@ public class User {
 		this.menu = menu;
 	}
 
+	@JsonManagedReference
 	public List<FoodOrder> getFoodOrders() {
 		return foodOrders;
 	}

@@ -18,7 +18,9 @@ import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="foodOrder")
@@ -47,6 +49,7 @@ public class FoodOrder {
 	@JoinColumn(name = "user_id")
 	private User user;
 
+	@JsonManagedReference
 	public List<Item> getItem() {
 		return item;
 	}
@@ -55,6 +58,7 @@ public class FoodOrder {
 		this.item = item;
 	}
 
+	@JsonBackReference
 	public User getUser() {
 		return user;
 	}
