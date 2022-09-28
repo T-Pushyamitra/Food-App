@@ -104,11 +104,11 @@ public class ItemService {
 		return response;
 	}
 	
-	public ResponseStructure<Item> updateItem(Item item){
+	public ResponseStructure<Item> updateItem(Item item,int id){
 		
 		ResponseStructure<Item> response = new ResponseStructure<Item>();
 		
-		Item item2 = itemDao.getItemById(item.getId());
+		Item item2 = itemDao.getItemById(id);
 		if(item2!=null) {
 			response.setStatusCode(HttpStatus.FOUND.value());
 			response.setMsg("Item data is updated");

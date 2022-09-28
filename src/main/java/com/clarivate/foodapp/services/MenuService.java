@@ -117,11 +117,11 @@ public class MenuService {
 
 	}
 
-	public ResponseStructure<Menu> updateMenu(Menu user) {
+	public ResponseStructure<Menu> updateMenu(Menu user,int id) {
 		
 		ResponseStructure<Menu> responseStructure = new ResponseStructure<Menu>();
 		
-		Menu u1 = menuDao.getMenuById(user.getId());
+		Menu u1 = menuDao.getMenuById(id);
 		
 		if (u1 == null) {
 			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
