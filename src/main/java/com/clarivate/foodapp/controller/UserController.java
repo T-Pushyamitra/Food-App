@@ -3,6 +3,7 @@ package com.clarivate.foodapp.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 //import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.clarivate.foodapp.dao.ResponseStructure;
 import com.clarivate.foodapp.dto.User;
 import com.clarivate.foodapp.services.UserServiceImpl;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class UserController {
 
