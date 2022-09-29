@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -26,6 +27,7 @@ public class Menu {
 	@OneToMany(cascade=CascadeType.ALL,mappedBy = "menu",fetch=FetchType.LAZY)
 	private List<FoodProducts> foodProducts;
 
+	@JsonBackReference
 	@OneToOne
 	@JoinColumn(name = "user_id")
 	private User user;

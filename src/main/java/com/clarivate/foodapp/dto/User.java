@@ -25,6 +25,7 @@ public class User {
 	private String password;
 	private String role;
 
+	@JsonManagedReference
 	@OneToOne(mappedBy = "user")
 	private Menu menu;
 
