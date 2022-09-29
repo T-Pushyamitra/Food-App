@@ -7,16 +7,20 @@ import { Injectable } from '@angular/core';
 export class StaffService {
 
   
-  getUrl: string = "http://localhost:8080/foodOrder"
+  foodOrderUrl: string = "http://localhost:8080/foodOrder/3"
   
   postUrl: string = "http://localhost:8080/foodProduct/"
 
-  deleteUrl: string = "http://localhost:8080/foodProduct/"
+  itemsUrl: string = "http://localhost:8080/item/3"
 
 
   constructor(private http:HttpClient) {  }
- addOrder(product:any){
-  return this.http.post(this.postUrl,product)
-
+ addNewOrder(order:any){
+  return this.http.post(this.foodOrderUrl,order);
  }
+
+ addOrderItems(items:any){
+  return this.http.post(this.itemsUrl,items);
+ }
+
 }
