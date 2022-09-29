@@ -24,14 +24,14 @@ public class FoodappApplication {
 		SpringApplication.run(FoodappApplication.class, args);
 	}
 
-//	List<VendorExtension> vendorExtensions = new ArrayList<VendorExtension>();
-//	
-//	Contact contact = new Contact("Clarivate","https://foodordering.com","clarivate@gmail.com");
-//	
-//	ApiInfo apiInfo = new ApiInfo("Food Ordering", "Order From your Home", "snapshot-0.0.1", "https://foodordering.com", contact, "www.foodordering.com", "terms and conditions", vendorExtensions);
-//	
-//	@Bean
-//	public Docket myDocket() {
-//		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.basePackage("com.clarivate.foodapp")).build().apiInfo(apiInfo);
-//	}
+	List<VendorExtension> vendorExtensions = new ArrayList<VendorExtension>();
+	
+	Contact contact = new Contact("Clarivate","https://foodordering.com","clarivate@gmail.com");
+	
+	ApiInfo apiInfo = new ApiInfo("Food Ordering", "Order From your Home", "snapshot-0.0.1", "https://foodordering.com", contact, "www.foodordering.com", "terms and conditions", vendorExtensions);
+	
+	@Bean
+	public Docket myDocket() {
+		return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.basePackage("com.clarivate.foodapp")).build().apiInfo(apiInfo);
+	}
 }
