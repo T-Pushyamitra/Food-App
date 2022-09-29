@@ -41,7 +41,7 @@ public class UserServiceImpl {
 			responseStructure.setData(null);
 		} else {
 			responseStructure.setStatusCode(HttpStatus.FOUND.value());
-			responseStructure.setMsg("Food order Details");
+			responseStructure.setMsg("User Details");
 			responseStructure.setData(userList);
 		}
 		

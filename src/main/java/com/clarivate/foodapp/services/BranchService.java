@@ -66,7 +66,7 @@ public class BranchService {
 			responseStructure.setData(null);
 		} else {
 			responseStructure.setStatusCode(HttpStatus.FOUND.value());
-			responseStructure.setMsg("Food order Details");
+			responseStructure.setMsg("Branch Details");
 			responseStructure.setData(branchList);
 		}
 		

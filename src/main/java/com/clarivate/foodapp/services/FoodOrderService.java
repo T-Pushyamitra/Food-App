@@ -44,11 +44,11 @@ public class FoodOrderService {
 		
 		if(user == null) {
 			response.setStatusCode(HttpStatus.NOT_FOUND.value());
-			response.setMsg("Menu not found");
+			response.setMsg("Food Order not found");
 			response.setData(null);
 		} else {
 			response.setStatusCode(HttpStatus.FOUND.value());
-			response.setMsg("Menu Details");
+			response.setMsg("Food Order Details");
 			foodOrder.setUser(user);
 			response.setData(foodOrderDao.addFoodOrder(foodOrder));
 			
@@ -72,7 +72,7 @@ public class FoodOrderService {
 			responseStructure.setData(null);
 		} else {
 			responseStructure.setStatusCode(HttpStatus.FOUND.value());
-			responseStructure.setMsg("Food order Details");
+			responseStructure.setMsg("Food Order Details");
 			responseStructure.setData(foodOrderList);
 		}
 		return responseStructure;
@@ -88,11 +88,11 @@ public class FoodOrderService {
 
 		if (foodOrder != null) {
 			responseStructure.setStatusCode(HttpStatus.FOUND.value());
-			responseStructure.setMsg("Food order details Obtained");
+			responseStructure.setMsg("Food Order details Obtained");
 			responseStructure.setData(foodOrder);
 		} else {
 			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
-			responseStructure.setMsg("Food order details Not Found");
+			responseStructure.setMsg("Food Order details Not Found");
 			responseStructure.setData(null);
 		}
 		return responseStructure;
@@ -109,11 +109,11 @@ public class FoodOrderService {
 
 		if (foodOrder != null) {
 			responseStructure.setStatusCode(HttpStatus.FOUND.value());
-			responseStructure.setMsg("Food order details Deleted Successfully");
+			responseStructure.setMsg("Food Order details Deleted Successfully");
 			responseStructure.setData(foodOrderDao.deleteFoodOrder(id));
 		} else {
 			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
-			responseStructure.setMsg("Food order details Not Found");
+			responseStructure.setMsg("Food Order details Not Found");
 			responseStructure.setData(null);
 		}
 		return responseStructure;
@@ -131,7 +131,7 @@ public class FoodOrderService {
 		
 		if (foodOrder1 == null) {
 			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
-			responseStructure.setMsg("FoodOrder data not found");
+			responseStructure.setMsg("Food Order data not found");
 			responseStructure.setData(null);
 
 		} else {

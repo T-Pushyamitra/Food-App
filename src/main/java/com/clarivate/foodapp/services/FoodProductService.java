@@ -41,13 +41,13 @@ public class FoodProductService {
 	
 	if(menu==null) {
 		response.setStatusCode(HttpStatus.NOT_FOUND.value());
-        response.setMsg("Menu not found");
+        response.setMsg("Food Product not found");
         response.setData(null);
 		
 	}
 	else {
 		response.setStatusCode(HttpStatus.FOUND.value());
-        response.setMsg("Food Order Details");
+        response.setMsg("Food Product Details");
         foodProduct.setMenu(menu);
         response.setData(foodProductDao.addFoodProduct(foodProduct));
 
@@ -74,7 +74,7 @@ public class FoodProductService {
 			responseStructure.setData(null);
 		} else {
 			responseStructure.setStatusCode(HttpStatus.FOUND.value());
-			responseStructure.setMsg("Food product Details");
+			responseStructure.setMsg("Food Product Details");
 			responseStructure.setData(foodProductList);
 		}
 		return responseStructure;
@@ -88,7 +88,7 @@ public class FoodProductService {
 
 		if (foodProduct != null) {
 			responseStructure.setStatusCode(HttpStatus.FOUND.value());
-			responseStructure.setMsg("Food order details Obtained");
+			responseStructure.setMsg("Food Product details Obtained");
 			responseStructure.setData(foodProduct);
 		} else {
 			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
@@ -109,11 +109,11 @@ public class FoodProductService {
 
 		if (foodProduct != null) {
 			responseStructure.setStatusCode(HttpStatus.FOUND.value());
-			responseStructure.setMsg("Food order details Deleted Successfully");
+			responseStructure.setMsg("Food Product details Deleted Successfully");
 			responseStructure.setData(foodProductDao.deleteFoodProduct(id));
 		} else {
 			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
-			responseStructure.setMsg("Food order details Not Found");
+			responseStructure.setMsg("Food Product details Not Found");
 			responseStructure.setData(null);
 		}
 		return responseStructure;
@@ -131,7 +131,7 @@ public class FoodProductService {
 		
 		if (foodProduct1 == null) {
 			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
-			responseStructure.setMsg("FoodProducts data not found");
+			responseStructure.setMsg("Food Products data not found");
 			responseStructure.setData(null);
 
 		} else {

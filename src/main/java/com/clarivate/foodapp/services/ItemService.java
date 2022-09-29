@@ -43,7 +43,7 @@ public class ItemService {
 		
 		if(foodOrder == null) {
 			response.setStatusCode(HttpStatus.NOT_FOUND.value());
-			response.setMsg("Menu not found");
+			response.setMsg("Item not found");
 			response.setData(null);
 		} else {
 			response.setStatusCode(HttpStatus.FOUND.value());
