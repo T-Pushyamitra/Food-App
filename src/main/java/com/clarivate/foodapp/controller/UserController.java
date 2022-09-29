@@ -38,6 +38,11 @@ public class UserController {
 	public ResponseStructure<User> getUserById(@PathVariable int id) {
 		return userService.getUserById(id);
 	}
+	
+	@GetMapping("/user/{email}")
+	public ResponseStructure<List<User>> getUserByName(@PathVariable String email) {
+		return userService.getUserByEmail(email);
+	}
 
 	@DeleteMapping("/users/{id}")
 	public ResponseStructure<String> deleteUser(@PathVariable int id) {
@@ -49,5 +54,6 @@ public class UserController {
 	public ResponseStructure<User> updateUser(@RequestBody User user,@PathVariable int id) {
 		return userService.updateUser(user,id);
 	}
+	
 
 }

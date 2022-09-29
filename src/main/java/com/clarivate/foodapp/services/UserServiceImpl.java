@@ -65,6 +65,24 @@ public class UserServiceImpl {
 		}
 		return responseStructure;
 	}
+	
+	public ResponseStructure <List<User>> getUserByEmail(String email) {
+
+		ResponseStructure <List<User>> responseStructure = new ResponseStructure<List<User>>();
+
+		List<User> user = userDao.getUserByEmail(email);
+
+		if (user != null) {
+			responseStructure.setStatusCode(HttpStatus.FOUND.value());
+			responseStructure.setMsg("User Details Obtained");
+			responseStructure.setData(user);
+		} else {
+			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
+			responseStructure.setMsg("User Details Not Found");
+			responseStructure.setData(null);
+		}
+		return responseStructure;
+	}
 
 	public ResponseStructure<String> deleteUser(int id) {
 

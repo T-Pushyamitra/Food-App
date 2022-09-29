@@ -34,6 +34,14 @@ public class UserDao {
 		return null;
 	}
 	
+	public List<User> getUserByEmail(String email) {
+		List<User> user = userRepository.findByEmail(email);
+		if(user != null) {
+			return user;
+		}
+		return null;
+	}
+	
 	public User updateUser(User user) {
 	
 		return userRepository.save(user);
