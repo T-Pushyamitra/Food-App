@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { StaffService } from '../Services/staff.service';
 
 @Component({
   selector: 'app-staff',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StaffComponent implements OnInit {
 
-  constructor() { }
+  constructor(private items:StaffService) { }
 
   ngOnInit(): void {
+  }
+  foodOrder(form:NgForm){
+    console.log(form.value)
+    this.items.addOrder(form.value).subscribe((data)=>{
+      console.log(data)
+    })
+
+
   }
 
 }
