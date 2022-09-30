@@ -13,79 +13,92 @@ import { FoodOrder } from './foodOrder';
 })
 export class StaffComponent implements OnInit {
   foodProductsList: any;
-  type: any;
+  _type: string = '';
   menuData: any;
-  foodOrderData:any;
-  foodOrder: FoodOrder = new FoodOrder('', 0, '', '', 0, false);
+  foodOrderData: any;
+  quantity: number | undefined;
+  _isOrderTaken = false;
   foodItems: any[] = [];
-  quantity: number = 1;
-  orderForm: any;
-  i:any= 1;
+  foodOrder: FoodOrder = new FoodOrder('', 0, '', '', 0, false);
+  types = ['Veg', 'Non-Veg', 'Drinks'];
 
   constructor(
     private service: StaffService,
-    private foodProducts: FoodProductService,
-    private menu:MenuService,
-    private totalPrice: TotalPricePipe,
-  ) { }
+    private menu: MenuService,
+    private totalPrice: TotalPricePipe
+  ) {}
 
   ngOnInit(): void {
-    this.menu.getMenu().subscribe((data)=>{
+    this.menu.getMenu().subscribe((data) => {
       this.menuData = data;
-      console.log(this.menuData.data.foodProducts) ;
-    })
-
+      this.menuData = this.menuData.data;
+      console.log(this.menuData);
+    });
   }
 
-
-plus(){
-  if(this.i !=10){
-    this.i++;
-    this.quantity =this.i;
+  plus(id: any) {
+    this.foodItems[id].quantity += 1;
   }
-}
-minus(){
-  if(this.i !=1){
-    this.i--;
-    this.quantity =this.i;
+  minus(id: any) {
+    if (this.foodItems[id].quantity < 2) {
+      this.foodItems.splice(id, 1);
+    }
+    this.foodItems[id].quantity -= 1;
   }
-}
 
-
-
-  addItem(id:any){
-      this.foodItems.push(id)
+  addItem(id: any) {
+    this.menuData.foodProducts.filter((item: any) => {
+      if (item.id === id) {
+        this.foodItems.push({
+          name: item.name,
+          price: item.price,
+          quantity: 1,
+          type: item.type,
+        });
+      }
+    });
   }
 
   getTotalPrice() {
-    console.log(this.totalPrice.transform(this.foodItems));
     return this.totalPrice.transform(this.foodItems);
   }
 
   createFoodOrder(order: any) {
     this.foodOrder.customerName = order.customerName;
-    this.foodOrder.customerNumber = order.customerNumber;
-    this.foodOrder.orderCreatedTime = '2022-09-29 10:50';
-    // this.foodOrder.orderCreatedTime = new Date().getTime();
-    this.foodOrder.totalPrice = this.getTotalPrice();
-    this.foodOrder.status = false;
+    this.foodOrder.customerNumber = parseInt(order.customerNumber);
     return this.foodOrder;
   }
 
+  updateFoodOrder() {
+    this.foodOrder.orderCreatedTime = '2022-09-29 10:50';
+    this.foodOrder.totalPrice = this.totalPrice.transform(this.foodItems);
+
+    this.service
+      .updateFoodOrder(this.foodOrder, this.foodOrderData.data.id)
+      .subscribe((res) => {
+        console.log(res);
+      });
+  }
 
   foodOrders(order: NgForm) {
+    this._isOrderTaken = !this._isOrderTaken;
     console.log(order.value);
     this.service
       .addNewOrder(this.createFoodOrder(order.value))
       .subscribe((data) => {
         this.foodOrderData = data;
         console.log('Order Has been Taken ' + this.foodOrderData.data.id);
+        // console.log('Name ' +  this.foodOrderData.data.name);
       });
-
-    // this.service
-    //   .addOrderItems(this.foodItems, this.foodOrderData.data.id)
-    //   .subscribe((data) => {
-    //     console.log(data);
-    //   });
+  }
+  postOrder() {
+    // this.foodOrder.orderCreatedTime = '2022-09-29 10:50';
+    // this.foodOrder.totalPrice = this.totalPrice.transform(this.foodItems);
+    this.service
+      .addOrderItems(this.foodItems, this.foodOrderData.data.id)
+      .subscribe((data) => {
+        console.log(data);
+      });
+    this.updateFoodOrder();
   }
 }
