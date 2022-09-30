@@ -1,5 +1,6 @@
 package com.clarivate.foodapp.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +23,10 @@ public class ItemDao {
 		return itemRepository.save(item);
 	}
 	
+	public List<Item>  addAllItem(List<Item> item) {
+		return itemRepository.saveAll(item);
+	}
+	
 	public List<Item> getAllItems(){
 		return itemRepository.findAll();
 	}
@@ -30,6 +35,12 @@ public class ItemDao {
 	public Item getItemById(int id) {
 		Optional<Item> item = itemRepository.findById(id);
 		return item.get();
+	}
+	
+	public List<Item> getItemByNameContaining(String regex) {
+		List<Item> item = itemRepository.findByNameContaining(regex);
+	
+		return item;
 	}
 	
 	public String deleteItem(int id) {
@@ -46,5 +57,8 @@ public class ItemDao {
 	public Item updateItem (Item item) {
 		return itemRepository.save(item);
 	}
+
+
+	
 	
 }
