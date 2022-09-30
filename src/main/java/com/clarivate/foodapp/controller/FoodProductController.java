@@ -31,11 +31,16 @@ public class FoodProductController {
 		return foodProductService.getAllFoodProducts();
 	}
 	
-	@GetMapping("/foodProduct/{id}")
-	public ResponseStructure<FoodProducts> getFoodProductById(@PathVariable int id) {
-		return foodProductService.getFoodProductsById(id);
-	}
+//	@GetMapping("/foodProduct/{id}")
+//	public ResponseStructure<FoodProducts> getFoodProductById(@PathVariable int id) {
+//		return foodProductService.getFoodProductsById(id);
+//	}
 
+	@GetMapping("/foodProduct/{name}")
+	public ResponseStructure<List<FoodProducts>> getFoodProductById(@PathVariable String name) {
+		return foodProductService.getFoodProductsByNameContaining(name);
+	}
+	
 	@DeleteMapping("/foodProduct/{id}")
 	public ResponseStructure<String> deleteFoodProduct(@PathVariable int id) {
 		return foodProductService.deleteFoodProducts(id);

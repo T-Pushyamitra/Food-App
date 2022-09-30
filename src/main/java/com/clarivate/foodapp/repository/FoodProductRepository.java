@@ -12,4 +12,5 @@ import com.clarivate.foodapp.dto.FoodProducts;
 public interface FoodProductRepository  extends JpaRepository<FoodProducts, Integer>{
 
 		List<FoodProducts> findByNameContaining(String name);
+		
 }

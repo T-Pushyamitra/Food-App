@@ -37,6 +37,17 @@ public class FoodProductDao {
 		}
 	}
 	
+	public List<FoodProducts> getFoodProductByNameContaining(String name) {
+		List<FoodProducts> foodProduct = foodProductRepository.findByNameContaining(name);
+		
+		if(foodProduct.isEmpty()) {			
+			return null;
+		}
+		else {
+			return foodProduct;
+		}
+	}
+	
 	public String deleteFoodProduct(int id) {
 		Optional<FoodProducts> foodProduct = foodProductRepository.findById(id);
 		

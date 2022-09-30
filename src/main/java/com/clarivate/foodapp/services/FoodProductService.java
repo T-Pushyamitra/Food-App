@@ -97,6 +97,24 @@ public class FoodProductService {
 		}
 		return responseStructure;
 	}
+	
+	public ResponseStructure<List<FoodProducts>> getFoodProductsByNameContaining(String name) {
+
+		ResponseStructure<List<FoodProducts>> responseStructure = new ResponseStructure<List<FoodProducts>>();
+
+		List<FoodProducts> foodProduct = foodProductDao.getFoodProductByNameContaining(name);
+
+		if (foodProduct != null) {
+			responseStructure.setStatusCode(HttpStatus.FOUND.value());
+			responseStructure.setMsg("Food Product details Obtained");
+			responseStructure.setData(foodProduct);
+		} else {
+			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
+			responseStructure.setMsg("Food product details Not Found");
+			responseStructure.setData(null);
+		}
+		return responseStructure;
+	}
 
 	
 	// Delete food order by id
