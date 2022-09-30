@@ -42,11 +42,6 @@ public class ItemController {
 		return itemService.getItemById(id);
 	}
 
-	/** Get Item By Using Regex */
-	@GetMapping("/items-by/{regex}")
-	public ResponseStructure<List<Item>> getItemByNameContaining(@PathVariable String regex) {
-		return itemService.getItemByNameContaining(regex);
-	}
 
 	@DeleteMapping("/items/{id}")
 	public ResponseStructure<String> deleteItem(@PathVariable int id) {

@@ -108,20 +108,7 @@ public class ItemService {
 		return response;
 	}
 	
-	public ResponseStructure<List<Item>> getItemByNameContaining(String regex) {
-		ResponseStructure<List<Item>> response = new ResponseStructure<List<Item>>();
-		List<Item> item = itemDao.getItemByNameContaining(regex);
-		if (item.isEmpty()) {
-			response.setStatusCode(HttpStatus.FOUND.value());
-			response.setMsg("Item Details");
-			response.setData(item);
-		} else {
-			response.setStatusCode(HttpStatus.NOT_FOUND.value());
-			response.setMsg("Item not found");
-			response.setData(null);
-		}
-		return response;
-	}
+
 	
 
 	public ResponseStructure<String> deleteItem(int id) {

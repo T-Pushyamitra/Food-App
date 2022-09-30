@@ -9,6 +9,6 @@ import com.clarivate.foodapp.dto.Item;
 
 public interface ItemRepository  extends JpaRepository<Item, Integer>{
 
-	public List<Item> findByNameContaining(String regex);
+	
 
 }

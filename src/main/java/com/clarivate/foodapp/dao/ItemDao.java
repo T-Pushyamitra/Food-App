@@ -37,11 +37,7 @@ public class ItemDao {
 		return item.get();
 	}
 	
-	public List<Item> getItemByNameContaining(String regex) {
-		List<Item> item = itemRepository.findByNameContaining(regex);
 	
-		return item;
-	}
 	
 	public String deleteItem(int id) {
 		Optional<Item> optional = itemRepository.findById(id);
