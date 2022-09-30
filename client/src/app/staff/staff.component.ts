@@ -54,7 +54,7 @@ export class StaffComponent implements OnInit {
       console.log(this.foodItems);
       console.log(this.results.data.id)
     });
-
+    
     this.service.addOrderItems(this.foodItems).subscribe((data) =>{
       console.log(data)
     });
