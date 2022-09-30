@@ -1,18 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
+import { Urls } from './devUrls';
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginService {
-  
-  url: string = "http://localhost:8080/user/"
+  constructor(private http: HttpClient) {}
 
-  constructor(private http:HttpClient) { }
-
-  getUsersByEmail(email:any){
-    // console.log(email)
-    return this.http.get(this.url+`${email}`)
+  getUsersByEmail(email: any) {
+    return this.http.get(Urls.userUrl + `${email}`);
   }
-
 }
