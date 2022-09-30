@@ -5,12 +5,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TotalPricePipe implements PipeTransform {
 
-  transform(value:any[]): any{
+  transform(items:any[]): any{
     var sum = 0;
-    value.forEach(function (price : any){
-      sum + price.price;
+    items.forEach(function (item : any){
+      sum += (item.price * item.quantity);
     })
-    console.log(sum)
+    console.log(sum);
     return sum;
   }
 
