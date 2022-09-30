@@ -11,7 +11,7 @@ export class StaffService {
     return this.http.post(Urls.foodOrderUrl, order);
   }
 
-  addOrderItems(items: any) {
-    return this.http.post(Urls.itemsUrl, items);
+  addOrderItems(items: any,foodOrderId: number) {
+    return this.http.post(Urls.itemsUrl+`${foodOrderId}`, items);
   }
 }

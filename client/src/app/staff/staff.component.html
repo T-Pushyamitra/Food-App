@@ -1,28 +1,52 @@
 <div class="container">
-  <form #newFoodOrder="ngForm" (ngSubmit)="foodOrders(newFoodOrder)">
-    <div class="form-group">
-      <input type="Customer_Name" class="form-control" ngModel id="customerName" name="customerName"
-        #customerName="ngModel" placeholder="enter the customerName">
-    </div>
-    <div class="form-group">
-      <input type="contactNumber" class="form-control" ngModel id="contactNumber" name="contactNumber"
-        #contactNumber="ngModel" placeholder="enter the contactNumberr">
-    </div>
-
-    <div *ngFor="let foodItem of foodItems; let i = index" class="mb-2">
-      <div class="input-group ">
-        <div class="input-group-prepend">
-          <span class="input-group-text mx-2" id="">Item</span>
+  <div class="row">
+    <div class="col-md-12">
+      <h2>Customer Details</h2>
+      <hr />
+      <form #userForm="ngForm" (ngSubmit)="foodOrders(userForm)">
+        <div class="form-group">
+          <label for="customerName" class="col-sm-2">Customer Name</label>
+          <div class="col-md-12">
+            <input type="text" class="form-control" name="customerName" ngModel />
+          </div>
         </div>
-        <input type="text" [(ngModel)]="foodItem.item" name="foodItem-{{i}}">
-        <span class="input-group-text mx-2"> Quantity</span>
-        <input type="text" min="1" max="10" [(ngModel)]="foodItem.quantity" name="foodItemQuantity-{{i}}">
-        <span class="mx-2"></span>
-        <button class="btn btn-warning" type="button" (click)="removeItem(i)">-</button>
-      </div>
+        <div class="form-group">
+          <label for="customerName" class="col-sm-2">Customer Number</label>
+          <div class="col-md-12">
+            <input type="text" class="form-control" name="customerNumber" ngModel />
+          </div>
+        </div>
+        <button class="btn btn-danger">Submit</button>
+      </form>
     </div>
-    <button class="btn btn-secondry" type="button" (click)="addItem()">Add</button>
-
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+  </div>
+  <div class="row mt-5">
+    <!-- <div class="col-md-12">
+      <table class="table text-center">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Item</th>
+            <th scope="col">About</th>
+            <th scope="col">Quantity</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let foodProduct of menuData.data.foodProducts ">
+            <td>{{ foodProduct.name }}</td>
+            <td>{{ foodProduct.about }}</td>
+            <td>
+              <div class="container text-center d-flex justify-content-center align-content-center">
+                <button class="btn btn-danger mx-2" (click)="plus()">+</button>
+                <input type="text" class="form-control number" [value]="quantity" ngModel />
+                <button class="btn btn-danger mx-2" (click)="minus()">-</button>
+              </div>
+            </td>
+            <td>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div> -->
+    
+  </div>
 </div>
