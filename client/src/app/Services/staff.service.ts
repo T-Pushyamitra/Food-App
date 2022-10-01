@@ -14,4 +14,8 @@ export class StaffService {
   addOrderItems(items: any,foodOrderId: number) {
     return this.http.post(Urls.itemsUrl+`${foodOrderId}`, items);
   }
+
+  updateFoodOrder(item:any,foodOrderId:number){
+    return this.http.put(Urls.foodOrderUpdateUrl+`${foodOrderId}`,item)
+  }
 }
