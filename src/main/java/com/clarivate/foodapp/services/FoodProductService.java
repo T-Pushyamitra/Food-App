@@ -1,5 +1,6 @@
 package com.clarivate.foodapp.services;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,9 @@ import org.springframework.stereotype.Service;
 import com.clarivate.foodapp.dao.FoodProductDao;
 import com.clarivate.foodapp.dao.MenuDao;
 import com.clarivate.foodapp.dao.ResponseStructure;
+import com.clarivate.foodapp.dto.FoodOrder;
 import com.clarivate.foodapp.dto.FoodProducts;
+import com.clarivate.foodapp.dto.Item;
 import com.clarivate.foodapp.dto.Menu;
 
 
@@ -34,14 +37,19 @@ public class FoodProductService {
 		return responseStructure;
 	}*/
 	
+	/**
+	 * @param foodProduct
+	 * @param id
+	 * @return
+	 */
 	public ResponseStructure<FoodProducts> saveFoodProducts(FoodProducts foodProduct, int id) {
 	ResponseStructure<FoodProducts> response= new ResponseStructure<FoodProducts>();
 	 
 	Menu menu =menuDao.getMenuById(id);
-	
-	if(menu==null) {
+	System.out.println(menu);
+	if(menu == null) {
 		response.setStatusCode(HttpStatus.NOT_FOUND.value());
-        response.setMsg("Food Product not found");
+        response.setMsg("Food Product not saved");
         response.setData(null);
 		
 	}
@@ -50,18 +58,47 @@ public class FoodProductService {
         response.setMsg("Food Product Details");
         foodProduct.setMenu(menu);
         response.setData(foodProductDao.addFoodProduct(foodProduct));
-
-
-		
 	}
 	return response;
 	
 	}
 	
+	/**
+	 * @param foodProducts
+	 * @param id
+	 * @return
+	 */
+	public ResponseStructure<List<FoodProducts>> saveAllFoodProducts(List<FoodProducts> foodProducts, int id) {
+
+		ResponseStructure<List<FoodProducts>> response = new ResponseStructure<List<FoodProducts>>();
+
+		Menu menu = menuDao.getMenuByUserId(id);
+		System.out.println(menu.getId());
+
+		if (menu == null) {
+			response.setStatusCode(HttpStatus.NOT_FOUND.value());
+			response.setMsg("Food Products not  saved");
+			response.setData(null);
+		} else {
+			response.setStatusCode(HttpStatus.FOUND.value());
+			response.setMsg("Food Products Details has been saved");
+			Iterator<FoodProducts> it = foodProducts.iterator();
+			while (it.hasNext()) {
+				it.next().setMenu(menu);
+			}
+
+			response.setData(foodProductDao.addAllFoodProducts(foodProducts));
+
+		}
+		return response;
+	}
 
 	
 	
 
+	/**
+	 * @return
+	 */
 	public ResponseStructure<List<FoodProducts>> getAllFoodProducts() {
 
 		ResponseStructure<List<FoodProducts>> responseStructure = new ResponseStructure<List<FoodProducts>>();
@@ -80,6 +117,10 @@ public class FoodProductService {
 		return responseStructure;
 	}
 	
+	/**
+	 * @param id
+	 * @return
+	 */
 	public ResponseStructure<FoodProducts> getFoodProductsById(int id) {
 
 		ResponseStructure<FoodProducts> responseStructure = new ResponseStructure<FoodProducts>();
@@ -98,6 +139,32 @@ public class FoodProductService {
 		return responseStructure;
 	}
 	
+	/**
+	 * @param id
+	 * @return
+	 */
+	public ResponseStructure<List<FoodProducts>> getFoodProductsByMenuId(int id) {
+
+		ResponseStructure<List<FoodProducts>> responseStructure = new ResponseStructure<List<FoodProducts>>();
+
+		List<FoodProducts> foodProduct = foodProductDao.getFoodProductsByMenuId(id);
+
+		if (foodProduct != null) {
+			responseStructure.setStatusCode(HttpStatus.FOUND.value());
+			responseStructure.setMsg("Food Product details Obtained");
+			responseStructure.setData(foodProduct);
+		} else {
+			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
+			responseStructure.setMsg("Food product details Not Found");
+			responseStructure.setData(null);
+		}
+		return responseStructure;
+	}
+	
+	/**
+	 * @param name
+	 * @return
+	 */
 	public ResponseStructure<List<FoodProducts>> getFoodProductsByNameContaining(String name) {
 
 		ResponseStructure<List<FoodProducts>> responseStructure = new ResponseStructure<List<FoodProducts>>();
@@ -115,10 +182,49 @@ public class FoodProductService {
 		}
 		return responseStructure;
 	}
+	
+	public ResponseStructure<List<FoodProducts>> getFoodProductsByType(String type) {
 
+		ResponseStructure<List<FoodProducts>> responseStructure = new ResponseStructure<List<FoodProducts>>();
+
+		List<FoodProducts> foodProduct = foodProductDao.getFoodProductByType(type);
+
+		if (foodProduct != null) {
+			responseStructure.setStatusCode(HttpStatus.FOUND.value());
+			responseStructure.setMsg("Food Product details Obtained");
+			responseStructure.setData(foodProduct);
+		} else {
+			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
+			responseStructure.setMsg("Food product details Not Found");
+			responseStructure.setData(null);
+		}
+		return responseStructure;
+	}
+
+	public ResponseStructure<List<FoodProducts>> getFoodProductsByAvailability(boolean type) {
+
+		ResponseStructure<List<FoodProducts>> responseStructure = new ResponseStructure<List<FoodProducts>>();
+
+		List<FoodProducts> foodProduct = foodProductDao.getFoodProductByAvailability(type);
+
+		if (foodProduct != null) {
+			responseStructure.setStatusCode(HttpStatus.FOUND.value());
+			responseStructure.setMsg("Food Product details Obtained");
+			responseStructure.setData(foodProduct);
+		} else {
+			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
+			responseStructure.setMsg("Food product details Not Found");
+			responseStructure.setData(null);
+		}
+		return responseStructure;
+	}
 	
 	// Delete food order by id
 	
+	/**
+	 * @param id
+	 * @return String
+	 */
 	public ResponseStructure<String> deleteFoodProducts(int id) {
 
 		ResponseStructure<String> responseStructure = new ResponseStructure<String>();
@@ -137,17 +243,45 @@ public class FoodProductService {
 		return responseStructure;
 
 	}
+	
+	/**
+	 * @param id
+	 * @return
+	 */
+	public ResponseStructure<String> deleteFoodProductsByMenuId(int id) {
+
+		ResponseStructure<String> responseStructure = new ResponseStructure<String>();
+
+		List<FoodProducts> foodProduct = foodProductDao.getFoodProductsByMenuId(id);
+
+		if (foodProduct != null) {
+			responseStructure.setStatusCode(HttpStatus.FOUND.value());
+			responseStructure.setMsg("Food Product details Deleted Successfully");
+			responseStructure.setData(foodProductDao.deleteFoodProductByMenuId(id));
+		} else {
+			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
+			responseStructure.setMsg("Food Product details Not Found");
+			responseStructure.setData(null);
+		}
+		return responseStructure;
+
+	}
 
 	
 	// Update food order by id
 	
+	/**
+	 * @param foodProduct
+	 * @param id
+	 * @return
+	 */
 	public ResponseStructure<FoodProducts> updateFoodProducts(FoodProducts foodProduct,int id) {
 		
 		ResponseStructure<FoodProducts> responseStructure = new ResponseStructure<FoodProducts>();
 		
-		FoodProducts foodProduct1 = foodProductDao.getFoodProductById(id);
+//		FoodProducts foodProduct1 = foodProductDao.getFoodProductById(id);
 		
-		if (foodProduct1 == null) {
+		if (foodProduct == null) {
 			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
 			responseStructure.setMsg("Food Products data not found");
 			responseStructure.setData(null);
@@ -155,7 +289,7 @@ public class FoodProductService {
 		} else {
 			responseStructure.setStatusCode(HttpStatus.FOUND.value());
 			responseStructure.setMsg("Food Product is present");
-			responseStructure.setData(foodProductDao.updateFoodProduct(foodProduct));
+			responseStructure.setData(foodProductDao.updateFoodProduct(foodProduct, id));
 
 		}
 		return responseStructure;

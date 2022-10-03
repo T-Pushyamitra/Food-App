@@ -24,7 +24,7 @@ public class ItemDao {
 	}
 	
 	public List<Item>  addAllItem(List<Item> item) {
-		return itemRepository.saveAll(item);
+		return itemRepository.saveAll(item);  
 	}
 	
 	public List<Item> getAllItems(){

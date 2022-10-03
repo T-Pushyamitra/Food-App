@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.clarivate.foodapp.dao.ResponseStructure;
@@ -18,6 +19,7 @@ import com.clarivate.foodapp.services.FoodOrderService;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
+//@RequestMapping("/staff")
 public class FoodOrderController {
 	
 	@Autowired
@@ -46,6 +48,12 @@ public class FoodOrderController {
 
 	@PutMapping("/foodOrder/update/{id}")
 	public ResponseStructure<FoodOrder> updateFoodOrder(@RequestBody FoodOrder foodOrder,@PathVariable int id) {
-		return foodOrderService.updateFoodOrder(foodOrder,id);
+		return foodOrderService.updateFoodOrder(foodOrder);
 	}
+	
+	@PutMapping("/foodOrder/{id}/{status}")
+	public ResponseStructure<FoodOrder> upateFoodOrderStatus(@RequestBody FoodOrder foodOrder, @PathVariable String status,@PathVariable int id){
+		return foodOrderService.updateFoodOrderStatus(foodOrder,status,id);
+	}
+	
 }

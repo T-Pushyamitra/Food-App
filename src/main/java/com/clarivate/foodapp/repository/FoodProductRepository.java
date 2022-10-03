@@ -12,5 +12,11 @@ import com.clarivate.foodapp.dto.FoodProducts;
 public interface FoodProductRepository  extends JpaRepository<FoodProducts, Integer>{
 
 		List<FoodProducts> findByNameContaining(String name);
+
+		List<FoodProducts> findByMenuId(int id);
+
+		List<FoodProducts> findByType(String type);
+
+		List<FoodProducts> findByAvailability(boolean availability);
 		
 }

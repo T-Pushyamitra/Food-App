@@ -20,14 +20,19 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 @Table(name = "menu")
 public class Menu {
 
+	@Override
+	public String toString() {
+		return "Menu [id=" + id + ", foodProducts=" + foodProducts + ", user=" + user + "]";
+	}
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
+	
 	@OneToMany(cascade=CascadeType.ALL,mappedBy = "menu",fetch=FetchType.LAZY)
 	private List<FoodProducts> foodProducts;
-
-	@JsonBackReference
+	
 	@OneToOne
 	@JoinColumn(name = "user_id")
 	private User user;
@@ -49,6 +54,7 @@ public class Menu {
 		this.id = id;
 	}
 
+	@JsonBackReference
 	public User getUser() {
 		return user;
 	}

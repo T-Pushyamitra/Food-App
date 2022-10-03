@@ -53,4 +53,9 @@ public class FoodOrderDao {
 		return foodOrderRepository.save(foodOrder);
 	}
 
+
+	public FoodOrder updateFoodOrderSave(FoodOrder foodOrder, String status, int id) {
+		return foodOrderRepository.save(foodOrder);
+	}
+
 }

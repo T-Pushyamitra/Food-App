@@ -2,7 +2,9 @@ package com.clarivate.foodapp.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 //import org.springframework.http.ResponseEntity;
@@ -17,30 +19,38 @@ import org.springframework.web.bind.annotation.RestController;
 import com.clarivate.foodapp.dao.ResponseStructure;
 import com.clarivate.foodapp.dto.User;
 import com.clarivate.foodapp.services.UserServiceImpl;
+
+
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
+//@RequestMapping("/api/auth")
 public class UserController {
 
 	@Autowired
 	UserServiceImpl userService;
+	
+
 
 	@GetMapping("/users")
 	public ResponseStructure<List<User>> getAllUser() {
 		return userService.getAllUsers();
 	}
-
+	
+	
 	@PostMapping("/users")
-	public ResponseStructure<User> saveUser(@RequestBody User user) {
+	public ResponseStructure<User> addUser(User user) {
 		return userService.saveUser(user);
 	}
+
+
 	
-	@GetMapping("/users/{id}")
-	public ResponseStructure<User> getUserById(@PathVariable int id) {
-		return userService.getUserById(id);
-	}
+//	@GetMapping("/users/{id}")
+//	public ResponseStructure<User> getUserById(@PathVariable int id) {
+//		return userService.getUserById(id);
+//	}
 	
-	@GetMapping("/user/{email}")
-	public ResponseStructure<List<User>> getUserByName(@PathVariable String email) {
+	@GetMapping("/users/{email}")
+	public ResponseStructure<User> getUserByName(@PathVariable String email) {
 		return userService.getUserByEmail(email);
 	}
 
@@ -54,6 +64,7 @@ public class UserController {
 	public ResponseStructure<User> updateUser(@RequestBody User user,@PathVariable int id) {
 		return userService.updateUser(user,id);
 	}
+	
 	
 
 }

@@ -123,13 +123,12 @@ public class FoodOrderService {
 	
 	// Update food order by id
 	
-	public ResponseStructure<FoodOrder> updateFoodOrder(FoodOrder foodOrder, int id) {
+	public ResponseStructure<FoodOrder> updateFoodOrder(FoodOrder foodOrder) {
 		
 		ResponseStructure<FoodOrder> responseStructure = new ResponseStructure<FoodOrder>();
 		
-		FoodOrder foodOrder1 = foodOrderDao.getFoodOrderById(id);
 		
-		if (foodOrder1 == null) {
+		if (foodOrder == null) {
 			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
 			responseStructure.setMsg("Food Order data not found");
 			responseStructure.setData(null);
@@ -142,5 +141,25 @@ public class FoodOrderService {
 		}
 		return responseStructure;
 
+	}
+
+
+	public ResponseStructure<FoodOrder> updateFoodOrderStatus(FoodOrder foodOrder, String status,int id) {
+ResponseStructure<FoodOrder> responseStructure = new ResponseStructure<FoodOrder>();
+		
+		
+		if (foodOrder == null) {
+			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
+			responseStructure.setMsg("Food Order data not found");
+			responseStructure.setData(null);
+
+		} else {
+			responseStructure.setStatusCode(HttpStatus.FOUND.value());
+			responseStructure.setMsg("Food Order is present");
+			responseStructure.setData(foodOrderDao.updateFoodOrderSave(foodOrder,status,id));
+
+			return responseStructure;
+		}
+		return null;
 	}
 }

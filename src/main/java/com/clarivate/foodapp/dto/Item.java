@@ -70,5 +70,10 @@ public class Item {
 	public int getId() {
 		return this.id;
 	}
+	@Override
+	public String toString() {
+		return "Item [id=" + id + ", name=" + name + ", type=" + type + ", quantity=" + quantity + ", price=" + price
+				+ ", foodOrder=" + foodOrder + "]";
+	}
 
 }

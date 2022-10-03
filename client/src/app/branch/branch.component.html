@@ -14,6 +14,15 @@
       </div>
     </div>
     <div class="col-md-12" *ngIf="!error">
+      <!-- <div class="form-group">
+        <label >role</label>
+       <select  name="menu" class="form-control" ngModel (ngModelChange)="getMenu()">
+        <option value="">1</option>
+        <option >2</option>
+        <option >3</option>
+        <option >4</option>
+       </select>
+      </div> -->
         <button class="btn btn-primary mb-5 mt-5" data-toggle="modal" data-target="#add">Add</button>
       <table class="table table-striped">
         <thead class="thead-dark">
@@ -28,7 +37,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of results.data.user.menu.foodProducts">
+          <tr *ngFor="let item of results.data">
             <!-- <p class="badge badge-pill badge-success">{{ item.type }}</p> -->
             <td>{{ item.type }}</td>
             <td>{{ item.name }} </td>
@@ -91,6 +100,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-secondary" >Add More</button> -->
                 <button type="submit" class="btn btn-primary"  [routerLink]="['menu']">Add product</button>
             </div>
         </form>
@@ -112,7 +122,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form #FoodProduct = "ngForm"  (ngSubmit)="updateFoodProduct(FoodProduct)">
+          <!-- <form #FoodProduct = "ngForm"  (ngSubmit)="updateFoodProduct(FoodProduct)">
             <div class="form-row">
                 <div class="form-group col-md-12">
                   <label for="inputPassword4">Name</label>
@@ -147,9 +157,9 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">Add product</button>
             </div>
-        </form>
+        </form> -->
         </div>
        
     </div>
 </div>
-  </div>
+</div>

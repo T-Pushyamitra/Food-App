@@ -28,7 +28,7 @@ public class FoodOrder {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private boolean status;
+	private String status;
 	private float totalPrice;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm", iso = ISO.DATE_TIME)
@@ -67,11 +67,11 @@ public class FoodOrder {
 		this.user = user;
 	}
 
-	public boolean isStatus() {
+	public String isStatus() {
 		return status;
 	}
 
-	public void setStatus(boolean status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
@@ -117,6 +117,17 @@ public class FoodOrder {
 
 	public int getId() {
 		return id;
+	}
+
+	@Override
+	public String toString() {
+		return "FoodOrder [id=" + id + ", status=" + status + ", totalPrice=" + totalPrice + ", orderCreatedTime="
+				+ orderCreatedTime + ", orderDeliveryTime=" + orderDeliveryTime + ", customerName=" + customerName
+				+ ", contactNumber=" + contactNumber + ", item=" + item + ", user=" + user + "]";
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	
