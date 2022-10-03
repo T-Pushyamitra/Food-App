@@ -11,7 +11,7 @@ export class FoodProductService {
 
 
   getFoodProductByname(value:any){
-      return this.http.get(Urls.foodProductUrl+`${value}`);
+      return this.http.get(Urls.foodOrderUrl+`${value}`);
   }
 
 }
