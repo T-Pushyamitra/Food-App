@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.clarivate.foodapp.dto.User;
-import com.clarivate.foodapp.repository.userRepository;
+import com.clarivate.foodapp.repository.UserRepository;
 
 @Component
 public class UserDao {
@@ -15,9 +15,10 @@ public class UserDao {
 	private static final Optional<User> User = null;
 
 	@Autowired
-	userRepository userRepository;
+	UserRepository userRepository;
 
 	public User addUser(User user) {
+		System.out.println(user);
 		return userRepository.save(user);
 	}
 
@@ -34,8 +35,8 @@ public class UserDao {
 		return null;
 	}
 	
-	public List<User> getUserByEmail(String email) {
-		List<User> user = userRepository.findByEmail(email);
+	public User getUserByEmail(String email) {
+		User user = userRepository.findByEmail(email);
 		if(user != null) {
 			return user;
 		}

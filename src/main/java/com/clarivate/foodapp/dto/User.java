@@ -1,16 +1,14 @@
 package com.clarivate.foodapp.dto;
 
 import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -23,18 +21,18 @@ public class User {
 	private String name;
 	private String email;
 	private String password;
+	private boolean active;
 	private String role;
 
-	@JsonManagedReference
+	
 	@OneToOne(mappedBy = "user")
 	private Menu menu;
 
-//	@OneToMany(mappedBy="user")
-//	private List<Branch> branch;
 
 	@OneToMany(mappedBy = "user")
 	private List<FoodOrder> foodOrders;
 
+	@JsonManagedReference
 	public Menu getMenu() {
 		return menu;
 	}
@@ -103,11 +101,17 @@ public class User {
 	public void setRole(String role) {
 		this.role = role;
 	}
+	public boolean isActive() {
+		return active;
+	}
 
+	public void setActive(boolean active) {
+		this.active = active;
+	}
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role=" + role
-				+ "]";
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", role="
+				+ role + "]";
 	}
 
 }

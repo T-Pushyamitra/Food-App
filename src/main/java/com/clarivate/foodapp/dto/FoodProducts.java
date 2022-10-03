@@ -58,6 +58,10 @@ public class FoodProducts {
 	}
 
 
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public FoodProducts() {
 	}
 
@@ -99,6 +103,12 @@ public class FoodProducts {
 
 	public void setPrice(float price) {
 		this.price = price;
+	}
+
+	@Override
+	public String toString() {
+		return "FoodProducts [id=" + id + ", name=" + name + ", type=" + type + ", about=" + about + ", availability="
+				+ availability + ", price=" + price + ", menu=" + menu + "]";
 	}
 
 }

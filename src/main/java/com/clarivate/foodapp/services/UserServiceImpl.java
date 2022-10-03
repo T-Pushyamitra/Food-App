@@ -66,11 +66,11 @@ public class UserServiceImpl {
 		return responseStructure;
 	}
 	
-	public ResponseStructure <List<User>> getUserByEmail(String email) {
+	public ResponseStructure<User> getUserByEmail(String email) {
 
-		ResponseStructure <List<User>> responseStructure = new ResponseStructure<List<User>>();
+		ResponseStructure<User> responseStructure = new ResponseStructure<User>();
 
-		List<User> user = userDao.getUserByEmail(email);
+		User user = userDao.getUserByEmail(email);
 
 		if (user != null) {
 			responseStructure.setStatusCode(HttpStatus.FOUND.value());

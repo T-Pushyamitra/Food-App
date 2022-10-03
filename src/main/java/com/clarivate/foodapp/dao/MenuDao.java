@@ -40,9 +40,17 @@ public class MenuDao {
 		Optional<Menu> menu = menuRepository.findById(id);
 		if(menu.isPresent()) {
 			menuRepository.delete(menu.get());
-			return "User has been deleted";
+			return "Menu has been deleted";
 		}
 		
-		return "User Id dosen't exists";
+		return "Menu Id dosen't exists";
+	}
+
+	public Menu getMenuByUserId(int id) {
+		Menu menu = menuRepository.findByUserId(id);
+		if(menu != null) {
+			return menu;
+		}
+		return null;
 	}
 }

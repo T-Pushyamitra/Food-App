@@ -43,10 +43,10 @@ public class MenuService {
 		ResponseStructure<Menu> response = new ResponseStructure<Menu>();
 		
 		User user = userDao.getUserById(id);
-		
+		System.out.println(user);
 		if(user == null) {
 			response.setStatusCode(HttpStatus.NOT_FOUND.value());
-			response.setMsg("Menu not found");
+			response.setMsg("Menu not saved");
 			response.setData(null);
 		} else {
 			response.setStatusCode(HttpStatus.FOUND.value());
@@ -136,6 +136,25 @@ public class MenuService {
 		}
 		return responseStructure;
 
+	}
+
+
+
+	public ResponseStructure<Menu> getMenuByUserId(int id) {
+		ResponseStructure<Menu> responseStructure = new ResponseStructure<Menu>();
+
+		Menu menu = menuDao.getMenuByUserId(id);
+
+		if (menu != null) {
+			responseStructure.setStatusCode(HttpStatus.FOUND.value());
+			responseStructure.setMsg("Menu Details Obtained");
+			responseStructure.setData(menu);
+		} else {
+			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
+			responseStructure.setMsg("Menu Details Not Found");
+			responseStructure.setData(null);
+		}
+		return responseStructure;
 	}
 	
 
