@@ -71,10 +71,11 @@ public class FoodProductService {
 	public ResponseStructure<List<FoodProducts>> saveAllFoodProducts(List<FoodProducts> foodProducts, int id) {
 
 		ResponseStructure<List<FoodProducts>> response = new ResponseStructure<List<FoodProducts>>();
-
-		Menu menu = menuDao.getMenuByUserId(id);
-		System.out.println(menu.getId());
-
+		
+		// menu -> 1
+		// menu -> { id,userid}
+		Menu menu = menuDao.getMenuById(id);
+		
 		if (menu == null) {
 			response.setStatusCode(HttpStatus.NOT_FOUND.value());
 			response.setMsg("Food Products not  saved");
@@ -82,13 +83,13 @@ public class FoodProductService {
 		} else {
 			response.setStatusCode(HttpStatus.FOUND.value());
 			response.setMsg("Food Products Details has been saved");
+			
 			Iterator<FoodProducts> it = foodProducts.iterator();
 			while (it.hasNext()) {
 				it.next().setMenu(menu);
 			}
-
+			
 			response.setData(foodProductDao.addAllFoodProducts(foodProducts));
-
 		}
 		return response;
 	}

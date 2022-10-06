@@ -78,7 +78,7 @@ public class UserServiceImpl {
 			responseStructure.setData(user);
 		} else {
 			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
-			responseStructure.setMsg("User Details Not Found");
+			responseStructure.setMsg("Invalid Email Id.");
 			responseStructure.setData(null);
 		}
 		return responseStructure;

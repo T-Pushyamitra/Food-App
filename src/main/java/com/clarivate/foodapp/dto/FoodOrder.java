@@ -67,7 +67,7 @@ public class FoodOrder {
 		this.user = user;
 	}
 
-	public String isStatus() {
+	public String getStatus() {
 		return status;
 	}
 

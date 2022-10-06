@@ -4,7 +4,8 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 //import org.springframework.http.ResponseEntity;
@@ -21,14 +22,15 @@ import com.clarivate.foodapp.dto.User;
 import com.clarivate.foodapp.services.UserServiceImpl;
 
 
+
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-//@RequestMapping("/api/auth")
 public class UserController {
 
 	@Autowired
 	UserServiceImpl userService;
 	
+
 
 
 	@GetMapping("/users")
@@ -38,7 +40,7 @@ public class UserController {
 	
 	
 	@PostMapping("/users")
-	public ResponseStructure<User> addUser(User user) {
+	public ResponseStructure<User> addUser(@RequestBody User user) {
 		return userService.saveUser(user);
 	}
 

@@ -7,8 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.clarivate.foodapp.dto.FoodOrder;
-
+import com.clarivate.foodapp.dto.User;
 import com.clarivate.foodapp.repository.FoodOrderRepository;
+import com.clarivate.foodapp.repository.UserRepository;
 
 
 @Component
@@ -18,6 +19,9 @@ public class FoodOrderDao {
 
 	@Autowired
 	FoodOrderRepository foodOrderRepository;
+	
+	@Autowired
+	UserRepository userRepository;
 
 	public FoodOrder addFoodOrder(FoodOrder foodOrder) {
 		return foodOrderRepository.save(foodOrder);
@@ -49,7 +53,25 @@ public class FoodOrderDao {
 		}
 	}
 	
-	public FoodOrder updateFoodOrder(FoodOrder foodOrder) {
+	public FoodOrder updateFoodOrder(FoodOrder foodOrder,int user_id,int foodOrder_id) {
+		// user Object
+		User user = userRepository.getById(user_id);
+		
+		
+		foodOrder.setId(foodOrder_id);
+		foodOrder.setUser(user);
+		
+		// Update food order
+		
+//		currentFoodOrder.setCustomerName(foodOrder.getCustomerName()); // name
+//		currentFoodOrder.setContactNumber(foodOrder.getContactNumber()); // number
+//		currentFoodOrder.setOrderCreatedTime(foodOrder.getOrderCreatedTime()); // created time
+//		currentFoodOrder.setOrderDeliveryTime(foodOrder.getOrderDeliveryTime()); // order time
+//		currentFoodOrder.setTotalPrice(foodOrder.getTotalPrice()); // price
+//		currentFoodOrder.setStatus(foodOrder.isStatus()); // status
+//		currentFoodOrder.setUser(user); // user
+//		currentFoodOrder.setId(foodOrder_id); // order id
+		
 		return foodOrderRepository.save(foodOrder);
 	}
 

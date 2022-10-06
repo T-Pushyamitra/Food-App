@@ -20,3 +20,4 @@ public interface FoodProductRepository  extends JpaRepository<FoodProducts, Inte
 		List<FoodProducts> findByAvailability(boolean availability);
 		
 }
+

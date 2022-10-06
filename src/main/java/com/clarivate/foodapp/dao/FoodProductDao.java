@@ -142,6 +142,7 @@ public class FoodProductDao {
 	 * Delete FoodProduts by id
 	 * @param id
 	 * */
+	// fp1 fp2 fp3
 	public String deleteFoodProductByMenuId(int id) {
 		List<FoodProducts> foodProduct = getFoodProductsByMenuId(id);
 		

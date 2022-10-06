@@ -25,9 +25,9 @@ public class FoodOrderController {
 	@Autowired
 	FoodOrderService foodOrderService;
 
-	@PostMapping("/foodOrder/{id}")
-	public ResponseStructure<FoodOrder> saveFoodOrder(@RequestBody FoodOrder foodOrder,@PathVariable int id) {
-		return foodOrderService.saveFoodOrder(foodOrder, id);
+	@PostMapping("/foodOrder/{staff_id}")
+	public ResponseStructure<FoodOrder> saveFoodOrder(@RequestBody FoodOrder foodOrder,@PathVariable int staff_id) {
+		return foodOrderService.saveFoodOrder(foodOrder, staff_id);
 	}
 
 	@GetMapping("/foodOrder")
@@ -35,8 +35,8 @@ public class FoodOrderController {
 		return foodOrderService.getAllFoodOrdersData();
 	}
 
-	@GetMapping("/foodOrder/{id}")
-	public ResponseStructure<FoodOrder> getFoodOrderById(@PathVariable int id) {
+	@GetMapping("/foodOrder/{staff_id}/{id}")
+	public ResponseStructure<FoodOrder> getFoodOrderById(@PathVariable int staff_id,@PathVariable int id) {
 		return foodOrderService.getFoodOrderById(id);
 	}
 
@@ -46,9 +46,9 @@ public class FoodOrderController {
 
 	}
 
-	@PutMapping("/foodOrder/update/{id}")
-	public ResponseStructure<FoodOrder> updateFoodOrder(@RequestBody FoodOrder foodOrder,@PathVariable int id) {
-		return foodOrderService.updateFoodOrder(foodOrder);
+	@PutMapping("/foodOrder/{user_id}/update/{foodOrder_id}")
+	public ResponseStructure<FoodOrder> updateFoodOrder(@RequestBody FoodOrder foodOrder,@PathVariable int user_id,@PathVariable Integer foodOrder_id) {
+		return foodOrderService.updateFoodOrder(foodOrder,user_id,foodOrder_id);
 	}
 	
 	@PutMapping("/foodOrder/{id}/{status}")

@@ -27,14 +27,21 @@ public class FoodProductController {
 	@Autowired
 	FoodProductService foodProductService;
 
+	/**
+	 * @param foodProduct
+	 * @param id
+	 * @return
+	 */
 	@PostMapping("/foodProducts/{id}")
 	public ResponseStructure<List<FoodProducts>> saveAllFoodProducts(@RequestBody List<FoodProducts> foodProduct,@PathVariable int id) {
 		return foodProductService.saveAllFoodProducts(foodProduct,id);
 	}
+	
 	@GetMapping("/foodProducts")
 	public ResponseStructure<List<FoodProducts>> getAllFoodProduct() {
 		return foodProductService.getAllFoodProducts();
 	}
+	
 	
 	@GetMapping("/foodProducts/menu/{id}")
 	public ResponseStructure<List<FoodProducts>> getFoodProductsByMenuId(@PathVariable int id) {
@@ -71,6 +78,7 @@ public class FoodProductController {
 	public ResponseStructure<String> deleteAllFoodProductsByMenuId(@PathVariable int id) {
 		return foodProductService.deleteFoodProductsByMenuId(id);
 	}
+	
 	@PutMapping("/foodProducts/update/{id}")
 	public ResponseStructure<FoodProducts> updateFoodProducts(@RequestBody FoodProducts foodProduct,@PathVariable int id) {
 		return foodProductService.updateFoodProducts(foodProduct,id);
