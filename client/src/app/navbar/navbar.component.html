@@ -3,7 +3,7 @@
   <h4 class="logo">FOOD APP</h4>
   <nav class='nav1'>
     <ul class='nav_links'>
-      <div *ngIf="role==''">
+      <div *ngIf="role==null">
       <a>
         <li routerLink="/login">Log In</li>
       </a>
@@ -15,7 +15,7 @@
       </a>
     </div>
 
-    <div *ngIf="role=='admin'"> 
+    <div *ngIf="role=='ADMIN'"> 
     <a routerLink="/foodorder">FoodProducts
       </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -27,16 +27,16 @@
 
     </div> 
 
-    <div *ngIf="role=='staff'">
-      <a href="">Menu        
-      </a>
+    <div *ngIf="role==='STAFF'">
+      <a href="/staff/{{id}}">Menu        
+      </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-      <a href="">Food Order       
+      <a routerLink="/foodorders/{{id}}">Food Order       
       </a>
     </div>
 
 
     </ul>
   </nav>
-  <a href="#"><button class="button">Contact</button></a>
+  <a href="#"><button type="submit" class="button" (click)="logout()">logout</button></a>
 </header>
