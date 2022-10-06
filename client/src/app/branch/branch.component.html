@@ -1,165 +1,102 @@
 <div class="container">
-  <div class="row mt-5 pr-5">
-    <div class="col-md-12 mb-5">
-      <div class="row">
-        <div class="col-md-6 mb-5 mt-5">
-          <h3>Manager Details</h3>
-          <h4>Name : {{ results.data.name }}</h4>
-          <h4>Email : {{ results.data.email }}</h4>
-          <h4>Phone Number : {{ results.data.phoneNumber }}</h4>
+  <div class="row">
+    <div class="col-md-6 mt-5">
+      <form #foodProduct="ngForm" (ngSubmit)="addFoodProduct(foodProduct)">
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <label for="inputPassword4">Name</label>
+            <input type="text" class="form-control" placeholder="Enter Food Product Name" id="foodProductName"
+              name="name" ngModel />
+          </div>
         </div>
-        <div class="col-md-6 mb-5 mt 5 d-flex justify-content-center align-content-center" >
-          <h3>Menu Card</h3>
+        <div class="form-group">
+          <label for="inputAddress">About</label>
+          <input type="text" class="form-control" placeholder="about Of product" id="foodProductabout" name="about"
+            ngModel />
+          <input type="hidden" class="form-control" id="foodProductavailability" name="availability" value="true"
+            ngModel />
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputCity">Price</label>
+            <input type="text" class="form-control" placeholder="Set Price" id="foodProductPrice" name="price"
+              ngModel />
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputZip">Type</label>
+            <select type="text" class="form-control" placeholder="Set Type" id="foodProductType" name="type" ngModel>
+              <option>VEG</option>
+              <option>NON-VEG</option>
+              <option>DRINK</option>
+            </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="reset" class="btn btn-secondary" data-dismiss="modal">
+            Reset
+          </button>
+          <!-- <button type="button" class="btn btn-secondary" >Add More</button> -->
+          <button type="submit" class="btn btn-primary">
+            Add product
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-6 mt-5">
+      <div class="col-md-3 mb-3">
+        <select id="types" class="form-selct" [(ngModel)]="_type">
+          <option value="">All Items</option>
+          <option *ngFor="let type of types; " value="{{ type }}">{{ type }}</option>
+        </select>
+      </div>
+      <div>
+        <app-alert [error]="errorMessage"></app-alert>
+        <div class="scroll">
+          <table class="table table-striped">
+            <thead class="thead-dark">
+              <tr>
+                <th>#</th>
+                <th>Type</th>
+                <th>Name</th>
+                <th>About</th>
+                <th>Availability</th>
+                <th>price</th>
+                <th>Edit</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of foodProducts.data  | filterByType:_type | availability let i = index ">
+                <td>{{i+1}}</td>
+                <!-- <p class="badge badge-pill badge-success">{{ item.type }}</p> -->
+                <td>{{ item.type }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.about }}</td>
+                <td>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" #availability name="availability" value=""
+                      id="flexCheckChecked" *ngIf="item.availability" checked>
+                    <input class="form-check-input" type="checkbox" #availability name="availability" value=""
+                      id="flexCheckChecked" *ngIf="!item.availability">
+                  </div>
+                </td>
+                <td>{{ item.price }}</td>
+                <td>
+                  <button class="btn btn-warning" (click)="updateFoodProduct(item.id)" data-target="#exampleModal">
+                    edit
+                  </button>
+                </td>
+                <td>
+                  <button class="btn btn-danger" (click)="deleteFoodProduct(item.id)">
+                    delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
-    <div class="col-md-12" *ngIf="!error">
-      <!-- <div class="form-group">
-        <label >role</label>
-       <select  name="menu" class="form-control" ngModel (ngModelChange)="getMenu()">
-        <option value="">1</option>
-        <option >2</option>
-        <option >3</option>
-        <option >4</option>
-       </select>
-      </div> -->
-        <button class="btn btn-primary mb-5 mt-5" data-toggle="modal" data-target="#add">Add</button>
-      <table class="table table-striped">
-        <thead class="thead-dark">
-          <tr>
-            <th>Type</th>
-            <th>Name</th>
-            <th>About</th>
-            <th>Availability</th>
-            <th>price</th>
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of results.data">
-            <!-- <p class="badge badge-pill badge-success">{{ item.type }}</p> -->
-            <td>{{ item.type }}</td>
-            <td>{{ item.name }} </td>
-            <td>{{ item.about }}</td>
-            <td>{{ item.availability }}</td>
-            <td>{{ item.price }}</td>
-            <td><button class="btn btn-warning" (click)="productId(item.id)">edit</button></td>
-            <td><button class="btn btn-danger" (click)="deleteFoodProduct(item.id)">delete</button></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
   </div>
 </div>
 
-
-<!-- Add food product to a menu-->
-
-<div class="modal fade" id="add" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add New Food Product</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form #foodProduct = "ngForm"  (ngSubmit)="addFoodProduct(foodProduct)">
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                  <label for="inputPassword4">Name</label>
-                  <input type="text" class="form-control" placeholder="Enter Food Product Name" id="foodProductName" name="name"  ngModel>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputAddress">About</label>
-                <input type="text" class="form-control" placeholder="about Of product" id="foodProductabout" name="about"  ngModel>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="inputCity">Price</label>
-                  <input type="text" class="form-control" placeholder="Set Price" id="foodProductPrice" name="price"  ngModel>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="inputZip">Type</label>
-                  <select type="text" class="form-control" placeholder="Set Type" id="foodProductType" name="type"  ngModel>
-                    <option>
-                        Veg
-                    </option>
-                    <option>
-                        Non-Veg
-                    </option>
-                    <option>
-                        Drink
-                    </option>
-                  </select>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <!-- <button type="button" class="btn btn-secondary" >Add More</button> -->
-                <button type="submit" class="btn btn-primary"  [routerLink]="['menu']">Add product</button>
-            </div>
-        </form>
-        </div>
-       
-    </div>
-</div>
-  </div>
-<!-- Add food product to a menu-->
-
-<div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Add New Food Product</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <!-- <form #FoodProduct = "ngForm"  (ngSubmit)="updateFoodProduct(FoodProduct)">
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                  <label for="inputPassword4">Name</label>
-                  <input type="text" class="form-control" placeholder="Enter Food Product Name" id="foodProductName" name="name"  ngModel>
-                </div>
-              </div>
-              <div class="form-group">
-                <label for="inputAddress">About</label>
-                <input type="text" class="form-control" placeholder="about Of product" id="foodProductabout" name="about"  ngModel>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label for="inputCity">Price</label>
-                  <input type="text" class="form-control" placeholder="Set Price" id="foodProductPrice" name="price"  ngModel>
-                </div>
-                <div class="form-group col-md-6">
-                  <label for="inputZip">Type</label>
-                  <select type="text" class="form-control" placeholder="Set Type" id="foodProductType" name="type"  ngModel>
-                    <option>
-                        Veg
-                    </option>
-                    <option>
-                        Non-Veg
-                    </option>
-                    <option>
-                        Drink
-                    </option>
-                  </select>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Add product</button>
-            </div>
-        </form> -->
-        </div>
-       
-    </div>
-</div>
-</div>

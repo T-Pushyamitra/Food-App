@@ -1,0 +1,9 @@
+.scroll
+    {
+        margin:5px;
+        padding:5px;
+        width: 900px;
+        height: 400px;
+        overflow: auto;
+        text-align:justify;
+    }
