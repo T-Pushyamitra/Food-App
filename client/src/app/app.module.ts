@@ -9,6 +9,17 @@ import { StaffComponent } from './staff/staff.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
+import { TotalPricePipe } from './Pipes/total-price.pipe';
+import { FilterByTypePipe } from './Pipes/filter-by-type.pipe';
+import { NavbarComponent } from './navbar/navbar.component';
+import { FoodOrderComponent } from './food-order/food-order.component';
+import { TypesPipe } from './Pipes/types.pipe';
+import { FilterBYNamePipe } from './Pipes/filter-byname.pipe';
+import { AlertComponent } from './alert/alert.component';
+import { InvoicegeneratorComponent } from './invoicegenerator/invoicegenerator.component';
+import { AuthGuard } from './Guard/auth.guard';
+import { AvailabilityPipe } from './Pipes/availability.pipe';
+
 
 @NgModule({
   declarations: [
@@ -16,7 +27,16 @@ import { FormsModule } from '@angular/forms';
     BranchComponent,
     StaffComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    NavbarComponent,
+    FoodOrderComponent,
+    AlertComponent,
+    InvoicegeneratorComponent,
+    TotalPricePipe,
+    FilterByTypePipe,
+    TypesPipe,
+    FilterBYNamePipe,
+    AvailabilityPipe,
   ],
   imports: [
     BrowserModule,
@@ -24,7 +44,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [TotalPricePipe,TypesPipe,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
