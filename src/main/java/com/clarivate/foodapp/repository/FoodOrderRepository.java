@@ -6,4 +6,6 @@ import com.clarivate.foodapp.dto.FoodOrder;
 
 public interface FoodOrderRepository  extends JpaRepository<FoodOrder, Integer>{
 
+	FoodOrder findByUserIdAndId(int id,int id1);
+
 }

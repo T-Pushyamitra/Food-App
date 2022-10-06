@@ -80,4 +80,9 @@ public class FoodOrderDao {
 		return foodOrderRepository.save(foodOrder);
 	}
 
+	public FoodOrder updateFoodOrderSaveByStaffId(FoodOrder foodOrder2) {
+		FoodOrder foodOrder = foodOrderRepository.findByUserIdAndId(foodOrder2.getId(),foodOrder2.getId());
+		return foodOrder;
+	}
+
 }

@@ -4,8 +4,6 @@ import java.util.List;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 //import org.springframework.http.ResponseEntity;
@@ -14,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 //import org.springframework.http.HttpStatus;
 
@@ -25,21 +24,20 @@ import com.clarivate.foodapp.services.UserServiceImpl;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
+@RequestMapping("/users")
 public class UserController {
 
 	@Autowired
 	UserServiceImpl userService;
+
 	
-
-
-
-	@GetMapping("/users")
+	@GetMapping("/get")
 	public ResponseStructure<List<User>> getAllUser() {
 		return userService.getAllUsers();
 	}
 	
 	
-	@PostMapping("/users")
+	@PostMapping("/save")
 	public ResponseStructure<User> addUser(@RequestBody User user) {
 		return userService.saveUser(user);
 	}
@@ -51,18 +49,18 @@ public class UserController {
 //		return userService.getUserById(id);
 //	}
 	
-	@GetMapping("/users/{email}")
-	public ResponseStructure<User> getUserByName(@PathVariable String email) {
-		return userService.getUserByEmail(email);
+	@PostMapping("/auth")
+	public ResponseStructure<User> getUserByEmail(@RequestBody User user) {
+		return userService.getUser(user);
 	}
 
-	@DeleteMapping("/users/{id}")
+	@DeleteMapping("/delete/{id}")
 	public ResponseStructure<String> deleteUser(@PathVariable int id) {
 		return userService.deleteUser(id);
 
 	}
 
-	@PutMapping("/users/{id}")
+	@PutMapping("/update/{id}")
 	public ResponseStructure<User> updateUser(@RequestBody User user,@PathVariable int id) {
 		return userService.updateUser(user,id);
 	}

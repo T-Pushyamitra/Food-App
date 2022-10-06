@@ -36,16 +36,16 @@ public class UserDao {
 		return null;
 	}
 	
-	public User getUserByEmail(String email) {
-		User user = userRepository.findByEmail(email);
-		if(user != null) {
-			return user;
+	public User getUser(User user) {
+		User currentUser = userRepository.findByEmailAndPassword(user.getEmail(),user.getPassword());
+		if(currentUser != null) {
+			return currentUser;
 		}
 		return null;
 	}
 	
-	public User updateUser(User user) {
-	
+	public User updateUser(User user,int id) {
+		user.setId(id);
 		return userRepository.save(user);
 	}
 

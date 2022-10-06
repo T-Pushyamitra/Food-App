@@ -19,7 +19,7 @@ import com.clarivate.foodapp.repository.FoodProductRepository;
 import com.clarivate.foodapp.services.FoodProductService;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-//@RequestMapping("/menu")
+@RequestMapping("/foodproducts")
 public class FoodProductController {
 	
 	
@@ -32,54 +32,56 @@ public class FoodProductController {
 	 * @param id
 	 * @return
 	 */
-	@PostMapping("/foodProducts/{id}")
-	public ResponseStructure<List<FoodProducts>> saveAllFoodProducts(@RequestBody List<FoodProducts> foodProduct,@PathVariable int id) {
-		return foodProductService.saveAllFoodProducts(foodProduct,id);
+	@PostMapping("/save/{menu_id}")
+	public ResponseStructure<List<FoodProducts>> saveAllFoodProducts(@RequestBody List<FoodProducts> foodProduct,@PathVariable int menu_id) {
+		return foodProductService.saveAllFoodProducts(foodProduct,menu_id);
 	}
 	
-	@GetMapping("/foodProducts")
-	public ResponseStructure<List<FoodProducts>> getAllFoodProduct() {
-		return foodProductService.getAllFoodProducts();
+	// return all menu 
+//	@GetMapping("/get")
+//	public ResponseStructure<List<FoodProducts>> getAllFoodProduct() {
+//		return foodProductService.getAllFoodProducts();
+//	}
+//	
+	
+	// By menu id
+	@GetMapping("/get/{menu_id}")
+	public ResponseStructure<List<FoodProducts>> getFoodProductsByMenuId(@PathVariable int menu_id) {
+		return foodProductService.getFoodProductsByMenuId(menu_id);
 	}
 	
-	
-	@GetMapping("/foodProducts/menu/{id}")
-	public ResponseStructure<List<FoodProducts>> getFoodProductsByMenuId(@PathVariable int id) {
-		return foodProductService.getFoodProductsByMenuId(id);
-	}
-	
-	@GetMapping("/foodProducts/{id}")
+	@GetMapping("/getbyfoodProduct/{id}")
 	public ResponseStructure<FoodProducts> getFoodProductById(@PathVariable int id) {
 		return foodProductService.getFoodProductsById(id);
 	}
 
-	@GetMapping("/foodProducts/name/{name}")
+	@GetMapping("/name/{name}")
 	public ResponseStructure<List<FoodProducts>> getFoodProductByNameContaining(@PathVariable String name) {
 		return foodProductService.getFoodProductsByNameContaining(name);
 	}
 	
-	@GetMapping("/foodProducts/type/{type}")
+	@GetMapping("/type/{type}")
 	public ResponseStructure<List<FoodProducts>> getFoodProductByType(@PathVariable String type) {
 		return foodProductService.getFoodProductsByType(type);
 	}
 	
-	@GetMapping("/foodProducts/availability/{availability}")
+	@GetMapping("/availability/{availability}")
 	public ResponseStructure<List<FoodProducts>> getFoodProductByAvailability(@PathVariable boolean availability) {
 		return foodProductService.getFoodProductsByAvailability(availability);
 	}
 	
 	
-	@DeleteMapping("/foodProducts/delete/{id}")
+	@DeleteMapping("/delete/{id}")
 	public ResponseStructure<String> deleteFoodProduct(@PathVariable int id) {
 		return foodProductService.deleteFoodProducts(id);
 	}
 
-	@DeleteMapping("/foodProducts/deleteAll/{id}")
+	@DeleteMapping("/deleteAll/{menu_id}")
 	public ResponseStructure<String> deleteAllFoodProductsByMenuId(@PathVariable int id) {
 		return foodProductService.deleteFoodProductsByMenuId(id);
 	}
 	
-	@PutMapping("/foodProducts/update/{id}")
+	@PutMapping("/update/{id}")
 	public ResponseStructure<FoodProducts> updateFoodProducts(@RequestBody FoodProducts foodProduct,@PathVariable int id) {
 		return foodProductService.updateFoodProducts(foodProduct,id);
 	}

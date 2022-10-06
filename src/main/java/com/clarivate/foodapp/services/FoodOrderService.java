@@ -163,4 +163,25 @@ ResponseStructure<FoodOrder> responseStructure = new ResponseStructure<FoodOrder
 		}
 		return null;
 	}
+
+
+	public ResponseStructure<FoodOrder> updateFoodOrderByStaffId(FoodOrder foodOrder) {
+		
+ResponseStructure<FoodOrder> responseStructure = new ResponseStructure<FoodOrder>();
+		
+		
+		if (foodOrder == null) {
+			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
+			responseStructure.setMsg("Food Order data not found");
+			responseStructure.setData(null);
+
+		} else {
+			responseStructure.setStatusCode(HttpStatus.FOUND.value());
+			responseStructure.setMsg("Food Order is present");
+			responseStructure.setData(foodOrderDao.updateFoodOrderSaveByStaffId(foodOrder));
+
+			return responseStructure;
+		}
+		return null;
+	}
 }

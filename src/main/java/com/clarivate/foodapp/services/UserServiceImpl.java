@@ -66,16 +66,16 @@ public class UserServiceImpl {
 		return responseStructure;
 	}
 	
-	public ResponseStructure<User> getUserByEmail(String email) {
+	public ResponseStructure<User> getUser(User user) {
 
 		ResponseStructure<User> responseStructure = new ResponseStructure<User>();
 
-		User user = userDao.getUserByEmail(email);
-
-		if (user != null) {
+		User currentUser = userDao.getUser(user);
+	
+		if (currentUser != null) {
 			responseStructure.setStatusCode(HttpStatus.FOUND.value());
-			responseStructure.setMsg("User Details Obtained");
-			responseStructure.setData(user);
+			responseStructure.setMsg("User creds are correct");
+			responseStructure.setData(currentUser);
 		} else {
 			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
 			responseStructure.setMsg("Invalid Email Id.");
@@ -117,7 +117,7 @@ public class UserServiceImpl {
 		} else {
 			responseStructure.setStatusCode(HttpStatus.FOUND.value());
 			responseStructure.setMsg("User is present");
-			responseStructure.setData(userDao.updateUser(user));
+			responseStructure.setData(userDao.updateUser(user,id));
 
 		}
 		return responseStructure;

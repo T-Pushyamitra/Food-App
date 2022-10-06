@@ -14,7 +14,7 @@ import com.clarivate.foodapp.dto.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer>{
 
-	public User findByEmail(String email);
+	public User findByEmailAndPassword(String email,String password);
 
 	public Optional<User> findByName(String username); 
 
