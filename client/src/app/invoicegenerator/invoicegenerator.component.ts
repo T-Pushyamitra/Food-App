@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { StaffService } from '../Services/staff.service';
 
 
 
@@ -8,11 +10,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./invoicegenerator.component.css']
 })
 export class InvoicegeneratorComponent implements OnInit {
+  order: any;
+  items: any;
  
- result:any
-  constructor() { }
+  constructor(private route: ActivatedRoute,private foodOrder:StaffService) { }
+  
+  id = this.route.snapshot.paramMap.get("id")
 
   ngOnInit(): void {
+    this.foodOrder.getFoodOrderByStaffId(this.id).subscribe((response)=>{
+      console.log(response)
+      this.order = response;
+      this.order = this.order.data;
+      this.items = this.order.item;
+    })
   }
 
 }
