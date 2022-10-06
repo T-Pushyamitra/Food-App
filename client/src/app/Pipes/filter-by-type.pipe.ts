@@ -15,3 +15,4 @@ export class FilterByTypePipe implements PipeTransform {
   }
 
 }
+

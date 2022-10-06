@@ -10,7 +10,7 @@ export class TotalPricePipe implements PipeTransform {
     items.forEach(function (item : any){
       sum += (item.price * item.quantity);
     })
-    console.log(sum);
+    // console.log(sum);
     return sum;
   }
 
