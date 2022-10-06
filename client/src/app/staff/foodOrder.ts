@@ -1,10 +1,10 @@
 export class FoodOrder {
   customerName: any;
   customerNumber: any;
-  orderCreatedTime: any;
-  totalPrice: any;
-  status: boolean | undefined;
-  orderDeliveryTime: any;
+  orderCreatedTime: any="";
+  orderDeliveryTime: any="";
+  totalPrice: number = 0;
+  status: String = "";
 
   constructor(
     customerName: string,

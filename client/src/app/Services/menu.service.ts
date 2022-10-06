@@ -9,9 +9,21 @@ export class MenuService {
   constructor(private http:HttpClient) { }
 
 
-  getMenu(){
-    return this.http.get(Urls.menuUrl);
+  // Get Menu By User
+
+  getMenuByUserId(userId : any){
+      return this.http.get(Urls.menuUrl+`${userId}`)
   }
 
+  getMenuId(id : any){
+    return this.http.get(Urls.getFoodProductOfMenuId+`${id}`);
+  }
 
+  isMenuAvailable(id : any){
+    return this.http.get(Urls.menuUrl+`${id}`);
+  }
+
+  createMenu(id:any){
+    return this.http.post(Urls.menuUrl+`${id}`,{})
+  }
 }

@@ -20,14 +20,23 @@
       </form>
     </div>
   </div>
-  <div class="row mt-5" *ngIf="_isOrderTaken">
-    <div class="col-md-6">
-      <div class="col-md-3 mb-3">
-        <select  id="types" class="form-selct" [(ngModel)]="_type">
-          <option value="">All Items</option>
-          <option *ngFor="let type of types" value="{{ type }}">{{ type }}</option>
-        </select>
-      </div>
+
+  <!-- Menu Display -->
+  <div class="row mt-5" *ngIf=" _isOrderTaken">
+    <div class="col-12">
+      <div class="col-6 mb-3">
+        <div class="form-row">
+          <div class="form-group">
+            <select  id="types" class="form-control" [(ngModel)]="_type">
+              <option value="">All Items</option>
+              <option *ngFor="let type of types" value="{{ type }}">{{ type }}</option>
+            </select>
+          </div>
+          <div class="form-group mx-5">
+            <input type="text" class="form-control" id="Search" placeholder="Search  Item..." [(ngModel)]="pattern">
+          </div>
+        </div>
+      <div class="scroll">
       <table class="table text-center">
         <thead class="thead-dark">
           <tr>
@@ -38,7 +47,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let foodProduct of menuData.foodProducts | filterByType:_type">
+          <tr *ngFor="let foodProduct of foodProductsList.data | filterByType:_type | filterBYName:pattern">
             <td>{{ foodProduct.name }}</td>
             <td>{{ foodProduct.about }}</td>
             <td>{{ foodProduct.price }}</td>
@@ -47,18 +56,22 @@
         </tbody>
       </table>
     </div>
-    <div class="col-md-6">
+  </div>
+
+
+  <!-- Order Display -->
+    <div class="col-6">
       <table class="table text-center">
         <thead class="thead-dark">
           <tr>
             <th scope="col">Item</th>
             <th scope="col">Price</th>
             <th scope="col">quantity</th>
-            <th scope="col">Add</th>
+            <th scope="col">Remove</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of foodItems; let i = index;">
+          <tr *ngFor="let item of orderedItems; let i = index;">
             <td>{{ item.name }}</td>
             <td>{{ item.price }}</td>
             <td><div class="container text-center d-flex justify-content-center align-content-center">

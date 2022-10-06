@@ -14,4 +14,19 @@ export class FoodProductService {
       return this.http.get(Urls.foodOrderUrl+`${value}`);
   }
 
+  // Get food products by menu id
+  getFoodProductsByMenuId(menuId: any){
+    return this.http.get(Urls.getFoodProductOfMenuId+`${menuId}`)
+  }
+
+  // Add Food Products By Menu Id
+  addFoodproductsByMenuid(request:any,menuId:any){
+    return this.http.post(Urls.addFoodProduct+`${menuId}`,request)
+  }
+
+  // Delete Food products By food product id
+  deleteFoodproductById(fooproductId:any){
+    return this.http.delete(Urls.deleteFoodProductById+`${fooproductId}`)
+  }
+  
 }

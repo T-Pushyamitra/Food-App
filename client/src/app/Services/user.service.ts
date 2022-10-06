@@ -17,5 +17,8 @@ export class UserService {
     return this.http.get(Urls.userUrl+`${email}`);
   }
 
+  loggedIn(){
+    return !!localStorage.getItem("id");
+  }
 
 }
