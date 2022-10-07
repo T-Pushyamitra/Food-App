@@ -2,8 +2,29 @@
     {
         margin:5px;
         padding:5px;
-        width: 900px;
+        width:750px;
         height: 400px;
         overflow: auto;
         text-align:justify;
+   
     }
+    .form1{
+        margin-right: 250px;
+       
+    }
+   
+   
+    
+    .tableFixHead{
+         overflow: auto;
+          height: 400px;
+         }
+.tableFixHead th{
+     position: sticky;
+      top: 0; 
+    }
+/* Just common table stuff. */
+table  { border-collapse: collapse; width: 100%; }
+th, td { padding: 8px 16px; }
+th     { background:#eee; }
+
