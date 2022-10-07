@@ -1,6 +1,7 @@
-<div class="container">
-  <div class="row">
+<div class=" container" >
+  <div class="row" >
     <div class="col-md-6 mt-5">
+      <div class="form1">
       <form #foodProducts="ngForm" (ngSubmit)="addFoodProduct(foodProducts)">
         <div class="form-row">
           <div class="form-group col-md-12">
@@ -42,16 +43,19 @@
         </div>
       </form>
     </div>
-    <div class="col-md-6 mt-5">
+    </div>
+    <div class="col-md-6 mt-7">
       <div class="col-md-3 mb-3">
         <select id="types" class="form-selct" [(ngModel)]="_type">
-          <option value="">All Items</option>
+          
+         <option value="">All Items</option>
           <option *ngFor="let type of types; " value="{{ type }}">{{ type }}</option>
         </select>
       </div>
       <div>
         <app-alert [error]="errorMessage"></app-alert>
         <div class="scroll">
+          <div class="tableFixHead">
           <table class="table table-striped">
             <thead class="thead-dark">
               <tr>
@@ -95,8 +99,8 @@
             </tbody>
           </table>
         </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
-
