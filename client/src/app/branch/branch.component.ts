@@ -33,7 +33,7 @@ export class BranchComponent implements OnInit {
   foodProduct: any;
   addNewProduct: any[] = [];
   types = ['Veg', 'Non-Veg', 'Drinks'];
-
+  pattern = ""
   constructor(
     private branch: BranchService,
     private menuService: MenuService,

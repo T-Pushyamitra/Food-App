@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   error: String = '';
 
   doLogin(employee: NgForm) {
-    this.service.getUserByEmail(employee.value).subscribe((response) => {
+    this.service.getUserByEmail(employee.value.email).subscribe((response) => {
       this.response = response;
       console.log(response)
       // // Alert for wrong email.

@@ -22,7 +22,7 @@
   </div>
 
   <!-- Menu Display -->
-  <div id="div1" class="col mt-5" *ngIf=" _isOrderTaken" >
+  <div id="div1" class="col mt-5" *ngIf=" !_isOrderTaken" >
     <div class="col-12">
       <div class="col-6 mb-3">
         <div class="form-row">
@@ -35,6 +35,7 @@
           <div class="form-group mx-5">
             <input type="text" class="form-control" id="Search" placeholder="Search  Item..." [(ngModel)]="pattern">
           </div>
+          
         </div>
       <div class="scroll" >
         <div class="tableFixHead">
