@@ -80,6 +80,24 @@ public class FoodOrderService {
 
 	// Get food order by Id
 	
+	public ResponseStructure<List<FoodOrder>> getFoodOrderByStaffId(int id) {
+
+		ResponseStructure<List<FoodOrder>> responseStructure = new ResponseStructure<List<FoodOrder>>();
+
+		List<FoodOrder> foodOrder = foodOrderDao.getFoodOrderByUserId(id);
+
+		if (!foodOrder.isEmpty()) {
+			responseStructure.setStatusCode(HttpStatus.FOUND.value());
+			responseStructure.setMsg("Food Order details Obtained");
+			responseStructure.setData(foodOrder);
+		} else {
+			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
+			responseStructure.setMsg("Food Order details Not Found");
+			responseStructure.setData(null);
+		}
+		return responseStructure;
+	}
+
 	public ResponseStructure<FoodOrder> getFoodOrderById(int id) {
 
 		ResponseStructure<FoodOrder> responseStructure = new ResponseStructure<FoodOrder>();

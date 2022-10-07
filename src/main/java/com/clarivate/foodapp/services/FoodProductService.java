@@ -276,7 +276,7 @@ public class FoodProductService {
 	 * @param id
 	 * @return
 	 */
-	public ResponseStructure<FoodProducts> updateFoodProducts(FoodProducts foodProduct,int id) {
+	public ResponseStructure<FoodProducts> updateFoodProducts(FoodProducts foodProduct,int menu_id,int product_id) {
 		
 		ResponseStructure<FoodProducts> responseStructure = new ResponseStructure<FoodProducts>();
 		
@@ -290,7 +290,7 @@ public class FoodProductService {
 		} else {
 			responseStructure.setStatusCode(HttpStatus.FOUND.value());
 			responseStructure.setMsg("Food Product is present");
-			responseStructure.setData(foodProductDao.updateFoodProduct(foodProduct, id));
+			responseStructure.setData(foodProductDao.updateFoodProduct(foodProduct, menu_id,product_id));
 
 		}
 		return responseStructure;

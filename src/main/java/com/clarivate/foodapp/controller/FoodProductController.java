@@ -81,8 +81,8 @@ public class FoodProductController {
 		return foodProductService.deleteFoodProductsByMenuId(id);
 	}
 	
-	@PutMapping("/update/{id}")
-	public ResponseStructure<FoodProducts> updateFoodProducts(@RequestBody FoodProducts foodProduct,@PathVariable int id) {
-		return foodProductService.updateFoodProducts(foodProduct,id);
+	@PutMapping("/update/{menu_id}/{product_id}")
+	public ResponseStructure<FoodProducts> updateFoodProducts(@RequestBody FoodProducts foodProduct,@PathVariable int menu_id,@PathVariable int product_id) {
+		return foodProductService.updateFoodProducts(foodProduct,menu_id,product_id);
 	}
 }

@@ -1,5 +1,7 @@
 package com.clarivate.foodapp.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -33,8 +35,13 @@ public class FoodOrderController {
 //		return foodOrderService.getAllFoodOrdersData();
 //	}
 
-	@GetMapping("/get/{staff_id}/{id}")
-	public ResponseStructure<FoodOrder> getFoodOrderById(@PathVariable int staff_id,@PathVariable int id) {
+	@GetMapping("/get/{staff_id}")
+	public ResponseStructure<List<FoodOrder>> getFoodOrderByStaffId(@PathVariable int staff_id) {
+		return foodOrderService.getFoodOrderByStaffId(staff_id);
+	}
+	
+	@GetMapping("/bill/{id}")
+	public ResponseStructure<FoodOrder> getFoodOrderById(@PathVariable int id) {
 		return foodOrderService.getFoodOrderById(id);
 	}
 

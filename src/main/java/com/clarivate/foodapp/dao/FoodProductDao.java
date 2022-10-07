@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.clarivate.foodapp.dto.FoodProducts;
+import com.clarivate.foodapp.dto.Menu;
 import com.clarivate.foodapp.repository.FoodProductRepository;
+import com.clarivate.foodapp.repository.MenuRepository;
 
 
 
@@ -19,7 +21,8 @@ public class FoodProductDao {
 	@Autowired
 	FoodProductRepository  foodProductRepository;
 	
-	
+	@Autowired
+	MenuRepository menuRepository;
 	
 	// POST  DAO's
 	
@@ -110,15 +113,11 @@ public class FoodProductDao {
 	 * Update FoodProduts by id
 	 * @param id
 	 * */
-	public FoodProducts updateFoodProduct(FoodProducts foodProduct,int id) {
-		FoodProducts currentfoodProduct = foodProductRepository.getById(id);
-		currentfoodProduct.setAbout(foodProduct.getAbout());
-		currentfoodProduct.setName(foodProduct.getName());
-		currentfoodProduct.setPrice(foodProduct.getPrice());
-		currentfoodProduct.setType(foodProduct.getType());
-		currentfoodProduct.setAvailability(foodProduct.isAvailability());
-		currentfoodProduct.setMenu(currentfoodProduct.getMenu());
-		return foodProductRepository.save(currentfoodProduct);
+	public FoodProducts updateFoodProduct(FoodProducts foodProduct,int menu_id,int product_id) {
+		foodProduct.setId(product_id);
+		Menu menu = menuRepository.getById(menu_id);
+		foodProduct.setMenu(menu);
+		return foodProductRepository.save(foodProduct);
 	}
 	
 	

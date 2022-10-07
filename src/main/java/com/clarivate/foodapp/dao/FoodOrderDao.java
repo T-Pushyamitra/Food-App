@@ -85,4 +85,13 @@ public class FoodOrderDao {
 		return foodOrder;
 	}
 
+	public List<FoodOrder> getFoodOrderByUserId(int id) {
+		List<FoodOrder> foodOrder = foodOrderRepository.findByUserId(id);
+		
+		if(foodOrder.isEmpty()) {
+			return null;
+		}
+		return foodOrder;
+	}
+
 }
