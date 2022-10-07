@@ -2,6 +2,7 @@ export class Urls {
   
   // User API's
   public static register: string = "http://localhost:8080/users/save";
+  public static user: string = "http://localhost:8080/users/get/";
   public static login: string = "http://localhost:8080/users/auth/";
 
 

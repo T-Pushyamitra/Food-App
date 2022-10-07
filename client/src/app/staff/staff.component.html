@@ -82,7 +82,7 @@
               <input type="text" class="form-control number" value="{{item.quantity}}" min=1 max=10 />
               <button class="btn btn-danger mx-2" (click)="minus(i)">-</button>
             </div></td>
-            <td><button class="btn btn-danger">X</button></td>
+            <td><button class="btn btn-danger" (click)="remove(i)">X</button></td>
           </tr>
         </tbody>
       </table>
