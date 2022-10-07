@@ -15,9 +15,6 @@ export class MenuService {
       return this.http.get(Urls.menuUrl+`${userId}`)
   }
 
-  getMenuId(id : any){
-    return this.http.get(Urls.getFoodProductOfMenuId+`${id}`);
-  }
 
   isMenuAvailable(id : any){
     return this.http.get(Urls.menuUrl+`${id}`);

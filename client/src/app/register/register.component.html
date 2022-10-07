@@ -7,6 +7,7 @@
                     <!-- <h5>Feel Free To Register</h5> -->
                     <hr>
                 </div>
+                <app-alert [error]="error"></app-alert>
                 <form #register="ngForm" (ngSubmit)="addUser(register)">
                     <div class="form-group">
                       <label >Name</label>

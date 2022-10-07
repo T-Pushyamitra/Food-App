@@ -19,6 +19,7 @@ import { AlertComponent } from './alert/alert.component';
 import { InvoicegeneratorComponent } from './invoicegenerator/invoicegenerator.component';
 import { AuthGuard } from './Guard/auth.guard';
 import { AvailabilityPipe } from './Pipes/availability.pipe';
+import { EditComponent } from './edit/edit.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { AvailabilityPipe } from './Pipes/availability.pipe';
     TypesPipe,
     FilterBYNamePipe,
     AvailabilityPipe,
+    EditComponent,
   ],
   imports: [
     BrowserModule,

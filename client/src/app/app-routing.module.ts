@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BranchComponent } from './branch/branch.component';
+import { EditComponent } from './edit/edit.component';
 import { FoodOrderComponent } from './food-order/food-order.component';
 import { AuthGuard } from './Guard/auth.guard';
 import { InvoicegeneratorComponent } from './invoicegenerator/invoicegenerator.component';
@@ -9,7 +10,7 @@ import { RegisterComponent } from './register/register.component';
 import { StaffComponent } from './staff/staff.component';
 
 const routes: Routes = [
-  // { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'register', pathMatch: 'full' },
 
   {
     path: 'login',
@@ -31,7 +32,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: "invoice/:staffId/:id",
+    path: "invoice/:id",
     component: InvoicegeneratorComponent,
     canActivate: [AuthGuard]
   },
@@ -39,7 +40,11 @@ const routes: Routes = [
     path: "foodorders/:staffid",
     component: FoodOrderComponent,
     canActivate: [AuthGuard]
-
+  },
+  {
+    path: "edit/:menuid/:productid",
+    component: EditComponent,
+    canActivate: [AuthGuard]
   }
 ];
 

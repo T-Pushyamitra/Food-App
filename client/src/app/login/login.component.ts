@@ -15,25 +15,25 @@ export class LoginComponent implements OnInit {
   response: any;
   isinvalidLogin = true;
   
-  constructor(private service: UserService,private router:Router, private auth:JwtClientService) {}
+  constructor(private service: UserService,private router:Router) {}
 
   ngOnInit(): void {}
 
   error: String = '';
 
   doLogin(employee: NgForm) {
-    this.auth.generateToken(employee.value).subscribe((response) => {
+    this.service.getUserByEmail(employee.value).subscribe((response) => {
       this.response = response;
       console.log(response)
-      // Alert for wrong email.
-      if (this.response.data == null) {
-        this.error = employee.value.email + " is "+ this.response.msg;
-      }
+      // // Alert for wrong email.
+      // if (this.response.data == null) {
+      //   this.error = employee.value.email + " is "+ this.response.msg;
+      // }
       
-      // Alert for wrong password.
-      if(this.response.data.password !== employee.value.password){
-        this.error = "Invalid Password.";
-      }
+      // // Alert for wrong password.
+      // if(this.response.data.password !== employee.value.password){
+      //   this.error = "Invalid Password.";
+      // }
 
       // storing the data in localstorage.
       if(this.response.data.password == employee.value.password){

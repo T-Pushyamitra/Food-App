@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6 mt-5">
-      <form #foodProduct="ngForm" (ngSubmit)="addFoodProduct(foodProduct)">
+      <form #foodProducts="ngForm" (ngSubmit)="addFoodProduct(foodProducts)">
         <div class="form-row">
           <div class="form-group col-md-12">
             <label for="inputPassword4">Name</label>
@@ -66,7 +66,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of foodProducts.data  | filterByType:_type | availability let i = index ">
+              <tr *ngFor="let item of foodProduct  | filterByType:_type | availability let i = index ">
                 <td>{{i+1}}</td>
                 <!-- <p class="badge badge-pill badge-success">{{ item.type }}</p> -->
                 <td>{{ item.type }}</td>
@@ -82,7 +82,7 @@
                 </td>
                 <td>{{ item.price }}</td>
                 <td>
-                  <button class="btn btn-warning" (click)="updateFoodProduct(item.id)" data-target="#exampleModal">
+                  <button class="btn btn-warning" [routerLink]="['/edit/',_menuId,item.id]" data-target="#exampleModal">
                     edit
                   </button>
                 </td>

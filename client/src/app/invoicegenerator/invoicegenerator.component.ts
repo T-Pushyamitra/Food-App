@@ -18,7 +18,7 @@ export class InvoicegeneratorComponent implements OnInit {
   id = this.route.snapshot.paramMap.get("id")
 
   ngOnInit(): void {
-    this.foodOrder.getFoodOrderByStaffId(this.id).subscribe((response)=>{
+    this.foodOrder.getFoodOrderById(this.id).subscribe((response)=>{
       console.log(response)
       this.order = response;
       this.order = this.order.data;

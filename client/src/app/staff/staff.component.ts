@@ -5,7 +5,6 @@ import { MenuService } from '../Services/menu.service';
 import { FoodProductService } from '../Services/food-product.service';
 import { StaffService } from '../Services/staff.service';
 import { FoodOrder } from './foodOrder';
-import { interval, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -26,7 +25,7 @@ export class StaffComponent implements OnInit {
   error: string = "";
   _staffId: any = localStorage.getItem('id');
   orderedItems: any[] = [];
-  foodOrder: FoodOrder = new FoodOrder('', 0, '', '', 0, false);
+  foodOrder: FoodOrder = new FoodOrder('', 0, '', '', 0, "PLACED");
   types = ['Veg', 'Non-Veg', 'Drinks'];
   foodOrderData: any;
   
@@ -64,7 +63,7 @@ export class StaffComponent implements OnInit {
   // Creates new food order and generates id.
   createFoodOrder(order: any) {
     this.foodOrder.customerName = order.customerName;
-    this.foodOrder.customerNumber = order.customerNumber;
+    this.foodOrder.contactNumber = order.contactNumber;
     this.foodOrder.orderCreatedTime = '2022-10-04 10:15';
     return this.foodOrder;
   }

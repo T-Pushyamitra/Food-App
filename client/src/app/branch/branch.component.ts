@@ -11,35 +11,57 @@ import { MenuService } from '../Services/menu.service';
   styleUrls: ['./branch.component.css'],
 })
 export class BranchComponent implements OnInit {
+
+  /**
+   *  login -> id and role
+   *  id -> menu_id
+   * menu_id -> food products
+   *  */
+
+  // => id = 30
+  // => menuid = 9
+
   results: any;
   error: any;
   errorMessage: any;
   // availabilty : boolean = true
-  _userId = localStorage.getItem("id");
+  _userId = localStorage.getItem('id');
   _isMenu: boolean = false;
-  _menuId : any = 6;
-  _type: string = "";
+  _menuId: any;
+  _type: string = '';
   foodProducts: any;
-  foodProduct: any[] = [];
+  foodProduct: any;
+  addNewProduct: any[] = [];
   types = ['Veg', 'Non-Veg', 'Drinks'];
 
   constructor(
     private branch: BranchService,
     private menuService: MenuService,
     private foodProductService: FoodProductService,
-    private router: Router) {}
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
-    this.foodProductService
-    .getFoodProductsByMenuId(this._menuId)
-    .subscribe((response) => {
+    this.menuService.getMenuByUserId(this._userId).subscribe((response) => {
       this.foodProducts = response;
-      console.log(this.foodProducts);
+      this.foodProduct = this.foodProducts.data.foodProducts;
+      this._menuId = this.foodProducts.data.id;
+      console.log(this._menuId);
     });
+  }
+
+  // Retrive branch Manager specific menu id
+  getFoodProducts() {
+    this.menuService.getMenuByUserId(this._userId).subscribe((response) => {
+      this.foodProducts = response;
+    });
+    console.log(this.foodProducts);
+    return this.foodProducts; // {menu and products}
   }
 
   // Create Menu
   createMenu(): void {
+    console.log(this._userId);
     this.menuService.createMenu(this._userId).subscribe((response) => {
       console.log('Menu data :' + response.valueOf);
     });
@@ -60,22 +82,23 @@ export class BranchComponent implements OnInit {
     foodProdut.value.availability = true;
     console.log(foodProdut.value);
     // List[foodProduct]
-    this.foodProduct.push(foodProdut.value);
+    this.addNewProduct.push(foodProdut.value);
 
     this.foodProductService
-      .addFoodproductsByMenuid(this.foodProduct, this._menuId)
+      .addFoodproductsByMenuid(this.addNewProduct, this._menuId)
       .subscribe((response) => {
-        this.error = response
-        if(this.error.data == null){
-          this.errorMessage = "Added Successfully"
+        this.error = response;
+        if (this.error.data == null) {
+          this.errorMessage = 'Added Successfully';
         }
         console.log(response);
-        this.router.navigate(['/menu',this._userId]);
-        this.foodProductService.getFoodProductsByMenuId(this._menuId).subscribe(
-          (data) => {
-            this.foodProducts = data;
-          },
-        );
+        this.router.navigate(['/menu', this._userId]);
+        this.menuService.getMenuByUserId(this._userId).subscribe((response) => {
+          this.foodProducts = response;
+          this.foodProduct = this.foodProducts.data.foodProducts;
+          this._menuId = this.foodProducts.data.id;
+          console.log(this._menuId);
+        });
       });
   }
 
@@ -85,35 +108,16 @@ export class BranchComponent implements OnInit {
     console.log(id);
     this.foodProductService.deleteFoodproductById(id).subscribe((response) => {
       console.log(response);
-      this.router.navigate(['/menu',this._userId]);
-      this.foodProductService.getFoodProductsByMenuId(this._menuId).subscribe(
-        (data) => {
-          this.foodProducts = data;
-        },
-      );
+      this.router.navigate(['/menu', this._userId]);
+      this.menuService.getMenuByUserId(this._userId).subscribe((response)=>{
+        this.foodProducts = response;
+        this.foodProduct = this.foodProducts.data.foodProducts;
+        this._menuId = this.foodProducts.data.id;
+        console.log(this._menuId)
+      })
     });
-    
   }
 
-  // this.branch.deleteFoodProduct(id).subscribe((res) => {
-  //   console.log(res);
-  //   this.router.navigate(['/menu']);
-  //   this.branch.getMenu(1).subscribe((data) => {
-  //     this.results = data;
-  //   });
-  // });
+ 
 
-
-
-  productId(id: any) {
-    return id;
-  }
-
-  updateFoodProduct(updateFoodProduct: NgForm): any {
-    console.log(updateFoodProduct);
-  }
-
-  check(id:any){
-
-  }
 }

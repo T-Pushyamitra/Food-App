@@ -12,20 +12,18 @@ export class BranchService {
 
   constructor(private http:HttpClient) { }
 
-  getMenu(id:any){
-    return this.http.get(Urls.getFoodProductOfMenuId+`${id}`);
+  getMenuId(id:any){
+    return this.http.get(Urls.menuUrl+`${id}`);
   }
 
-  getMenus(){
-    return this.http.get(Urls.menuUrl)
-  }
-
-  addFoodProduct(foodProduct : any,id :any){
-    return this.http.post(Urls.addFoodProduct+`${id}`,foodProduct,{responseType : "json"});
+  addFoodProduct(foodProduct : any,menu_id :any){
+    return this.http.post(Urls.saveFoodProducts+`${menu_id}`,foodProduct,{responseType : "json"});
   }
 
   deleteFoodProduct(id:any){
     return this.http.delete(Urls.deleteFoodProductById+`${id}`);
   }
+
+
 
 }

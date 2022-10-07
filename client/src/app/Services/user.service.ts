@@ -10,11 +10,11 @@ export class UserService {
   constructor(private http:HttpClient) { }
 
   addEmployee(employee:any){
-    return this.http.post(Urls.userUrl,employee);
+    return this.http.post(Urls.register,employee);
   }
   
-  getUserByEmail(email:any){
-    return this.http.get(Urls.userUrl+`${email}`);
+  getUserByEmail(user:any){
+    return this.http.post(Urls.login,user);
   }
 
   loggedIn(){

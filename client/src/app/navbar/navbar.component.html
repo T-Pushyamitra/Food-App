@@ -15,7 +15,7 @@
       </a>
     </div>
 
-    <div *ngIf="role=='ADMIN'"> 
+    <div *ngIf="role==='ADMIN'"> 
     <a routerLink="/foodorder">FoodProducts
       </a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
@@ -28,7 +28,7 @@
     </div> 
 
     <div *ngIf="role==='STAFF'">
-      <a href="/staff/{{id}}">Menu        
+      <a routerLink="/staff/{{id}}">Menu        
       </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
       <a routerLink="/foodorders/{{id}}">Food Order       
@@ -38,5 +38,5 @@
 
     </ul>
   </nav>
-  <a href="#"><button type="submit" class="button" (click)="logout()">logout</button></a>
+  <button type="submit" class="button" (click)="logout()">logout</button>
 </header>

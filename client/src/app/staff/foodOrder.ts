@@ -1,6 +1,6 @@
 export class FoodOrder {
   customerName: any;
-  customerNumber: any;
+  contactNumber: any;
   orderCreatedTime: any="";
   orderDeliveryTime: any="";
   totalPrice: number = 0;
@@ -12,6 +12,6 @@ export class FoodOrder {
     orderCreatedTime: string,
     orderDeliveryTime: string,
     totalPrice: number,
-    status: boolean
+    status: string
   ) {}
 }
