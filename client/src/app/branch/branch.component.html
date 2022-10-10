@@ -1,6 +1,8 @@
 <div class=" container" >
   <div class="row" >
+   
     <div class="col-md-6 mt-5">
+     <div class="css1">
       <div class="form1">
       <form #foodProducts="ngForm" (ngSubmit)="addFoodProduct(foodProducts)">
         <div class="form-row">
@@ -36,15 +38,18 @@
           <button type="reset" class="btn btn-secondary" data-dismiss="modal">
             Reset
           </button>
+          <div class="button2">
           <!-- <button type="button" class="btn btn-secondary" >Add More</button> -->
           <button type="submit" class="btn btn-primary">
             Add product
           </button>
         </div>
+        </div>
       </form>
     </div>
     </div>
-    <div class="col-md-6 mt-7">
+    </div>
+    <div class="col-md-6 mt-5">
       <div class="col-md-3 mb-3">
         <select id="types" class="form-selct" [(ngModel)]="_type">
           
