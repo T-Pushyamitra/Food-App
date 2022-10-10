@@ -10,10 +10,13 @@ body {
         height: 400px;
         overflow: auto;
         text-align:justify;
+        background-color: rgb(224, 229, 236);
    
     }
     .form1{
         margin-right: 250px;
+      
+      
        
     }
    
@@ -32,3 +35,19 @@ table  { border-collapse: collapse; width: 100%; }
 th, td { padding: 8px 16px; }
 th     { background:#eee; }
 
+.css1{
+    margin-right: 30px;
+    margin-top: 42px;
+
+    background-image: url("C:/Users/U6071310/Downloads/imagev1.jfif");
+   
+    width: 561px;
+    font-weight:200;
+    border-radius: 10px;
+    background-repeat:repeat-y;
+    
+   
+}
+.button2{
+    padding:10px;
+}
