@@ -92,7 +92,7 @@ public class FoodOrderService {
 			responseStructure.setData(foodOrder);
 		} else {
 			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
-			responseStructure.setMsg("Food Order details Not Found");
+			responseStructure.setMsg("No Food Order Found");
 			responseStructure.setData(null);
 		}
 		return responseStructure;
@@ -201,5 +201,26 @@ ResponseStructure<FoodOrder> responseStructure = new ResponseStructure<FoodOrder
 			return responseStructure;
 		}
 		return null;
+	}
+
+
+	public int totalCount(int staff_id) {
+		
+		int  foodOrderCount = foodOrderDao.countById(staff_id);
+		if (foodOrderCount > -1) {
+			return foodOrderCount;
+		} else {			
+			return 0;
+		}
+	}
+
+
+	public int statusCount(String status) {
+		int  foodOrderCount = foodOrderDao.countByStatus(status);
+		if (foodOrderCount > -1) {
+			return foodOrderCount;
+		} else {			
+			return 0;
+		}
 	}
 }

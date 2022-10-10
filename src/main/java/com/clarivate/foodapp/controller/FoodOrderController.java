@@ -56,6 +56,17 @@ public class FoodOrderController {
 		return foodOrderService.updateFoodOrder(foodOrder,staff_id,foodOrder_id);
 	}
 	
+	@GetMapping("/total-count/{staff_id}")
+	public int foodOrderCount(@PathVariable int staff_id) {
+		return foodOrderService.totalCount(staff_id);
+	}
+	
+	@GetMapping("/count-status/{status}")
+	public int foodOrderCountByStatus(@PathVariable String  status) {
+		return foodOrderService.statusCount(status);
+	}
+	
+}
 //	@PutMapping("/foodOrder/update")
 //	public ResponseStructure<FoodOrder> updateFoodOrder(@RequestBody FoodOrder foodOrder) {
 //		return foodOrderService.updateFoodOrderByStaffId(foodOrder);
@@ -66,4 +77,3 @@ public class FoodOrderController {
 //		return foodOrderService.updateFoodOrderStatus(foodOrder,status,id);
 //	}
 	
-}

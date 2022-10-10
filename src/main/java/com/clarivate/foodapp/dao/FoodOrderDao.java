@@ -89,9 +89,19 @@ public class FoodOrderDao {
 		List<FoodOrder> foodOrder = foodOrderRepository.findByUserId(id);
 		
 		if(foodOrder.isEmpty()) {
-			return null;
+			return foodOrder;
 		}
 		return foodOrder;
+	}
+
+	public int countById(int staff_id) {
+		int count = foodOrderRepository.countByUserId(staff_id);
+		return count;
+	}
+
+	public int countByStatus(String status) {
+		int count = foodOrderRepository.countByStatus(status);
+		return count;
 	}
 
 }

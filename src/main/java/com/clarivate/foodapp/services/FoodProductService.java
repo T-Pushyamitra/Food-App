@@ -296,4 +296,22 @@ public class FoodProductService {
 		return responseStructure;
 
 	}
+
+	public ResponseStructure<List<FoodProducts>> get() {
+		ResponseStructure<List<FoodProducts>> responseStructure = new ResponseStructure<List<FoodProducts>>();
+		List<FoodProducts> foodProduct = foodProductDao.get();
+		if (foodProduct == null) {
+			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
+			responseStructure.setMsg("Food Products data not found");
+			responseStructure.setData(null);
+
+		} else {
+			responseStructure.setStatusCode(HttpStatus.FOUND.value());
+			responseStructure.setMsg("Food Product is present");
+			responseStructure.setData(foodProduct);
+
+		}
+		return responseStructure;
+
+	}
 }

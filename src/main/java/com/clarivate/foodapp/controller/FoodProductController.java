@@ -85,4 +85,9 @@ public class FoodProductController {
 	public ResponseStructure<FoodProducts> updateFoodProducts(@RequestBody FoodProducts foodProduct,@PathVariable int menu_id,@PathVariable int product_id) {
 		return foodProductService.updateFoodProducts(foodProduct,menu_id,product_id);
 	}
+	
+	@GetMapping("/orderby")
+	public ResponseStructure<List<FoodProducts>> get(){
+		return foodProductService.get();
+	}
 }

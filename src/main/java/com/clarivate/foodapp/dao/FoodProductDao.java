@@ -156,4 +156,14 @@ public class FoodProductDao {
 		}
 	}
 
-}
+	public List<FoodProducts> get() {
+		List<FoodProducts> foodProduct = foodProductRepository.findAllByOrderByTypeDesc();
+		if(foodProduct.isEmpty()) {			
+			return null;
+		}
+		else {
+			return foodProduct;
+		}
+	}
+
+	}

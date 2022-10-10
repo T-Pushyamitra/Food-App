@@ -18,6 +18,8 @@ public interface FoodProductRepository  extends JpaRepository<FoodProducts, Inte
 		List<FoodProducts> findByType(String type);
 
 		List<FoodProducts> findByAvailability(boolean availability);
+
+		List<FoodProducts> findAllByOrderByTypeDesc();
 		
 }
 
