@@ -14,7 +14,7 @@ export class UserService {
   }
   
   getUserByEmail(user:any){
-    return this.http.post(Urls.login,user);
+    return this.http.get(Urls.user+`${user}`);
   }
 
   loggedIn(){

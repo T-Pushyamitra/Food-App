@@ -29,13 +29,15 @@ export class RegisterComponent implements OnInit {
         this.email = response
         console.log(this.email)
         if(this.email.data != null){
+          this.error = "User already exists"
           this.router.navigate(["register"])
+        }else{
+          this.service.addEmployee(employee).subscribe((res)=>{
+            this.result = res;
+            console.log(this.result);
+          })
+          this.router.navigate(["login"])
         }
-        this.router.navigate(["login"])
-    })
-    this.service.addEmployee(employee).subscribe((res)=>{
-        this.result = res;
-        console.log(this.result);
     })
   }
 

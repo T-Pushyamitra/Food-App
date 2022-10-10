@@ -1,8 +1,6 @@
-<div class=" container" >
+<div class=" container-fluid" >
   <div class="row" >
-   
-    <div class="col-md-6 mt-5">
-     <div class="css1">
+    <div class="col-5 mt-5">
       <div class="form1">
       <form #foodProducts="ngForm" (ngSubmit)="addFoodProduct(foodProducts)">
         <div class="form-row">
@@ -48,64 +46,69 @@
       </form>
     </div>
     </div>
+    <div class="col-7 mt-5">
+    <div class="shadow p-2 mb-3 bg-white rounded  bg-white rounded">
+      <div class="row d-flex flex-row justify-content-between align-content-between">
+        <div class="col-4 ">
+          <select id="types" class="form-control" [(ngModel)]="_type">
+            <option value="">Search By catogery</option>
+             <option *ngFor="let type of types; " value="{{ type }}">{{ type }}</option>
+           </select>
+        </div>
+        <div class="col-4">
+          <input type="text" class="form-control" id="Search" placeholder="Search  Item..." [(ngModel)]="pattern">
+        </div>
+      </div>
     </div>
-    <div class="col-md-6 mt-5">
-      <div class="col-md-3 mb-3">
-        <select id="types" class="form-selct" [(ngModel)]="_type">
+    <div class="shadow p-3 mb-5 bg-white rounded">
+      <table class="table align-middle mb-0 bg-white ">
+        <thead class="thead-dark rounded">
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>About</th>
+            <th>Availability</th>
+            <th>Price</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
           
-         <option value="">All Items</option>
-          <option *ngFor="let type of types; " value="{{ type }}">{{ type }}</option>
-        </select>
-      </div>
-      <div>
-        <app-alert [error]="errorMessage"></app-alert>
-        <div class="scroll">
-          <div class="tableFixHead">
-          <table class="table table-striped">
-            <thead class="thead-dark">
-              <tr>
-                <th>#</th>
-                <th>Type</th>
-                <th>Name</th>
-                <th>About</th>
-                <th>Availability</th>
-                <th>price</th>
-                <th>Edit</th>
-                <th>Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of foodProduct  | filterByType:_type | availability let i = index ">
-                <td>{{i+1}}</td>
-                <!-- <p class="badge badge-pill badge-success">{{ item.type }}</p> -->
-                <td>{{ item.type }}</td>
-                <td>{{ item.name }}</td>
-                <td>{{ item.about }}</td>
-                <td>
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" #availability name="availability" value=""
-                      id="flexCheckChecked" *ngIf="item.availability" checked>
-                    <input class="form-check-input" type="checkbox" #availability name="availability" value=""
-                      id="flexCheckChecked" *ngIf="!item.availability">
-                  </div>
-                </td>
-                <td>{{ item.price }}</td>
-                <td>
-                  <button class="btn btn-warning" [routerLink]="['/edit/',_menuId,item.id]" data-target="#exampleModal">
-                    edit
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-danger" (click)="deleteFoodProduct(item.id)">
-                    delete
-                  </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        </div>
-      </div>
+          <tr *ngFor="let item of foodProduct  | filterByType:_type | filterBYName : pattern; let i = index;">
+            <td>{{i+1}}</td>
+            <td>
+              <div class="ms-3">
+                <p class="fw-bold mb-1">{{ item.name}}</p>
+              </div>
+            </td>
+            <td>
+              <div class="ms-3">
+                <p class="fw-bold mb-1">{{ item.about}}</p>
+              </div>
+            </td>
+            <td>
+              <span class="badge badge-success px-2 rounded-pill">{{ item.availability }}</span>
+            </td>
+            <td>
+              <div class="ms-3">
+                <p class="fw-bold mb-1">{{ item.price}}</p>
+              </div>
+            </td>
+            <td>
+              <button type="button" class="btn btn-link btn-sm btn-rounded"  [routerLink]="['/edit/',_menuId,item.id]" >
+                Edit
+              </button>
+            </td>
+            <td>
+              <button type="button" class="btn btn-link btn-sm btn-rounded" (click)="deleteFoodProduct(item.id)">
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
+</div>
 </div>

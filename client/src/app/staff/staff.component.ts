@@ -102,6 +102,9 @@ export class StaffComponent implements OnInit {
     this.orderedItems[id].quantity -= 1;
   }
   
+  remove(id:any){
+    this.orderedItems.splice(id, 1);
+  }
   
   
   addItem(id: any) {
