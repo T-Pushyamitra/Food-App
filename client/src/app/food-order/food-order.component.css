@@ -1,5 +1,4 @@
 .ac-head{
-    background-color: #f0f0f0;
     padding: 20px;
     border-radius: 6px;
     border-bottom-left-radius: 4px;
@@ -11,7 +10,25 @@
     font-weight: 400;
     font-size: 15px;
 }
+.vl {
+  border-left: 6px solid grey;
+  height: 500px;
+}
+.scroll
+    {
+        margin:5px;
+        padding:5px;
+        width:750px;
+        height: 400px;
+        overflow: auto;
+        text-align:justify;
+        background-color: rgb(224, 229, 236);
+   
+    }
 
+.bg-red{
+  background-color: #ff6361;
+}
 
 .ac-head.active{
     border-radius: 0px;
@@ -22,7 +39,7 @@
 
 .ac-content{
     padding: 20px;
-    background: #f4e1d2;
+    background: #ffff;
     font-weight: 400;
     color: black;
     margin-bottom: 20px;
@@ -56,3 +73,43 @@
     margin: 20px;
     padding: 5px;
   }
+
+  .tableFixHead{
+    overflow: auto;
+     height: 400px;
+    }
+.tableFixHead th{
+position: sticky;
+ top: 0; 
+}
+/* Just common table stuff. */
+table  { border-collapse: collapse; width: 100%; }
+th, td { padding: 8px 16px; }
+th     { background:#eee; }
+
+.css1{
+margin-right: 30px;
+margin-top: 42px;
+
+width: 561px;
+font-weight:200;
+border-radius: 10px;
+background-repeat:repeat-y;
+
+
+}
+
+.badge{
+  width: 70px;
+  height: 20px;
+  font-weight: bold;
+  padding: 5px;
+}
+
+.badge-success{
+  background-color:#5BB318 ;
+}
+
+.badge-danger{
+  background-color:#CC3636 ;
+}

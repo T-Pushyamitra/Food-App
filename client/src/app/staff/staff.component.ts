@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { TotalPricePipe } from '../Pipes/total-price.pipe';
-import { MenuService } from '../Services/menu.service';
 import { FoodProductService } from '../Services/food-product.service';
 import { StaffService } from '../Services/staff.service';
 import { FoodOrder } from './foodOrder';
@@ -120,6 +119,8 @@ export class StaffComponent implements OnInit {
       }
     });
   }
+
+
 
   /**  After filling the form of Customer name and number */
   foodOrders(order: NgForm) {

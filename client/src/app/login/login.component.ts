@@ -22,13 +22,14 @@ export class LoginComponent implements OnInit {
   error: String = '';
 
   doLogin(employee: NgForm) {
-    this.service.getUserByEmail(employee.value.email).subscribe((response) => {
+
+    this.service.getUserByEmail(employee.value).subscribe((response) => {
       this.response = response;
       console.log(response)
-      // // Alert for wrong email.
-      // if (this.response.data == null) {
-      //   this.error = employee.value.email + " is "+ this.response.msg;
-      // }
+      // Alert for wrong email.
+      if (this.response.data == null) {
+        this.error = "Invalid Credentials";
+      }
       
       // // Alert for wrong password.
       // if(this.response.data.password !== employee.value.password){

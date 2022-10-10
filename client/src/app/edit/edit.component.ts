@@ -16,28 +16,21 @@ export class EditComponent implements OnInit {
   constructor( private activatedRoute: ActivatedRoute,private foodProduct:FoodProductService,private router:Router) { }
   
   ngOnInit(): void {
-    this.id = this.activatedRoute.snapshot.params['productid'];
+    this.id = this.activatedRoute.snapshot.params['productid']; // 73
     this.menuId = this.activatedRoute.snapshot.params['menuid'];
-    console.log(this.id)
-    this.foodProduct.getFoodProductsByMenuId(9).subscribe((data)=>{
+    this.foodProduct.getFoodProductsByMenuId(9).subscribe((data)=>{ // list of products
       this.result = data;
       for (let item of this.result.data) {
-        console.log(item.id == this.id)
         if (item.id == this.id) {
           this.selectedProduct = item;
           console.log(this.selectedProduct)
-        }
-        else{
-          
         }
       }
     })
   }
 
   updateFoodproduct(form:NgForm){
-    console.log(form.value)
     this.foodProduct.updateFoodProduct(form.value,this.menuId,this.id).subscribe((response)=>{
-      console.log(response);
       this.router.navigate(["/menu",localStorage.getItem("id")])
     })
 }

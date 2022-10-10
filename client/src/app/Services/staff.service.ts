@@ -31,4 +31,11 @@ export class StaffService {
     return this.http.get(Urls.billFoodOrder+`${id}`)
   }
 
+  getCountOfFoodOrders(id:any){
+    return this.http.get("http://localhost:8080/foodorder/total-count/"+`${id}`)
+  }
+  getCountOfStatus(value:any){
+    return this.http.get("http://localhost:8080/foodorder/count-status/"+`${value}`)
+  }
+
 }

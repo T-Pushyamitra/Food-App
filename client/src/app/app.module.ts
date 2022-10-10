@@ -20,6 +20,8 @@ import { InvoicegeneratorComponent } from './invoicegenerator/invoicegenerator.c
 import { AuthGuard } from './Guard/auth.guard';
 import { AvailabilityPipe } from './Pipes/availability.pipe';
 import { EditComponent } from './edit/edit.component';
+import { FoodProductsComponent } from './food-products/food-products.component';
+import { StatusPipe } from './Pipes/status.pipe';
 
 
 @NgModule({
@@ -39,6 +41,8 @@ import { EditComponent } from './edit/edit.component';
     FilterBYNamePipe,
     AvailabilityPipe,
     EditComponent,
+    FoodProductsComponent,
+    StatusPipe,
   ],
   imports: [
     BrowserModule,

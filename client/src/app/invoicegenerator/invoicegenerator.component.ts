@@ -23,6 +23,7 @@ export class InvoicegeneratorComponent implements OnInit {
       this.order = response;
       this.order = this.order.data;
       this.items = this.order.item;
+      console.log(this.items)
     })
   }
 
