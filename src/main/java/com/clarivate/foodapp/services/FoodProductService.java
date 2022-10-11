@@ -314,4 +314,21 @@ public class FoodProductService {
 		return responseStructure;
 
 	}
+
+	public ResponseStructure<List<String>> getTypes() {
+		ResponseStructure<List<String>> responseStructure = new ResponseStructure<List<String>>();
+		List<String> types = foodProductDao.getTypes();
+		if (types == null) {
+			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
+			responseStructure.setMsg("Failed to retrive Distinct values");
+			responseStructure.setData(null);
+
+		} else {
+			responseStructure.setStatusCode(HttpStatus.FOUND.value());
+			responseStructure.setMsg("Retrived Distinct Values Of Type");
+			responseStructure.setData(types);
+
+		}
+		return responseStructure;
+	}
 }

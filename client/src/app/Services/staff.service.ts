@@ -23,7 +23,7 @@ export class StaffService {
     return this.http.put(Urls.updateFoodOrder+`${staffId}`+"/"+`${foodOrderId}`,item)
   }
 
-  getFoodOrderByStaffId(foodOrder:any){
+  getFoodOrderByStaffId(){
     return this.http.get(Urls.getFoodOrder+`${localStorage.getItem("id")}`)
   }
 
@@ -31,6 +31,9 @@ export class StaffService {
     return this.http.get(Urls.billFoodOrder+`${id}`)
   }
 
+  getAllFoodOrders(){
+    return this.http.get("http://localhost:8080/foodorder/get")
+  }
   getCountOfFoodOrders(id:any){
     return this.http.get("http://localhost:8080/foodorder/total-count/"+`${id}`)
   }

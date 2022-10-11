@@ -9,6 +9,9 @@ export class StatusPipe implements PipeTransform {
     if(status == ""){
       return foodOrders;
     }
+    if(status == "DASHBOARD"){
+    return foodOrders.filter(order => order.status !== "DELIVERED");
+    }
     return foodOrders.filter(order => order.status === status);
   }
 

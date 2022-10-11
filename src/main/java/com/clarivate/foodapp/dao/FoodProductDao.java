@@ -166,4 +166,14 @@ public class FoodProductDao {
 		}
 	}
 
+	public List<String> getTypes() {
+		List<String> types = foodProductRepository.getDistinctEmployeesByName();
+		if(types.isEmpty()) {			
+			return null;
+		}
+		else {
+			return types;
+		}
+	}
+
 	}

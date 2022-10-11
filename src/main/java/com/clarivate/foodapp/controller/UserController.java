@@ -32,8 +32,8 @@ public class UserController {
 
 	
 	@GetMapping("/get")
-	public ResponseStructure<List<User>> getAllUser() {
-		return userService.getAllUsers();
+	public ResponseStructure<List<User>> getStaff() {
+		return userService.getStaff();
 	}
 	
 	
@@ -50,7 +50,7 @@ public class UserController {
 //	}
 	
 	@PostMapping("/auth")
-	public ResponseStructure<User> getUserByEmail(@RequestBody User user) {
+	public ResponseStructure<User> getUser(@RequestBody User user) {
 		return userService.getUser(user);
 	}
 

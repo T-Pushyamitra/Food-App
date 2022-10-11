@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { BranchService } from '../Services/branch.service';
 import { FoodProductService } from '../Services/food-product.service';
 import { MenuService } from '../Services/menu.service';
+import { StaffService } from '../Services/staff.service';
+import { UserService } from '../Services/user.service';
 
 @Component({
   selector: 'app-branch',
@@ -11,33 +13,26 @@ import { MenuService } from '../Services/menu.service';
   styleUrls: ['./branch.component.css'],
 })
 export class BranchComponent implements OnInit {
-
-  /**
-   *  login -> id and role
-   *  id -> menu_id
-   * menu_id -> food products
-   *  */
-
-  // => id = 30
-  // => menuid = 9
-
   results: any;
   error: any;
   errorMessage: any;
-  // availabilty : boolean = true
   _userId = localStorage.getItem('id');
   _isMenu: boolean = false;
   _menuId: any;
   _type: string = '';
   foodProducts: any;
   foodProduct: any;
+  foodOrders:any;
   addNewProduct: any[] = [];
-  types = ['Veg', 'Non-Veg', 'Drinks'];
+  types:any;
   pattern = ""
+  staffs:any;
+
   constructor(
-    private branch: BranchService,
+    private userService:UserService,
     private menuService: MenuService,
     private foodProductService: FoodProductService,
+    private staffService:StaffService,
     private router: Router
   ) {}
 
@@ -46,8 +41,15 @@ export class BranchComponent implements OnInit {
       this.foodProducts = response;
       this.foodProduct = this.foodProducts.data.foodProducts;
       this._menuId = this.foodProducts.data.id;
-      console.log(this._menuId);
     });
+
+    this.userService.getStaff().subscribe((response)=>{
+      this.staffs = response;
+      console.log(this.staffs)
+      this.staffs=this.staffs.data;
+    })
+    this.getTypes();
+    this.getFoodOrders();
   }
 
   // Retrive branch Manager specific menu id
@@ -56,7 +58,7 @@ export class BranchComponent implements OnInit {
       this.foodProducts = response;
     });
     console.log(this.foodProducts);
-    return this.foodProducts; // {menu and products}
+    return this.foodProducts; 
   }
 
   // Create Menu
@@ -78,30 +80,30 @@ export class BranchComponent implements OnInit {
   }
 
   addFoodProduct(foodProdut: NgForm): any {
-    // Set Availability
     foodProdut.value.availability = true;
-    console.log(foodProdut.value);
-    // List[foodProduct]
-    this.addNewProduct.push(foodProdut.value);
 
+    if (this.foodProduct.find((product:any) => product.name.toLowerCase() === foodProdut.value.name.toLowerCase())) {
+      // this.addNewProduct.pop();
+      this.error = "FOOD PRODUCT ALREADY EXSITS"
+      console.log("ERROR")
+    }
+    else{
+    this.addNewProduct.pop();
+    this.addNewProduct.push(foodProdut.value);
     this.foodProductService
       .addFoodproductsByMenuid(this.addNewProduct, this._menuId)
       .subscribe((response) => {
-        this.error = response;
-        if (this.error.data == null) {
-          this.errorMessage = 'Added Successfully';
-        }
-        console.log(response);
         this.router.navigate(['/menu', this._userId]);
         this.menuService.getMenuByUserId(this._userId).subscribe((response) => {
           this.foodProducts = response;
           this.foodProduct = this.foodProducts.data.foodProducts;
           this._menuId = this.foodProducts.data.id;
+          this.getTypes();
           console.log(this._menuId);
         });
       });
   }
-
+  }
   // Delete Product by id
 
   deleteFoodProduct(id: any) {
@@ -118,6 +120,54 @@ export class BranchComponent implements OnInit {
     });
   }
 
- 
+ getTypes(){
+   this.foodProductService.getDistinctTypes().subscribe((response)=>{
+    this.types = response
+    this.types = this.types.data
+  })
+}
+
+changeStatus(id:any){
+  console.log(id)
+  this.foodProduct.filter((product:any)=>{
+    if(product.id === id){
+      product.availability = !product.availability
+      console.log(product)
+        this.foodProductService.updateFoodProduct(product,this._menuId,id).subscribe((response)=>{
+
+          this.router.navigate(["/menu",localStorage.getItem("id")])
+          this.menuService.getMenuByUserId(this._userId).subscribe((response)=>{
+            this.foodProducts = response;
+            this.foodProduct = this.foodProducts.data.foodProducts;
+            this._menuId = this.foodProducts.data.id;
+        });
+
+        })
+    }
+  })
+}
+
+changeStaffStatus(id:any){
+  this.staffs.filter((user:any)=>{
+    if(user.id === id){
+      console.log(user)
+      user.active = !user.active;
+      this.userService.updateStaff(user,id).subscribe((response)=>{
+        console.log(response)
+          this.router.navigate(["/menu",localStorage.getItem("id")])
+
+      })
+    }
+  })
+}
+
+getFoodOrders(){
+  this.staffService.getAllFoodOrders().subscribe((response)=>{
+    this.foodOrders = response;
+    this.foodOrders = this.foodOrders.data;
+    console.log(this.foodOrders)
+  })
+}
+
 
 }

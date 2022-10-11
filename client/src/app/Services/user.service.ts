@@ -6,6 +6,9 @@ import { Urls } from './devUrls';
   providedIn: 'root'
 })
 export class UserService {
+  updateUser(id: any) {
+    throw new Error('Method not implemented.');
+  }
 
   constructor(private http:HttpClient) { }
 
@@ -19,6 +22,14 @@ export class UserService {
 
   loggedIn(){
     return !!localStorage.getItem("id");
+  }
+
+  getStaff(){
+    return this.http.get("http://localhost:8080/users/get");
+  }
+
+  updateStaff(user:any,id:any){
+    return this.http.put("http://localhost:8080/users/update/"+`${id}`,user)
   }
 
 }

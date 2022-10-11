@@ -3,6 +3,7 @@ package com.clarivate.foodapp.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.clarivate.foodapp.dto.FoodProducts;
@@ -21,5 +22,7 @@ public interface FoodProductRepository  extends JpaRepository<FoodProducts, Inte
 
 		List<FoodProducts> findAllByOrderByTypeDesc();
 		
+		@Query("SELECT DISTINCT fp.type FROM FoodProducts fp")
+		List<String> getDistinctEmployeesByName();
 }
 

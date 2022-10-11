@@ -83,6 +83,24 @@ public class UserServiceImpl {
 		}
 		return responseStructure;
 	}
+	
+	public ResponseStructure<List<User>> getStaff() {
+
+		ResponseStructure<List<User>> responseStructure = new ResponseStructure<List<User>>();
+
+		List<User> currentUser = userDao.getStaff();
+	
+		if (currentUser != null) {
+			responseStructure.setStatusCode(HttpStatus.FOUND.value());
+			responseStructure.setMsg("Staff Details");
+			responseStructure.setData(currentUser);
+		} else {
+			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
+			responseStructure.setMsg("Invalid .");
+			responseStructure.setData(null);
+		}
+		return responseStructure;
+	}
 
 	public ResponseStructure<String> deleteUser(int id) {
 

@@ -21,4 +21,7 @@ export class NavbarComponent implements OnInit {
     localStorage.clear()
     this.router.navigate(["login"])
   }
+
+  isAdmin:any = (this.role === "ADMIN")?true:false
+
 }

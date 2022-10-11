@@ -22,6 +22,7 @@ export class Urls {
   public static getFoodOrder: string = 'http://localhost:8080/foodorder/get/';
   public static updateFoodOrder: string = "http://localhost:8080/foodorder/update/";
   public static deleteFoodOrder: string = "http://localhost:8080/foodorder/delete/";
+  public static getTypes: string = "http://localhost:8080/foodproducts/types" 
   public static billFoodOrder: string ="http://localhost:8080/foodorder/bill/"
   
   // Items API's

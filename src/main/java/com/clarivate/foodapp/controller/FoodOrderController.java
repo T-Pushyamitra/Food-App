@@ -29,11 +29,11 @@ public class FoodOrderController {
 	public ResponseStructure<FoodOrder> saveFoodOrder(@RequestBody FoodOrder foodOrder,@PathVariable int staff_id) {
 		return foodOrderService.saveFoodOrder(foodOrder, staff_id);
 	}
-
-//	@GetMapping("/get")
-//	public ResponseStructure<List<FoodOrder>> getAllFoodOrders() {
-//		return foodOrderService.getAllFoodOrdersData();
-//	}
+//
+	@GetMapping("/get")
+	public ResponseStructure<List<FoodOrder>> getAllFoodOrders() {
+		return foodOrderService.getAllFoodOrdersData();
+	}
 
 	@GetMapping("/get/{staff_id}")
 	public ResponseStructure<List<FoodOrder>> getFoodOrderByStaffId(@PathVariable int staff_id) {

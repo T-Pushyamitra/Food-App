@@ -28,4 +28,7 @@ export class FoodProductService {
     return this.http.put(Urls.updateFoodProductById+`${menu_id}`+"/"+`${product_id}`,product)
   }
   
+  getDistinctTypes(){
+    return this.http.get(Urls.getTypes,{responseType:'json'});
+  }
 }

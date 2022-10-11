@@ -54,7 +54,10 @@ public class ItemDao {
 		return itemRepository.save(item);
 	}
 
-
+	public int get() {
+		int count = itemRepository.countByName("Paneer Chilly");
+		return count;
+	}
 
 
 	

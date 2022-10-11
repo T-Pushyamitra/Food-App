@@ -68,4 +68,12 @@ public class UserDao {
 		return null;
 	}
 
+	public List<User> getStaff() {
+		List<User> user= userRepository.findByRole("STAFF");
+		if(!user.isEmpty()) {
+			return user;
+		}
+		return null;
+	}
+
 }

@@ -90,4 +90,10 @@ public class FoodProductController {
 	public ResponseStructure<List<FoodProducts>> get(){
 		return foodProductService.get();
 	}
+	
+	@GetMapping("/types")
+	public ResponseStructure<List<String>> getTypes(){
+		return foodProductService.getTypes();
+	}
+	
 }

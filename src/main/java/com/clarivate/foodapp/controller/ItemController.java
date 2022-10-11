@@ -54,5 +54,8 @@ public class ItemController {
 	public ResponseStructure<Item> updateItem(@RequestBody Item item, @PathVariable int id) {
 		return itemService.updateItem(item, id);
 	}
-
+	@GetMapping("/getdistval")
+	public int get(){
+		return itemService.get();
+	}
 }

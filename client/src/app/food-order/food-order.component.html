@@ -51,7 +51,7 @@
                 <button class="btn mx-2 btn-outline-warning" (click)="status('COOKING')">Cooking</button>
                 <button class="btn mx-2 btn-outline-success" (click)="status('DELIVERED')">Delivered</button>
             </div>
-            <div class="ac-accordion">
+            <div class="ac-accordion scroll">
                 <div *ngFor="let data of foodOrder | status:_status ;let i = index ">
                     <div class="ac-head d-flex flex-row justify-content-between shadow p-3 mb-5 bg-white rounded" [ngClass]="{ 'active':view_tab === 'ac_'+i}"
                         (click)="changeTab('ac_'+i)"  >
@@ -124,7 +124,7 @@
                                             <li>
                                                 <h4 class="display-5" >
                                                     <span class="dot1"
-                                                        [ngStyle]="{backgroundColor: (data.status.toLowerCase() == 'cooking' || data.status.toLowerCase() == 'delivered')?'#5BB318':'grey'}"></span>
+                                                        [ngStyle]="{backgroundColor: (data.status === 'COOKING' || data.status === 'DELIVERED')?'#5BB318':'grey'}"></span>
                                                     Cooking
                                                 </h4>
                                             </li>
@@ -132,15 +132,16 @@
                                             <li>
                                                 <h4 class="display-5">
                                                     <span class="dot1"
-                                                        [ngStyle]="{backgroundColor: (data.status.toLowerCase() === 'delivered')?'#5BB318':'grey'}"></span>
+                                                        [ngStyle]="{backgroundColor: (data.status === 'DELIVERED')?'#5BB318':'grey'}"></span>
                                                     Delivered 
                                                 </h4>
                                             </li>
                                         </ul>
-                                        <button type="submit" class="btn btn-outline-success" (click)="update(data.id,i)" >
+                                        
+                                        <button type="submit" class="btn btn-outline-success" (click)="update(data.id,i)"  *ngIf="data.status !== 'COOKING' && data.status !== 'DELIVERED'">
                                             Update
                                         </button>
-                                        <button type="submit" class="btn btn-outline-danger" (click)="generateBill(data.id,i)">
+                                        <button type="submit" class="btn btn-outline-danger" (click)="generateBill(data.id,i)" *ngIf="data.status === 'COOKING'">
                                                 Checkout
                                         </button>
                                     </div>

@@ -18,14 +18,13 @@
     {
         margin:5px;
         padding:5px;
-        width:750px;
         height: 400px;
         overflow: auto;
         text-align:justify;
-        background-color: rgb(224, 229, 236);
-   
     }
-
+    .scroll::-webkit-scrollbar{
+      width:0px;
+  }
 .bg-red{
   background-color: #ff6361;
 }
@@ -74,18 +73,7 @@
     padding: 5px;
   }
 
-  .tableFixHead{
-    overflow: auto;
-     height: 400px;
-    }
-.tableFixHead th{
-position: sticky;
- top: 0; 
-}
-/* Just common table stuff. */
-table  { border-collapse: collapse; width: 100%; }
-th, td { padding: 8px 16px; }
-th     { background:#eee; }
+
 
 .css1{
 margin-right: 30px;
