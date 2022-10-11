@@ -145,7 +145,15 @@ public class ItemService {
 
 	}
 
+	public int get() {
+		
+		int count = itemDao.get();
+		if (count != 0) {
+			return count;
+		} 
+		return 0;
 
+	}
 
 
 }
