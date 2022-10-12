@@ -138,10 +138,10 @@
                                             </li>
                                         </ul>
                                         
-                                        <button type="submit" class="btn btn-outline-success" (click)="update(data.id,i)"  *ngIf="data.status !== 'COOKING' && data.status !== 'DELIVERED'">
+                                        <button type="submit" class="btn btn-outline-success" (click)="update(data.id)"  *ngIf="data.status !== 'COOKING' && data.status !== 'DELIVERED'">
                                             Update
                                         </button>
-                                        <button type="submit" class="btn btn-outline-danger" (click)="generateBill(data.id,i)" *ngIf="data.status === 'COOKING'">
+                                        <button type="submit" class="btn btn-outline-danger" (click)="generateBill(data.id)" *ngIf="data.status === 'COOKING'">
                                                 Checkout
                                         </button>
                                     </div>

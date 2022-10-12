@@ -1,7 +1,7 @@
 
 <div class="container">
     <div class="page-content container">
-        <div class="page-header text-blue-d2">
+        <div class="page-header text-blue-d2" id="printSection">
             <h1 class="page-title text-secondary-d1">
                 Invoice
                 <small class="page-info">
@@ -12,13 +12,9 @@
     
             <div class="page-tools">
                 <div class="action-buttons">
-                    <a class="btn bg-white btn-light mx-1px text-95" href="#" data-title="Print">
+                    <a class="btn bg-white btn-light mx-1px text-95"  data-title="Print" (click)="get()">
                         <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
                         Print
-                    </a>
-                    <a class="btn bg-white btn-light mx-1px text-95" href="#" data-title="PDF">
-                        <i class="mr-1 fa fa-file-pdf-o text-danger-m1 text-120 w-2"></i>
-                        Export
                     </a>
                 </div>
             </div>
@@ -36,7 +32,7 @@
                             <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">customerName:</span> {{order.customerName}}</div>
                             <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">Customer Number :</span> {{ order.contactNumber }}</div>
     
-                            <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">Invoice sssssID:</span> {{id}}</div>
+                            <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">Invoice ID:</span> {{id}}</div>
     
                             <div class="my-2"><i class="fa fa-circle text-blue-m2 text-xs mr-1"></i> <span class="text-600 text-90">Order Created :</span> {{ order.orderCreatedTime }}</div>
     

@@ -31,12 +31,9 @@ public class FoodOrder {
 	private String status;
 	private float totalPrice;
 
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm", iso = ISO.DATE_TIME)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-	private LocalDateTime orderCreatedTime;
-	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm", iso = ISO.DATE_TIME)
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-	private LocalDateTime orderDeliveryTime;
+	private String orderCreatedTime;
+
+	private String orderDeliveryTime;
 	
 	private String customerName;
 	private long contactNumber;
@@ -83,19 +80,19 @@ public class FoodOrder {
 		this.totalPrice = totalPrice;
 	}
 
-	public LocalDateTime getOrderCreatedTime() {
+	public String getOrderCreatedTime() {
 		return orderCreatedTime;
 	}
 
-	public void setOrderCreatedTime(LocalDateTime orderCreatedTime) {
+	public void setOrderCreatedTime(String orderCreatedTime) {
 		this.orderCreatedTime = orderCreatedTime;
 	}
 
-	public LocalDateTime getOrderDeliveryTime() {
+	public String getOrderDeliveryTime() {
 		return orderDeliveryTime;
 	}
 
-	public void setOrderDeliveryTime(LocalDateTime orderDeliveryTime) {
+	public void setOrderDeliveryTime(String orderDeliveryTime) {
 		this.orderDeliveryTime = orderDeliveryTime;
 	}
 

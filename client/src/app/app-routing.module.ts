@@ -4,6 +4,7 @@ import { BranchComponent } from './branch/branch.component';
 import { EditComponent } from './edit/edit.component';
 import { FoodOrderComponent } from './food-order/food-order.component';
 import { AuthGuard } from './Guard/auth.guard';
+import { RoleGuardGuard } from './Guard/role-guard.guard';
 import { InvoicegeneratorComponent } from './invoicegenerator/invoicegenerator.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
@@ -24,7 +25,10 @@ const routes: Routes = [
   {
     path: 'menu/:id',
     component: BranchComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, RoleGuardGuard],
+    data:{
+      expectedRoles:['ADMIN']
+    }
   },
   {
     path:"staff/:id",

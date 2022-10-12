@@ -21,11 +21,11 @@ export class StaffComponent implements OnInit {
   foodProductsList: any;
   _type: string = '';
   pattern: string = '';
-  error: string = "";
+  error: string | undefined;
   _staffId: any = localStorage.getItem('id');
   orderedItems: any[] = [];
   foodOrder: FoodOrder = new FoodOrder('', 0, '', '', 0, "PLACED");
-  types = ['Veg', 'Non-Veg', 'Drinks'];
+  types :any;
   foodOrderData: any;
   
   constructor(
@@ -35,23 +35,15 @@ export class StaffComponent implements OnInit {
     private router:Router
   ) {}
 
-  getDateandTime() {
-    this.orderTime = new Date();
-    const year = this.orderTime.getFullYear();
-    const month = this.orderTime.getMonth();
-    const day = this.orderTime.getDay();
-    const hour = this.orderTime.getHours();
-    const mintue = this.orderTime.getMinutes();
-    return year + '-' + month + '-' + day + ' ' + hour + ':' + mintue;
-  }
 
   ngOnInit(): void {
     this.foodProductSubscriber = this.foodProducts
-      .getFoodProductsByMenuId(6)
+      .getFoodProductsByMenuId(1)
       .subscribe((response) => {
         this.foodProductsList = response;
         console.log(response);
       });
+      this.getTypes();
   }
 
   ngOnDestroy() {
@@ -63,12 +55,12 @@ export class StaffComponent implements OnInit {
   createFoodOrder(order: any) {
     this.foodOrder.customerName = order.customerName;
     this.foodOrder.contactNumber = order.contactNumber;
-    this.foodOrder.orderCreatedTime = '2022-10-04 10:15';
+    this.foodOrder.orderCreatedTime = new Date().toLocaleString() ;
     return this.foodOrder;
   }
 
   updateFoodOrder() {
-    this.foodOrder.orderCreatedTime = '2022-09-29 10:50';
+    this.foodOrder.orderDeliveryTime =  new Date().toLocaleString();
     this.foodOrder.totalPrice = this.totalPrice.transform(this.orderedItems);
     this.foodOrder.status = 'PLACED';
     this.service
@@ -107,17 +99,32 @@ export class StaffComponent implements OnInit {
   
   
   addItem(id: any) {
-    console.log(id);
-    this.foodProductsList.data.filter((item: any) => {
-      if (item.id === id) {
-        this.orderedItems.push({
-          name: item.name,
-          price: item.price,
-          quantity: 1,
-          type: item.type,
-        });
+    this.foodProductsList.data.find((product:any) => {
+      if(product.id === id){
+        if(this.orderedItems.find(order => order.name.toLowerCase() === product.name.toLowerCase())){
+          this.error = "Item already present"
+        }
+        else{
+          this.orderedItems.push({
+            name: product.name,
+            price: product.price,
+            quantity: 1,
+            type: product.type,
+          });
+        }
       }
-    });
+    }) 
+     
+    // this.foodProductsList.data.filter((item: any) => {
+    //   if (item.id === id) {
+    //     this.orderedItems.push({
+    //       name: item.name,
+    //       price: item.price,
+    //       quantity: 1,
+    //       type: item.type,
+    //     });
+    //   }
+    // });
   }
 
 
@@ -148,5 +155,12 @@ export class StaffComponent implements OnInit {
       });
     this.updateFoodOrder();
   }
+
+  getTypes(){
+    this.foodProducts.getDistinctTypes().subscribe((response)=>{
+     this.types = response
+     this.types = this.types.data
+   })
+ }
 
 }

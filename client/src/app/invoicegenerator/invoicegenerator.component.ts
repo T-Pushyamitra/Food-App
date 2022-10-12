@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { StaffService } from '../Services/staff.service';
 
@@ -14,7 +14,7 @@ export class InvoicegeneratorComponent implements OnInit {
   items: any;
  
   constructor(private route: ActivatedRoute,private foodOrder:StaffService) { }
-  
+
   id = this.route.snapshot.paramMap.get("id")
 
   ngOnInit(): void {
@@ -26,5 +26,11 @@ export class InvoicegeneratorComponent implements OnInit {
       console.log(this.items)
     })
   }
+
+element: ElementRef | undefined;
+
+get(){
+window.print();
+}
 
 }

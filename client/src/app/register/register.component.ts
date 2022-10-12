@@ -25,7 +25,9 @@ export class RegisterComponent implements OnInit {
   addUser(employeeForm:NgForm){
     console.log(employeeForm.value);
     const employee = employeeForm.value;
-    this.service.getUserByEmail(employeeForm.value).subscribe((response)=>{
+    employee.active = true
+    
+    this.service.isEmail(employeeForm.value.email).subscribe((response)=>{
         this.email = response
         console.log(this.email)
         if(this.email.data != null){

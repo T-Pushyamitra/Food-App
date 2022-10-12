@@ -44,10 +44,10 @@ public class UserController {
 
 
 	
-//	@GetMapping("/users/{id}")
-//	public ResponseStructure<User> getUserById(@PathVariable int id) {
-//		return userService.getUserById(id);
-//	}
+	@GetMapping("/email/{email}")
+	public ResponseStructure<User> isEmailRegistered(@PathVariable String email) {
+		return userService.isEmailRegistered(email);
+	}
 	
 	@PostMapping("/auth")
 	public ResponseStructure<User> getUser(@RequestBody User user) {

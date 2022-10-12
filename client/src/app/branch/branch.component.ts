@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NavbarComponent } from '../navbar/navbar.component';
 import { BranchService } from '../Services/branch.service';
 import { FoodProductService } from '../Services/food-product.service';
 import { MenuService } from '../Services/menu.service';
@@ -27,6 +28,7 @@ export class BranchComponent implements OnInit {
   types:any;
   pattern = ""
   staffs:any;
+@ViewChild(NavbarComponent) navbarComponent:NavbarComponent | undefined;
 
   constructor(
     private userService:UserService,
@@ -41,6 +43,7 @@ export class BranchComponent implements OnInit {
       this.foodProducts = response;
       this.foodProduct = this.foodProducts.data.foodProducts;
       this._menuId = this.foodProducts.data.id;
+      this.navbarComponent?.ngOnInit();
     });
 
     this.userService.getStaff().subscribe((response)=>{
@@ -134,14 +137,12 @@ changeStatus(id:any){
       product.availability = !product.availability
       console.log(product)
         this.foodProductService.updateFoodProduct(product,this._menuId,id).subscribe((response)=>{
-
           this.router.navigate(["/menu",localStorage.getItem("id")])
           this.menuService.getMenuByUserId(this._userId).subscribe((response)=>{
             this.foodProducts = response;
             this.foodProduct = this.foodProducts.data.foodProducts;
             this._menuId = this.foodProducts.data.id;
         });
-
         })
     }
   })

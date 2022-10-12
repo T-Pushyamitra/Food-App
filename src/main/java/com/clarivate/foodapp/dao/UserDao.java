@@ -76,4 +76,12 @@ public class UserDao {
 		return null;
 	}
 
+	public User isEmailRegistered(String email) {
+		User user= userRepository.findByEmail(email);
+		if(user != null) {
+			return user;
+		}
+		return null;
+	}
+
 }

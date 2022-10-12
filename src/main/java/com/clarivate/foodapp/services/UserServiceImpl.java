@@ -142,4 +142,21 @@ public class UserServiceImpl {
 
 	}
 
+	public ResponseStructure<User> isEmailRegistered(String email) {
+		ResponseStructure<User> responseStructure = new ResponseStructure<User>();
+		User user = userDao.isEmailRegistered(email);
+		if (user == null) {
+			responseStructure.setStatusCode(HttpStatus.NOT_FOUND.value());
+			responseStructure.setMsg("User data missing");
+			responseStructure.setData(null);
+
+		} else {
+			responseStructure.setStatusCode(HttpStatus.FOUND.value());
+			responseStructure.setMsg("User is present");
+			responseStructure.setData(user);
+
+		}
+		return responseStructure;
+	}
+
 }
