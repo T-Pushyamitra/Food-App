@@ -11,26 +11,28 @@
                 <form #register="ngForm" (ngSubmit)="addUser(register)">
                     <div class="form-group">
                       <label >Name</label>
-                      <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp" ngModel>
+                      <input type="text" class="form-control" required #name="ngModel" id="name" name="name" aria-describedby="emailHelp"  ngModel>
+                      <span *ngIf="name.valid && name.untouched" style="color:red">Enter required values</span>
                     </div>
-
                     <div class="form-group">
-                        <label >Email address</label>
-                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" ngModel>
+                      <label >Email address</label>
+                      <input type="email" class="form-control" required #email="ngModel" id="email" name="email" aria-describedby="emailHelp" ngModel>
+                      <span *ngIf="email.valid && email.touched">Enter required values</span>
                     </div> 
-
+                    
                     <div class="form-group">
                       <label >Password</label>
-                      <input type="password" class="form-control" id="password" name="password" ngModel>
+                      <input type="password" class="form-control" required #password="ngModel" id="password" name="password" ngModel>
+                      <span *ngIf="password.valid && password.touched">Enter required values</span>
                     </div>
                     <div class="form-group">
                       <label >role</label>
-                     <select name="role" class="form-control" ngModel>
+                     <select name="role" required #roke="ngModel" class="form-control" ngModel>
                       <option value="ADMIN">Branch Manager</option>
                       <option value="Staff">Staff</option>
                      </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Register</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="register.invalid">Register</button>
                   </form>
                   <a routerLink="/login">Already User ? Click here to Login!</a>
 

@@ -31,6 +31,7 @@ export class UserService {
   getRole(){
     return localStorage.getItem("role");
   }
+  
   getStaff(){
     return this.http.get("http://localhost:8080/users/get");
   }
@@ -39,5 +40,8 @@ export class UserService {
     return this.http.put("http://localhost:8080/users/update/"+`${id}`,user)
   }
 
+  deleteEmployee(id:any){
+    return this.http.delete("http://localhost:8080/users/delete/"+`${id}`)
+  }
 
 }

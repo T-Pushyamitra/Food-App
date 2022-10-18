@@ -18,7 +18,7 @@ export class EditComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params['productid']; // 73
     this.menuId = this.activatedRoute.snapshot.params['menuid'];
-    this.foodProduct.getFoodProductsByMenuId(9).subscribe((data)=>{ // list of products
+    this.foodProduct.getFoodProductsByMenuId(1).subscribe((data)=>{ // list of products
       this.result = data;
       for (let item of this.result.data) {
         if (item.id == this.id) {

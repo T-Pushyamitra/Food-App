@@ -111,18 +111,27 @@ export class BranchComponent implements OnInit {
 
   deleteFoodProduct(id: any) {
     console.log(id);
-    this.foodProductService.deleteFoodproductById(id).subscribe((response) => {
-      console.log(response);
+    if(confirm("Are you sure to delete this product")) {
+      this.foodProductService.deleteFoodproductById(id).subscribe((response) => {
+        console.log(response);
+        this.router.navigate(['/menu', this._userId]);
+        this.menuService.getMenuByUserId(this._userId).subscribe((response)=>{
+          this.foodProducts = response;
+          this.foodProduct = this.foodProducts.data.foodProducts;
+          this._menuId = this.foodProducts.data.id;
+          console.log(this._menuId)
+        })
+      });
+    }
+    else{
       this.router.navigate(['/menu', this._userId]);
       this.menuService.getMenuByUserId(this._userId).subscribe((response)=>{
         this.foodProducts = response;
         this.foodProduct = this.foodProducts.data.foodProducts;
         this._menuId = this.foodProducts.data.id;
-        console.log(this._menuId)
-      })
-    });
+    })
   }
-
+  }
  getTypes(){
    this.foodProductService.getDistinctTypes().subscribe((response)=>{
     this.types = response
@@ -170,5 +179,17 @@ getFoodOrders(){
   })
 }
 
+deleteStaff(id:any,name:any){
+  if(confirm("Are Sure to delete Employee : "+ name)){
+    this.userService.deleteEmployee(id).subscribe((response)=>{
+      console.log(response)
+      this.router.navigate(["/menu",localStorage.getItem("id")])
+    })
+  }
+  {
+    this.router.navigate(["/menu",localStorage.getItem("id")])
+
+  }
+}
 
 }

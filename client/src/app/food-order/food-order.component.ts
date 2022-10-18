@@ -51,6 +51,9 @@ export class FoodOrderComponent implements OnInit {
     return types;
   }
 
+  viewBill(id:any){
+    this.router.navigate(['/invoice', id]);
+  }
   generateBill(id: any) {
     var currentOrder = this.foodOrder.find((order: any) => order.id === id);
     currentOrder.status = 'DELIVERED';

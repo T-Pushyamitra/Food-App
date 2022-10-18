@@ -144,6 +144,11 @@
                                         <button type="submit" class="btn btn-outline-danger" (click)="generateBill(data.id)" *ngIf="data.status === 'COOKING'">
                                                 Checkout
                                         </button>
+                                        
+                                        <button type="submit" class="btn btn-outline-danger" (click)="viewBill(data.id)" *ngIf="data.status === 'DELIVERED'">
+                                                View Bill
+                                        </button>
+
                                     </div>
                                 </div>
                             </div>

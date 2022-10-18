@@ -23,7 +23,9 @@ export class RegisterComponent implements OnInit {
   }
 
   addUser(employeeForm:NgForm){
-    console.log(employeeForm.value);
+    
+  
+
     const employee = employeeForm.value;
     employee.active = true
     
